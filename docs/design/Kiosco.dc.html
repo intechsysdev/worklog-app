@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Kiosco fuera de jornada</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;">
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 20px; background: #1E1F1D; color: #FFFFFF; font-size: 12px; font-weight: 600;">
+    <span style="display: flex; align-items: center; gap: 6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>{{kioskLabel}}</span>
+    <span style="color: #C9C9C8;">Administrado por MobiControl</span>
+  </div>
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px 12px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+    </div>
+    <a href="Perfil.dc.html" aria-label="Perfil de Andrés Mora" style="width: 44px; height: 44px; border-radius: 22px; background: #AF1839; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; text-decoration: none;">AM</a>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 16px; padding: 8px 20px 24px;">
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <h1 style="margin: 0; font-size: 26px; font-weight: 700; line-height: 32px;">{{title}}</h1>
+      <p style="margin: 0; font-size: 15px; color: #5A5958;">Martes 3 de noviembre · Turno 07:00 – 16:00</p>
+    </div>
+
+    <div role="group" aria-label="Simular hora" style="display: flex; gap: 6px;">
+      <sc-for list="{{times}}" as="t" hint-placeholder-count="2">
+        <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.sel}}" style="flex: 1; min-height: 36px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{t.border}}; background: {{t.bg}}; color: {{t.fg}};">{{t.label}}</button>
+      </sc-for>
+    </div>
+
+    <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 16px 20px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <span style="font-size: 14px; font-weight: 700;">Apps de trabajo</span>
+        <span style="font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: {{stateBg}}; color: {{stateFg}};">{{stateText}}</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;">
+        <sc-for list="{{apps}}" as="a" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: {{a.op}};">
+            <span style="width: 52px; height: 52px; border-radius: 14px; background: {{a.bg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; position: relative;">{{a.ini}}<sc-if value="{{a.locked}}" hint-placeholder-val="{{true}}"><span style="position: absolute; right: -4px; bottom: -4px; width: 20px; height: 20px; border-radius: 10px; background: #1E1F1D; display: flex; align-items: center; justify-content: center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span></sc-if></span>
+            <span style="font-size: 12px; color: #3C3C3B; text-align: center; line-height: 15px;">{{a.name}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin: 0; font-size: 13px; line-height: 18px; color: #5A5958;">{{appsNote}}</p>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 14px 20px; display: flex; align-items: center; gap: 12px;">
+      <span style="width: 40px; height: 40px; border-radius: 20px; background: #E7F4EC; color: #1E6B3F; display: flex; align-items: center; justify-content: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg></span>
+      <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 14px; font-weight: 600;">Siempre disponibles</span><span style="font-size: 13px; color: #5A5958;">Teléfono para emergencias y WorkLog</span></div>
+    </section>
+
+    <div style="flex-grow: 1;"></div>
+
+    <sc-if value="{{sending}}" hint-placeholder-val="{{false}}">
+      <p role="status" style="margin: 0; font-size: 14px; color: #3C3C3B; text-align: center;">Habilitando tus apps de trabajo…</p>
+    </sc-if>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <sc-if value="{{open}}" hint-placeholder-val="{{false}}">
+        <a href="Actividad.dc.html" style="height: 64px; border-radius: 16px; background: #AF1839; color: #FFFFFF; font-size: 18px; font-weight: 600; display: flex; align-items: center; justify-content: center; text-decoration: none;">Ir a mi jornada</a>
+      </sc-if>
+      <sc-if value="{{notOpen}}" hint-placeholder-val="{{true}}">
+        <button type="button" onClick="{{primary}}" aria-disabled="{{primaryBlocked}}" style="height: 64px; border-radius: 16px; border: none; background: {{primaryBg}}; color: {{primaryFg}}; font-family: inherit; font-size: 18px; font-weight: 600; cursor: pointer;">Iniciar jornada</button>
+      </sc-if>
+      <p style="margin: 0; font-size: 13px; line-height: 18px; color: #5A5958; text-align: center;">{{hint}}</p>
+    </div>
+    <sc-if value="{{early}}" hint-placeholder-val="{{false}}">
+      <a href="Solicitudes.dc.html" style="display: flex; align-items: center; justify-content: center; height: 48px; font-size: 15px; font-weight: 600; text-decoration: none;">Pedir autorización al supervisor</a>
+    </sc-if>
+    <sc-if value="{{open}}" hint-placeholder-val="{{false}}">
+      <a href="AvisoCierre.dc.html" style="display: flex; align-items: center; justify-content: center; height: 48px; font-size: 15px; font-weight: 600; text-decoration: none;">Ver aviso de fin de turno</a>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { time: 'ok', phase: 'kiosk' };
+}
+renderVals() {
+const st = this.state;
+const open = st.phase === 'open';
+const sending = st.phase === 'sending';
+const early = st.time === 'early' && !open;
+const A = [
+{ name: 'Correo', ini: 'C', bg: '#3C3C3B' },
+{ name: 'Órdenes de trabajo', ini: 'O', bg: '#751326' },
+{ name: 'Inventario', ini: 'I', bg: '#5A5958' },
+{ name: 'Chat del equipo', ini: 'E', bg: '#AF1839' }
+];
+const chip = (on) => ({ sel: on ? 'true' : 'false', bg: on ? '#1E1F1D' : '#FFFFFF', fg: on ? '#FFFFFF' : '#3C3C3B', border: on ? '1px solid #1E1F1D' : '1px solid #C9C9C8' });
+return {
+open: open, sending: sending, early: early,
+kioskLabel: open ? 'En jornada · apps de trabajo habilitadas' : 'Dispositivo compartido · sesión de Andrés Mora',
+title: open ? 'Jornada iniciada' : 'Hola, Andrés',
+times: [{ id: 'ok', label: '06:55 · dentro de la tolerancia' }, { id: 'early', label: '05:40 · muy temprano' }].map((t) => Object.assign({}, t, chip(t.id === st.time), { pick: () => this.setState({ time: t.id, phase: 'kiosk' }) })),
+stateText: open ? 'Habilitadas' : (sending ? 'Habilitando' : 'Bloqueadas'),
+stateBg: open ? '#E7F4EC' : '#E8E8E7',
+stateFg: open ? '#1E6B3F' : '#3C3C3B',
+apps: A.map((a) => Object.assign({}, a, { op: open ? '1' : '0.45', locked: !open })),
+appsNote: open ? 'Se ocultan de nuevo al cerrar tu jornada o al terminar tu turno. Te avisaremos 15 y 5 minutos antes.' : 'Se habilitan cuando inicias tu jornada. Fuera de tu turno el dispositivo solo muestra WorkLog y el teléfono.',
+primaryLabel: open ? 'Ir a mi jornada' : 'Iniciar jornada',
+primaryBlocked: early || sending ? 'true' : 'false',
+primaryBg: early || sending ? '#E8E8E7' : '#AF1839',
+primaryFg: early || sending ? '#5A5958' : '#FFFFFF',
+notOpen: !open,
+primary: () => {
+if (early || sending) return;
+this.setState({ phase: 'sending' });
+setTimeout(() => this.setState({ phase: 'open' }), 900);
+},
+hint: open ? 'Registrada a las 06:55. MobiControl aplicó el perfil «En jornada».' : (early ? 'Tu turno empieza a las 07:00. Puedes iniciar desde las 06:50.' : 'Al iniciar, WorkLog pide a MobiControl que habilite tus apps de trabajo.')
+};
+}
+}
+</script>
+</body>
+</html>

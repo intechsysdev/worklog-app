@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Invitar usuario</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.split4{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px}
+@media (max-width:1100px){.split4{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-direction: column; gap: 6px;">
+      <a href="PanelUsuarios.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; text-decoration: none; padding: 6px 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Usuarios y roles</a>
+      <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Invitar usuario</h1>
+      <p style="margin: 0; font-size: 15px; color: #5A5958;">El usuario queda como «Invitado» hasta que ingresa por primera vez.</p>
+    </header>
+
+    <sc-if value="{{editing}}" hint-placeholder-val="{{true}}">
+      <ol aria-label="Pasos" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px;">
+        <sc-for list="{{steps}}" as="s" hint-placeholder-count="3">
+          <li style="display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 600; background: {{s.bg}}; color: {{s.fg}}; border: {{s.border}};"><span style="width: 22px; height: 22px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 12px; background: {{s.numBg}}; color: {{s.numFg}};">{{s.num}}</span>{{s.label}}</li>
+        </sc-for>
+      </ol>
+
+      <div class="split4" style="align-items: start;">
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 20px; min-width: 0;">
+          <sc-if value="{{s1}}" hint-placeholder-val="{{true}}">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+              <label style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">Nombre completo</span><input type="text" value="{{f.name}}" onChange="{{setName}}" placeholder="Ej.: Natalia Pineda" style="height: 44px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D;"></label>
+              <label style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">Correo corporativo</span><input type="email" value="{{f.email}}" onChange="{{setEmail}}" placeholder="usuario@[DOMINIO]" style="height: 44px; padding: 0 12px; border: 1px solid {{emailBorder}}; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D;"></label>
+            </div>
+            <sc-if value="{{emailError}}" hint-placeholder-val="{{false}}">
+              <p style="margin: -8px 0 0; font-size: 13px; color: #751326;">{{emailError}}</p>
+            </sc-if>
+            <fieldset style="border: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+              <legend style="font-size: 14px; font-weight: 600; padding: 0; margin-bottom: 10px;">Cómo usará WorkLog</legend>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+                <sc-for list="{{kinds}}" as="k" hint-placeholder-count="2">
+                  <button type="button" onClick="{{k.pick}}" aria-pressed="{{k.sel}}" style="text-align: left; display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 12px; font-family: inherit; cursor: pointer; border: {{k.border}}; background: {{k.bg}};"><span style="font-size: 15px; font-weight: 600; color: #1E1F1D;">{{k.label}}</span><span style="font-size: 13px; color: #5A5958;">{{k.note}}</span></button>
+                </sc-for>
+              </div>
+            </fieldset>
+          </sc-if>
+
+          <sc-if value="{{s2}}" hint-placeholder-val="{{false}}">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 14px; font-weight: 600;">Rol</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <sc-for list="{{roles}}" as="r" hint-placeholder-count="5">
+                  <button type="button" onClick="{{r.pick}}" aria-pressed="{{r.sel}}" style="min-height: 38px; padding: 0 14px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{r.border}}; background: {{r.bg}}; color: {{r.fg}};">{{r.label}}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+              <label style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">Sede</span><select style="height: 44px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; background: #FFFFFF; font-family: inherit; font-size: 14px; color: #1E1F1D;"><option>Bogotá Norte</option><option>Bogotá Sur</option></select></label>
+              <label style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">Grupo</span><select style="height: 44px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; background: #FFFFFF; font-family: inherit; font-size: 14px; color: #1E1F1D;"><option>Instalaciones</option><option>Mantenimiento</option></select></label>
+              <label style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">Supervisor</span><select style="height: 44px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; background: #FFFFFF; font-family: inherit; font-size: 14px; color: #1E1F1D;"><option>Laura Gómez</option><option>Marta Ríos</option></select></label>
+              <label style="display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">Desde</span><input type="date" value="2026-11-09" style="height: 44px; padding: 0 10px; border: 1px solid #C9C9C8; border-radius: 10px; font-family: inherit; font-size: 14px; color: #1E1F1D;"></label>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 14px; font-weight: 600;">Horario</span>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+                <sc-for list="{{tpls}}" as="t" hint-placeholder-count="3">
+                  <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.sel}}" style="text-align: left; display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 12px; font-family: inherit; cursor: pointer; border: {{t.border}}; background: {{t.bg}};"><span style="font-size: 14px; font-weight: 600; color: #1E1F1D;">{{t.name}}</span><span style="font-size: 12px; color: #5A5958;">{{t.line}}</span></button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{s3}}" hint-placeholder-val="{{false}}">
+            <sc-if value="{{isMobile}}" hint-placeholder-val="{{true}}">
+              <p style="margin: 0; font-size: 14px; color: #3C3C3B;">Dispositivos inscritos en SOTI MobiControl que todavía no tienen usuario en WorkLog.</p>
+              <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+                <sc-for list="{{devices}}" as="d" hint-placeholder-count="3">
+                  <li>
+                    <button type="button" onClick="{{d.pick}}" aria-pressed="{{d.sel}}" style="width: 100%; text-align: left; display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; font-family: inherit; cursor: pointer; box-sizing: border-box; border: {{d.border}}; background: {{d.bg}};">
+                      <span style="width: 20px; height: 20px; flex-shrink: 0; border-radius: 10px; box-sizing: border-box; border: 2px solid {{d.ring}}; display: flex; align-items: center; justify-content: center;"><span style="width: 10px; height: 10px; border-radius: 5px; background: {{d.dot}};"></span></span>
+                      <span style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1;"><span style="font-size: 14px; font-weight: 600; color: #1E1F1D;">{{d.name}}</span><span style="font-size: 12px; color: #5A5958;">{{d.meta}}</span></span>
+                      <span style="font-size: 12px; font-weight: 600; color: {{d.stateC}}; white-space: nowrap;">{{d.state}}</span>
+                    </button>
+                  </li>
+                </sc-for>
+              </ul>
+            </sc-if>
+            <sc-if value="{{isPanel}}" hint-placeholder-val="{{false}}">
+              <p style="margin: 0; padding: 14px 16px; border-radius: 12px; background: #F5F5F4; font-size: 14px; color: #3C3C3B;">Este usuario solo usará el panel web, así que no necesita dispositivo. Recibirá un correo para su primer ingreso.</p>
+            </sc-if>
+          </sc-if>
+
+          <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid #EFEFEE;">
+            <button type="button" onClick="{{back}}" style="height: 48px; padding: 0 20px; border: 1px solid #C9C9C8; border-radius: 12px; background: #FFFFFF; color: #1E1F1D; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; visibility: {{backVis}};">Atrás</button>
+            <button type="button" onClick="{{next}}" aria-disabled="{{nextBlocked}}" style="height: 48px; padding: 0 24px; border: none; border-radius: 12px; background: {{nextBg}}; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">{{nextLabel}}</button>
+          </div>
+        </section>
+
+        <aside style="display: flex; flex-direction: column; gap: 16px;">
+          <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+            <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Resumen</h2>
+            <dl style="margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 12px; font-size: 13px;">
+              <sc-for list="{{summary}}" as="x" hint-placeholder-count="6">
+                <dt style="color: #5A5958;">{{x.k}}</dt><dd style="margin: 0; font-weight: 600;">{{x.v}}</dd>
+              </sc-for>
+            </dl>
+          </section>
+          <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+            <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Qué pasa después</h2>
+            <ol style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; line-height: 18px; color: #3C3C3B;">
+              <li>MobiControl instala WorkLog en el dispositivo con su configuración.</li>
+              <li>La app se identifica con el id del dispositivo y muestra el usuario asignado.</li>
+              <li>El usuario ingresa con su cuenta, acepta la política de datos y pasa la revisión del dispositivo.</li>
+              <li>Queda «Activo». Todo el proceso queda en la auditoría.</li>
+            </ol>
+          </section>
+        </aside>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{sent}}" hint-placeholder-val="{{false}}">
+      <section style="max-width: 640px; background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 14px;">
+        <span style="width: 48px; height: 48px; border-radius: 24px; background: #E6F4EC; color: #1E6B3F; display: flex; align-items: center; justify-content: center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7L10 17l-5-5"></path></svg></span>
+        <h2 style="margin: 0; font-size: 22px; font-weight: 700;">Invitación enviada</h2>
+        <p style="margin: 0; font-size: 15px; line-height: 22px; color: #3C3C3B;">{{sentText}}</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="PanelUsuarios.dc.html" style="display: inline-flex; align-items: center; height: 46px; padding: 0 20px; border-radius: 12px; background: #AF1839; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none;">Ver usuarios</a>
+          <button type="button" onClick="{{reset}}" style="height: 46px; padding: 0 18px; border: 1px solid #C9C9C8; border-radius: 12px; background: #FFFFFF; color: #1E1F1D; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">Invitar a otra persona</button>
+        </div>
+      </section>
+    </sc-if>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { step: 1, sent: false, name: '', email: '', kind: 'mobile', role: 'tec', tpl: 'campo', dev: '' };
+}
+renderVals() {
+const st = this.state;
+const R = [{ id: 'tec', label: 'Usuario móvil' }, { id: 'sup', label: 'Supervisor' }, { id: 'rh', label: 'Recursos humanos' }, { id: 'nom', label: 'Nómina' }, { id: 'adm', label: 'Administrador' }];
+const T = [{ id: 'campo', name: 'Campo L–V', line: '07:00 – 16:00 · 40 h/sem · válida' }, { id: 'admin', name: 'Administrativo L–V', line: '08:00 – 17:00 · 40 h/sem · válida' }, { id: 'media', name: 'Media jornada L–S', line: '07:00 – 11:00 · 24 h/sem · válida' }];
+const D = [
+{ id: 'a', name: '[MODELO] · serie [SERIE-A]', meta: 'INTECHSYS / Campo / Bogotá Norte · inscrito el 30 oct', state: 'En línea · 92%', ok: 1 },
+{ id: 'b', name: '[MODELO] · serie [SERIE-B]', meta: 'INTECHSYS / Campo / Bogotá Norte · inscrito el 28 oct', state: 'En línea · 67%', ok: 1 },
+{ id: 'c', name: '[MODELO] · serie [SERIE-C]', meta: 'INTECHSYS / Campo / Bogotá Sur · inscrito el 21 oct', state: 'Sin conexión desde el 31 oct', ok: 0 },
+{ id: 'later', name: 'Asignar después', meta: 'El usuario no podrá iniciar jornada hasta tener dispositivo', state: '', ok: 1 }
+];
+const mobile = st.kind === 'mobile';
+const email = st.email.trim();
+const emailError = email && email.indexOf('@') < 1 ? 'Escribe un correo válido.' : (email.toLowerCase().indexOf('amora@') === 0 ? 'Ya existe un usuario con este correo: Andrés Mora.' : '');
+const ok1 = st.name.trim().length > 1 && email.indexOf('@') > 0 && !emailError;
+const ok3 = !mobile || !!st.dev;
+const okNow = st.step === 1 ? ok1 : (st.step === 2 ? true : ok3);
+const sel = (on) => ({ sel: on ? 'true' : 'false', border: on ? '2px solid #AF1839' : '1px solid #C9C9C8', bg: on ? '#FBE9EE' : '#FFFFFF' });
+const chip = (on) => ({ sel: on ? 'true' : 'false', bg: on ? '#AF1839' : '#FFFFFF', fg: on ? '#FFFFFF' : '#3C3C3B', border: on ? '1px solid #AF1839' : '1px solid #C9C9C8' });
+const labels = ['Datos', 'Rol y horario', 'Dispositivo'];
+const dev = D.find((d) => d.id === st.dev);
+const roleLabel = (R.find((r) => r.id === st.role) || R[0]).label;
+const tplName = (T.find((t) => t.id === st.tpl) || T[0]).name;
+return {
+editing: !st.sent, sent: st.sent,
+s1: st.step === 1, s2: st.step === 2, s3: st.step === 3,
+isMobile: mobile, isPanel: !mobile,
+f: { name: st.name, email: st.email },
+setName: (e) => this.setState({ name: e.target.value }),
+setEmail: (e) => this.setState({ email: e.target.value }),
+emailError: emailError,
+emailBorder: emailError ? '#AF1839' : '#C9C9C8',
+steps: labels.map((l, i) => {
+const n = i + 1; const cur = n === st.step; const done = n < st.step;
+return { num: done ? '✓' : String(n), label: l, bg: cur ? '#FBE9EE' : '#FFFFFF', fg: cur ? '#751326' : '#3C3C3B', border: cur ? '1px solid #AF1839' : '1px solid #E2E2E1', numBg: cur || done ? '#AF1839' : '#E8E8E7', numFg: cur || done ? '#FFFFFF' : '#3C3C3B' };
+}),
+kinds: [{ id: 'mobile', label: 'Usuario móvil', note: 'Registra su jornada en un dispositivo de MobiControl' }, { id: 'panel', label: 'Solo panel web', note: 'Supervisa, aprueba o configura desde el navegador' }].map((k) => Object.assign({}, k, sel(k.id === st.kind), { pick: () => this.setState({ kind: k.id, role: k.id === 'mobile' ? 'tec' : (st.role === 'tec' ? 'sup' : st.role), dev: '' }) })),
+roles: R.filter((r) => mobile ? r.id === 'tec' || r.id === 'sup' : r.id !== 'tec').map((r) => Object.assign({}, r, chip(r.id === st.role), { pick: () => this.setState({ role: r.id }) })),
+tpls: T.map((t) => Object.assign({}, t, sel(t.id === st.tpl), { pick: () => this.setState({ tpl: t.id }) })),
+devices: D.map((d) => {
+const on = d.id === st.dev;
+return Object.assign({}, d, { sel: on ? 'true' : 'false', border: on ? '2px solid #AF1839' : '1px solid #E2E2E1', bg: on ? '#FBE9EE' : '#FFFFFF', ring: on ? '#AF1839' : '#868787', dot: on ? '#AF1839' : 'transparent', stateC: d.ok ? '#1E6B3F' : '#8A4105', pick: () => this.setState({ dev: d.id }) });
+}),
+summary: [
+{ k: 'Nombre', v: st.name.trim() || '—' },
+{ k: 'Correo', v: email || '—' },
+{ k: 'Uso', v: mobile ? 'Usuario móvil' : 'Solo panel web' },
+{ k: 'Rol', v: roleLabel },
+{ k: 'Horario', v: tplName + ' · desde el 9 nov' },
+{ k: 'Dispositivo', v: mobile ? (dev ? dev.name : 'Sin elegir') : 'No aplica' }
+],
+backVis: st.step > 1 ? 'visible' : 'hidden',
+back: () => this.setState({ step: Math.max(1, st.step - 1) }),
+nextLabel: st.step < 3 ? 'Siguiente' : 'Enviar invitación',
+nextBlocked: okNow ? 'false' : 'true',
+nextBg: okNow ? '#AF1839' : '#5A5958',
+next: () => { if (!okNow) return; if (st.step < 3) this.setState({ step: st.step + 1 }); else this.setState({ sent: true }); },
+sentText: (st.name.trim() || 'La persona') + (mobile ? (dev && dev.id !== 'later' ? ' recibirá WorkLog en el dispositivo ' + dev.name + '. Cuando ingrese por primera vez quedará Activo.' : ' quedó invitada sin dispositivo. Asígnale uno en Usuarios y roles para que pueda registrar su jornada.') : ' recibirá un correo en ' + email + ' para ingresar al panel web.'),
+reset: () => this.setState({ step: 1, sent: false, name: '', email: '', kind: 'mobile', role: 'tec', tpl: 'campo', dev: '' })
+};
+}
+}
+
+</script>
+</body>
+</html>

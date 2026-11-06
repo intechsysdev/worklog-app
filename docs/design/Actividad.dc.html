@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Actividad en curso</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;">
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 20px 20px 12px;">
+    <div style="display: flex; flex-direction: column; gap: 2px;">
+      <span style="font-size: 16px; font-weight: 600;">Jornada activa</span>
+      <span style="font-size: 13px; color: #5A5958;">Desde 07:03 · Turno hasta 16:00</span>
+    </div>
+    <div style="display: flex; gap: 6px; align-items: center;">
+      <span role="img" aria-label="GPS activo" style="width: 44px; height: 44px; border-radius: 22px; background: #E6F4EC; color: #1E6B3F; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
+      <a href="Pendientes.dc.html" aria-label="Todo sincronizado. Ver sincronización" style="width: 44px; height: 44px; border-radius: 22px; background: #E6F4EC; color: #1E6B3F; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7L10 17l-5-5"></path></svg></a>
+    </div>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 16px; padding: 8px 20px 16px;">
+    <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+      <sc-if value="{{paused}}" hint-placeholder-val="{{false}}">
+        <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: #FEF3DA; color: #8A4105; font-size: 13px; font-weight: 600;"><span style="width: 8px; height: 8px; border-radius: 4px; background: #DA830B;"></span>EN PAUSA</span>
+      </sc-if>
+      <sc-if value="{{running}}" hint-placeholder-val="{{true}}">
+        <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: #E6F4EC; color: #1E6B3F; font-size: 13px; font-weight: 600;"><span style="width: 8px; height: 8px; border-radius: 4px; background: #1E7A46;"></span>EN CURSO</span>
+      </sc-if>
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 24px; font-weight: 700; line-height: 30px;">Instalación de equipo</h1>
+        <p style="margin: 0; font-size: 14px; color: #5A5958;">Almacén Norte · OT-1042</p>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 0;">
+        <span style="font-size: 52px; font-weight: 700; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; line-height: 1;">01:23:45</span>
+        <span style="font-size: 13px; color: #5A5958;">Iniciada a las 08:12</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #F5F5F4; font-size: 13px; color: #3C3C3B;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7A46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+        Dentro de la geocerca del sitio · precisión 6 m
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+        <button type="button" onClick="{{togglePause}}" style="height: 52px; border-radius: 14px; border: 1px solid #C9C9C8; background: #FFFFFF; color: #1E1F1D; font-family: inherit; font-size: 16px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5v14M15 5v14"></path></svg>{{pauseLabel}}
+        </button>
+        <a href="Finalizar.dc.html" style="height: 52px; border-radius: 14px; background: #AF1839; color: #FFFFFF; font-size: 16px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect></svg>Finalizar</a>
+      </div>
+      <a href="Seleccionar.dc.html" style="height: 48px; border-radius: 14px; color: #AF1839; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3"></path></svg>Cambiar actividad</a>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 10px;">
+      <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Resumen del día</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;">
+        <div style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-size: 20px; font-weight: 700;">3</span>
+          <span style="font-size: 12px; color: #5A5958;">Actividades</span>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-size: 19px; font-weight: 700; white-space: nowrap;">2 h 31 m</span>
+          <span style="font-size: 12px; color: #5A5958;">Productivo</span>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-size: 20px; font-weight: 700; color: #8A4105;">7 m</span>
+          <span style="font-size: 12px; color: #5A5958;">Sin actividad</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav aria-label="Navegación principal" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #E2E2E1; background: #FFFFFF; padding: 8px 8px 16px;">
+    <a href="Actividad.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; min-height: 44px; color: #AF1839; font-size: 12px; font-weight: 600; text-decoration: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Actividad</a>
+    <a href="Historial.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; min-height: 44px; color: #5A5958; font-size: 12px; font-weight: 500; text-decoration: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg>Historial</a>
+    <a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; min-height: 44px; color: #5A5958; font-size: 12px; font-weight: 500; text-decoration: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Jornada</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { paused: false };
+}
+renderVals() {
+const paused = !!this.state.paused;
+return {
+paused: paused,
+running: !paused,
+pauseLabel: paused ? 'Reanudar' : 'Pausar',
+togglePause: () => this.setState({ paused: !paused })
+};
+}
+}
+</script>
+</body>
+</html>

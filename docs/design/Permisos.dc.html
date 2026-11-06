@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Revisión del dispositivo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;">
+  <header style="display: flex; align-items: center; gap: 8px; padding: 16px 12px 8px;">
+    <a href="Politica.dc.html" aria-label="Volver" style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: #1E1F1D;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></a>
+    <h1 style="margin: 0; font-size: 20px; font-weight: 700;">Revisión del dispositivo</h1>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 20px;">
+    <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 16px; display: flex; gap: 12px; align-items: flex-start;">
+      <span style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 20px; background: #E6F4EC; color: #1E6B3F; display: flex; align-items: center; justify-content: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></svg></span>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 15px; font-weight: 600;">Administrado por SOTI MobiControl</span>
+        <span style="font-size: 13px; line-height: 18px; color: #5A5958;">[MODELO] · serie [SERIE]<br>Grupo: INTECHSYS / Campo / Bogotá Norte</span>
+      </div>
+    </section>
+
+    <p style="margin: 0; font-size: 14px; line-height: 20px; color: #3C3C3B;">La política de tu dispositivo concede estos permisos. Si alguno falla, soporte TI lo corrige desde MobiControl; no tienes que cambiar nada en el teléfono.</p>
+
+    <ul style="list-style: none; margin: 0; padding: 0; background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; display: flex; flex-direction: column;">
+      <sc-for list="{{perms}}" as="p" hint-placeholder-count="5">
+        <li style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: {{p.sep}};">
+          <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 15px; font-weight: 600;">{{p.title}}</span><span style="font-size: 12px; color: #5A5958;">{{p.why}}</span></span>
+          <span style="padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: {{p.chipBg}}; color: {{p.chipFg}};">{{p.status}}</span>
+        </li>
+      </sc-for>
+    </ul>
+
+    <sc-if value="{{hasIssue}}" hint-placeholder-val="{{true}}">
+      <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-radius: 14px; background: #FEF3DA; color: #6E3504;">
+        <span style="font-size: 14px; line-height: 20px;"><strong>Notificaciones</strong> no está activo en este dispositivo. Ya avisamos a soporte TI.</span>
+        <button type="button" onClick="{{recheck}}" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid #8A4105; background: #FFFFFF; color: #6E3504; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Volver a revisar</button>
+      </div>
+    </sc-if>
+
+    <div style="flex-grow: 1;"></div>
+    <a href="Main.dc.html" style="display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 16px; background: #AF1839; color: #FFFFFF; font-size: 17px; font-weight: 600; text-decoration: none;">Continuar</a>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { fixed: false };
+}
+renderVals() {
+const fixed = !!this.state.fixed;
+const base = [
+{ title: 'Ubicación siempre', why: 'Validar el sitio y registrar la jornada', ok: true },
+{ title: 'Notificaciones', why: 'Avisos de inactividad y fin de turno', ok: fixed },
+{ title: 'Cámara', why: 'Fotos de evidencia', ok: true },
+{ title: 'Sin optimización de batería', why: 'Que el sistema no cierre WorkLog', ok: true },
+{ title: 'Configuración de la app', why: 'Servidor y usuario enviados por MobiControl', ok: true }
+];
+return {
+hasIssue: !fixed,
+recheck: () => this.setState({ fixed: true }),
+perms: base.map((p, i) => Object.assign({}, p, {
+sep: i < base.length - 1 ? '1px solid #EFEFEE' : 'none',
+status: p.ok ? 'Por política' : 'Falta',
+chipBg: p.ok ? '#E6F4EC' : '#FEF3DA',
+chipFg: p.ok ? '#1E6B3F' : '#8A4105'
+}))
+};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Pendiente de sincronizar</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;">
+  <header style="display: flex; align-items: center; gap: 8px; padding: 16px 12px 8px;">
+    <a href="Actividad.dc.html" aria-label="Volver" style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: #1E1F1D;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></a>
+    <h1 style="margin: 0; font-size: 20px; font-weight: 700;">Pendiente de sincronizar</h1>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 16px; min-height: 0;">
+    <section style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: #FEF3DA; color: #6E3504;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M2 2l20 20"></path><path d="M8.5 16a5 5 0 0 1 7 0"></path><path d="M5 12.5a10 10 0 0 1 4.4-2.4M14.6 10.1A10 10 0 0 1 19 12.5"></path><circle cx="12" cy="19.5" r="1"></circle></svg>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 15px; font-weight: 600;">Sin conexión desde las 10:12</span>
+        <span style="font-size: 13px; line-height: 18px;">Tu trabajo está guardado en el teléfono. Se enviará solo cuando vuelva la señal.</span>
+      </div>
+    </section>
+
+    <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">En cola · 3 eventos y 2 archivos</h2>
+    <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px;">
+      <sc-for list="{{queue}}" as="q" hint-placeholder-count="5">
+        <li style="display: flex; gap: 12px; align-items: center; padding: 12px 16px; border-bottom: {{q.sep}};">
+          <span style="font-size: 13px; font-weight: 600; color: #3C3C3B; width: 40px; font-variant-numeric: tabular-nums;">{{q.time}}</span>
+          <span style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1;"><span style="font-size: 14px; font-weight: 600;">{{q.title}}</span><span style="font-size: 12px; color: #5A5958;">{{q.meta}}</span></span>
+          <span style="font-size: 12px; font-weight: 600; color: #5A5958; white-space: nowrap;">{{q.state}}</span>
+        </li>
+      </sc-for>
+    </ul>
+
+    <section style="display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; border: 1px solid #AF1839;">
+      <span style="font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.08em;">Rechazado por el servidor</span>
+      <span style="font-size: 14px; font-weight: 600;">06:41 · Inicio de jornada</span>
+      <span style="font-size: 13px; line-height: 18px; color: #3C3C3B;">Fuera de la ventana del turno (desde 06:45). Se registró a las 06:45.</span>
+      <a href="Solicitudes.dc.html" style="align-self: flex-start; font-size: 14px; font-weight: 600; padding: 6px 0;">Solicitar ajuste</a>
+    </section>
+
+    <label style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 0 16px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E2E2E1;">
+      <span style="font-size: 14px;">Subir archivos con datos móviles</span>
+      <input type="checkbox" checked="{{mobile}}" onChange="{{toggleMobile}}" style="width: 22px; height: 22px; margin: 0; accent-color: #AF1839;">
+    </label>
+
+    <div style="flex-grow: 1;"></div>
+    <p style="margin: 0; font-size: 12px; color: #5A5958; text-align: center;">Última sincronización: hoy 10:11</p>
+    <button type="button" style="height: 56px; border-radius: 16px; border: 1px solid #AF1839; background: #FFFFFF; color: #AF1839; font-family: inherit; font-size: 17px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"></path><path d="M20 4v5h-5"></path></svg>Reintentar ahora</button>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { mobile: false };
+}
+renderVals() {
+const q = [
+{ time: '10:15', title: 'Pausa', meta: 'Mantenimiento preventivo · OT-1043', state: 'En cola' },
+{ time: '10:32', title: 'Reanudar', meta: 'Mantenimiento preventivo · OT-1043', state: 'En cola' },
+{ time: '10:58', title: 'Finalizar actividad', meta: 'Completada · ubicación 7 m', state: 'En cola' },
+{ time: '10:57', title: 'Foto 1 de 2', meta: '1,8 MB', state: 'Espera wifi' },
+{ time: '10:57', title: 'Firma del cliente', meta: '0,1 MB', state: 'Espera wifi' }
+];
+const m = !!this.state.mobile;
+return {
+mobile: m,
+toggleMobile: () => this.setState({ mobile: !m }),
+queue: q.map((x, i) => Object.assign({}, x, { sep: i < q.length - 1 ? '1px solid #EFEFEE' : 'none', state: m && x.state === 'Espera wifi' ? 'En cola' : x.state }))
+};
+}
+}
+</script>
+</body>
+</html>

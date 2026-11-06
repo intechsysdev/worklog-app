@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Horas del equipo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:288px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Horas del equipo</h1>
+        <p style="margin: 0; font-size: 15px; color: #5A5958;">Semana del 26 al 30 de octubre · cifras al jueves 29, 10:42 · provisionales</p>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; min-height: 40px;"><input type="checkbox" checked="{{onlyAlerts}}" onChange="{{toggleAlerts}}" style="width: 18px; height: 18px; margin: 0; accent-color: #AF1839;">Solo con alertas</label>
+        <a href="#" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: 1px solid #C9C9C8; border-radius: 10px; background: #FFFFFF; color: #1E1F1D; font-size: 14px; font-weight: 600; text-decoration: none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"></path></svg>Exportar</a>
+      </div>
+    </header>
+
+    <section style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; padding: 14px 20px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E2E2E1; font-size: 13px; color: #3C3C3B;">
+      <span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 10px; border-radius: 3px; background: #AF1839;"></span>Ordinarias</span>
+      <span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 10px; border-radius: 3px; background: #3C3C3B;"></span>Nocturnas</span>
+      <span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 10px; border-radius: 3px; background: #DA830B;"></span>Extra</span>
+      <span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 2px; height: 14px; background: #1E1F1D;"></span>Tope legal 42 h</span>
+      <span style="color: #5A5958;">Extra: máximo 2 h al día y 12 h a la semana, con autorización vigente.</span>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; overflow-x: auto;">
+      <div role="table" class="tbl" style="width: 100%; min-width: 900px; font-size: 14px;">
+        <div role="rowgroup" style="display: contents;">
+          <div role="row" class="thead" style="display: grid; grid-template-columns: minmax(140px,1.2fr) minmax(220px,3fr) 100px 120px 110px 150px; align-items: center; text-align: left; color: #5A5958; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;">
+            <div role="columnheader" style="padding: 14px 20px; font-weight: 600;">Usuario</div>
+            <div role="columnheader" style="padding: 14px 12px; font-weight: 600; width: 38%;">Semana frente al tope</div>
+            <div role="columnheader" style="padding: 14px 12px; font-weight: 600; text-align: right;">Total</div>
+            <div role="columnheader" style="padding: 14px 12px; font-weight: 600; text-align: right;">Extra</div>
+            <div role="columnheader" style="padding: 14px 12px; font-weight: 600; text-align: right;">Dom. y fest.</div>
+            <div role="columnheader" style="padding: 14px 20px; font-weight: 600;">Alerta</div>
+          </div>
+        </div>
+        <div role="rowgroup" style="display: contents;">
+          <sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
+            <div role="row" class="trow" style="display: grid; grid-template-columns: minmax(140px,1.2fr) minmax(220px,3fr) 100px 120px 110px 150px; align-items: center; border-top: 1px solid #EFEFEE;">
+              <div role="cell" style="padding: 14px 20px; font-weight: 600;">{{r.name}}</div>
+              <div role="cell" data-label="Semana frente al tope" style="padding: 14px 12px;">
+                <div role="img" aria-label="{{r.aria}}" style="position: relative; height: 14px; border-radius: 4px; background: #EFEFEE; display: flex; overflow: visible;">
+                  <span style="height: 100%; border-radius: 4px 0 0 4px; width: {{r.wo}}; background: #AF1839;"></span>
+                  <span style="height: 100%; width: {{r.wn}}; background: #3C3C3B;"></span>
+                  <span style="height: 100%; width: {{r.we}}; background: #DA830B;"></span>
+                  <span style="position: absolute; left: 77.8%; top: -4px; bottom: -4px; width: 2px; background: #1E1F1D;"></span>
+                </div>
+              </div>
+              <div role="cell" data-label="Total" style="padding: 14px 12px; text-align: right; font-variant-numeric: tabular-nums; font-weight: 600;">{{r.total}}</div>
+              <div role="cell" data-label="Extra" style="padding: 14px 12px; text-align: right; font-variant-numeric: tabular-nums;">{{r.extra}}</div>
+              <div role="cell" data-label="Dom. y fest." style="padding: 14px 12px; text-align: right; font-variant-numeric: tabular-nums;">{{r.dom}}</div>
+              <div role="cell" data-label="Alerta" style="padding: 14px 20px;"><span style="padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: {{r.aBg}}; color: {{r.aFg}};">{{r.alert}}</span></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <p style="margin: 0; padding: 12px 20px; border-top: 1px solid #E2E2E1; font-size: 12px; color: #5A5958;">La barra va de 0 a 54 h (42 ordinarias + 12 extra). El periodo se cierra el 15 de noviembre.</p>
+    </section>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { only: false };
+}
+renderVals() {
+const data = [
+{ name: 'Hernán Díaz', o: 36 * 60, n: 4 * 60, e: 4 * 60, d: 0 },
+{ name: 'Diana Ruiz', o: 38 * 60 + 40, n: 0, e: 0, d: 0 },
+{ name: 'Ricardo Salas', o: 32 * 60, n: 0, e: 90, d: 0 },
+{ name: 'Paula Herrera', o: 31 * 60 + 50, n: 0, e: 0, d: 0 },
+{ name: 'Andrés Mora', o: 31 * 60 + 20, n: 0, e: 0, d: 0 },
+{ name: 'Miguel Torres', o: 30 * 60 + 40, n: 0, e: 0, d: 0 },
+{ name: 'Jorge Castaño', o: 28 * 60, n: 125, e: 0, d: 0 },
+{ name: 'Carlos Pérez', o: 29 * 60 + 10, n: 0, e: 0, d: 0 },
+{ name: 'Sofía Rincón', o: 28 * 60 + 15, n: 0, e: 0, d: 0 },
+{ name: 'Luis Ortega', o: 24 * 60, n: 0, e: 0, d: 0 }
+];
+const fmt = (m) => Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + String(m % 60).padStart(2, '0') + ' m' : '');
+const pct = (m) => (m / (54 * 60) * 100).toFixed(1) + '%';
+const rows = data.map((r) => {
+const t = r.o + r.n + r.e;
+let a = { alert: '—', aBg: 'transparent', aFg: '#5A5958', has: false };
+if (t >= 42 * 60) a = { alert: 'Pasó 42 h', aBg: '#FBE9EE', aFg: '#751326', has: true };
+else if (t >= 38 * 60) a = { alert: 'Cerca del tope', aBg: '#FEF3DA', aFg: '#8A4105', has: true };
+else if (r.e > 0) a = { alert: 'Extra en uso', aBg: '#E8E8E7', aFg: '#3C3C3B', has: true };
+return Object.assign({}, r, a, {
+wo: pct(r.o), wn: pct(r.n), we: pct(r.e),
+total: fmt(t), extra: r.e ? fmt(r.e) + ' de 12 h' : '0 h', dom: r.d ? fmt(r.d) : '0 h',
+aria: r.name + ': ' + fmt(t) + ' en la semana, ' + fmt(r.e) + ' extra'
+});
+});
+const only = !!this.state.only;
+return {
+onlyAlerts: only,
+toggleAlerts: () => this.setState({ only: !only }),
+rows: only ? rows.filter((r) => r.has) : rows
+};
+}
+}
+
+</script>
+</body>
+</html>

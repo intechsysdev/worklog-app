@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Cierre de periodo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:288px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.split4{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px}
+@media (max-width:1100px){.split4{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Cierre de periodo</h1>
+        <p style="margin: 0; font-size: 15px; color: #5A5958;">Quincena del 16 al 31 de octubre de 2026 · Sede Bogotá Norte · {{statusText}}</p>
+      </div>
+      <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #3C3C3B;">Periodo
+        <select style="height: 40px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; background: #FFFFFF; font-family: inherit; font-size: 14px; color: #1E1F1D;"><option>16 – 31 oct 2026</option><option>1 – 15 oct 2026 (cerrado)</option></select>
+      </label>
+    </header>
+
+    <div class="split4" style="align-items: start;">
+      <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; overflow-x: auto;">
+        <div role="table" class="tbl" aria-label="Horas clasificadas por usuario" style="min-width: 860px; font-size: 14px;">
+          <div role="row" class="thead" style="display: grid; grid-template-columns: minmax(150px,1.4fr) repeat(5, 96px) minmax(150px,1.4fr) 110px; align-items: center; color: #5A5958; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
+            <div role="columnheader" style="padding: 14px 20px; font-weight: 600;">Usuario</div>
+            <div role="columnheader" style="padding: 14px 8px; font-weight: 600; text-align: right;">Ord. diurnas</div>
+            <div role="columnheader" style="padding: 14px 8px; font-weight: 600; text-align: right;">Ord. noct.</div>
+            <div role="columnheader" style="padding: 14px 8px; font-weight: 600; text-align: right;">Extra diurnas</div>
+            <div role="columnheader" style="padding: 14px 8px; font-weight: 600; text-align: right;">Extra noct.</div>
+            <div role="columnheader" style="padding: 14px 8px; font-weight: 600; text-align: right;">Dom. y fest.</div>
+            <div role="columnheader" style="padding: 14px 12px; font-weight: 600;">Novedades</div>
+            <div role="columnheader" style="padding: 14px 20px; font-weight: 600;">Estado</div>
+          </div>
+          <sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
+            <div role="row" class="trow" style="display: grid; grid-template-columns: minmax(150px,1.4fr) repeat(5, 96px) minmax(150px,1.4fr) 110px; align-items: center; border-top: 1px solid #EFEFEE; font-variant-numeric: tabular-nums;">
+              <div role="cell" style="padding: 12px 20px; font-weight: 600;">{{r.name}}</div>
+              <div role="cell" data-label="Ord. diurnas" style="padding: 12px 8px; text-align: right;">{{r.od}}</div>
+              <div role="cell" data-label="Ord. noct." style="padding: 12px 8px; text-align: right;">{{r.on}}</div>
+              <div role="cell" data-label="Extra diurnas" style="padding: 12px 8px; text-align: right;">{{r.ed}}</div>
+              <div role="cell" data-label="Extra noct." style="padding: 12px 8px; text-align: right;">{{r.en}}</div>
+              <div role="cell" data-label="Dom. y fest." style="padding: 12px 8px; text-align: right;">{{r.df}}</div>
+              <div role="cell" data-label="Novedades" style="padding: 12px; font-size: 13px; color: #3C3C3B;">{{r.nov}}</div>
+              <div role="cell" data-label="Estado" style="padding: 12px 20px;"><span style="padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: {{r.bg}}; color: {{r.fg}};">{{r.state}}</span></div>
+            </div>
+          </sc-for>
+          <div role="row" class="trow" style="display: grid; grid-template-columns: minmax(150px,1.4fr) repeat(5, 96px) minmax(150px,1.4fr) 110px; align-items: center; border-top: 2px solid #1E1F1D; font-weight: 700; font-variant-numeric: tabular-nums;">
+            <div role="cell" style="padding: 14px 20px;">Total</div>
+            <div role="cell" data-label="Ord. diurnas" style="padding: 14px 8px; text-align: right;">{{t.od}}</div>
+            <div role="cell" data-label="Ord. noct." style="padding: 14px 8px; text-align: right;">{{t.on}}</div>
+            <div role="cell" data-label="Extra diurnas" style="padding: 14px 8px; text-align: right;">{{t.ed}}</div>
+            <div role="cell" data-label="Extra noct." style="padding: 14px 8px; text-align: right;">{{t.en}}</div>
+            <div role="cell" data-label="Dom. y fest." style="padding: 14px 8px; text-align: right;">{{t.df}}</div>
+            <div role="cell" data-label="Novedades" style="padding: 14px 12px;"></div>
+            <div role="cell" data-label="Estado" style="padding: 14px 20px;"></div>
+          </div>
+        </div>
+      </section>
+
+      <aside style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Antes de cerrar</h2>
+        <sc-if value="{{open}}" hint-placeholder-val="{{true}}">
+          <div style="display: flex; gap: 10px; padding: 12px; border-radius: 10px; background: #FEF3DA; color: #6E3504; font-size: 13px; line-height: 18px;"><span><strong>3 solicitudes</strong> de este periodo siguen pendientes (Andrés Mora, Diana Ruiz y Luis Ortega). <a href="PanelAprobaciones.dc.html" style="font-weight: 600;">Ir a Aprobaciones</a></span></div>
+          <sc-for list="{{checks}}" as="c" hint-placeholder-count="3">
+            <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 20px; cursor: pointer;">
+              <input type="checkbox" checked="{{c.on}}" onChange="{{c.toggle}}" style="width: 20px; height: 20px; margin: 0; accent-color: #AF1839; flex-shrink: 0;">
+              <span>{{c.label}}</span>
+            </label>
+          </sc-for>
+          <button type="button" onClick="{{close}}" aria-disabled="{{blocked}}" style="height: 48px; border: none; border-radius: 12px; background: {{closeBg}}; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">Cerrar periodo</button>
+          <p style="margin: 0; font-size: 12px; line-height: 17px; color: #5A5958;">Al cerrar, las horas quedan congeladas. Cualquier cambio posterior entra como ajuste en el periodo siguiente.</p>
+        </sc-if>
+        <sc-if value="{{closed}}" hint-placeholder-val="{{false}}">
+          <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px; border-radius: 12px; background: #E6F4EC; color: #1E6B3F;">
+            <span style="font-size: 15px; font-weight: 700;">Periodo cerrado</span>
+            <span style="font-size: 13px;">Por Laura Gómez · las horas quedan congeladas.</span>
+          </div>
+          <span style="font-size: 14px; font-weight: 600;">Exportar para nómina</span>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="#" style="display: inline-flex; align-items: center; height: 44px; padding: 0 16px; border-radius: 10px; background: #AF1839; color: #FFFFFF; font-size: 14px; font-weight: 600; text-decoration: none;">Excel (.xlsx)</a>
+            <a href="#" style="display: inline-flex; align-items: center; height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #C9C9C8; color: #1E1F1D; font-size: 14px; font-weight: 600; text-decoration: none;">CSV</a>
+          </div>
+          <button type="button" onClick="{{reopen}}" style="align-self: flex-start; min-height: 40px; padding: 0; border: none; background: transparent; color: #AF1839; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Reabrir (solo administrador)</button>
+        </sc-if>
+      </aside>
+    </div>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { checks: [false, false, false], closed: false };
+}
+renderVals() {
+const data = [
+{ name: 'Andrés Mora', od: 5180, on: 0, ed: 0, en: 0, df: 0, nov: 'Ajuste del 29 oct por aprobar', ok: 0 },
+{ name: 'Diana Ruiz', od: 5220, on: 0, ed: 120, en: 0, df: 0, nov: '2 h extra por aprobar', ok: 0 },
+{ name: 'Hernán Díaz', od: 4200, on: 960, ed: 240, en: 240, df: 0, nov: '—', ok: 1 },
+{ name: 'Ricardo Salas', od: 5280, on: 0, ed: 90, en: 0, df: 0, nov: '—', ok: 1 },
+{ name: 'Jorge Castaño', od: 5040, on: 250, ed: 0, en: 0, df: 0, nov: '—', ok: 1 },
+{ name: 'Paula Herrera', od: 5280, on: 0, ed: 0, en: 0, df: 0, nov: '—', ok: 1 },
+{ name: 'Camila Vargas', od: 2880, on: 0, ed: 0, en: 0, df: 0, nov: 'Vacaciones 26 – 30 oct', ok: 1 },
+{ name: 'Luis Ortega', od: 4800, on: 0, ed: 0, en: 0, df: 0, nov: 'Cambio de turno por aprobar', ok: 0 }
+];
+const fmt = (m) => m ? Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + String(m % 60).padStart(2, '0') : '') : '—';
+const keys = ['od', 'on', 'ed', 'en', 'df'];
+const tot = {};
+keys.forEach((k) => { tot[k] = fmt(data.reduce((a, r) => a + r[k], 0)); });
+const closed = !!this.state.closed;
+const ch = this.state.checks;
+const labels = ['Revisé las alertas de horas del equipo', 'Revisé las novedades del periodo', 'Resolví las solicitudes pendientes'];
+const all = ch.every((x) => x);
+return {
+statusText: closed ? 'cerrado' : 'abierto, listo para revisar',
+rows: data.map((r) => {
+const ready = closed || r.ok;
+return { name: r.name, od: fmt(r.od), on: fmt(r.on), ed: fmt(r.ed), en: fmt(r.en), df: fmt(r.df), nov: r.nov,
+state: closed ? 'Cerrado' : (r.ok ? 'Listo' : 'Pendiente'),
+bg: ready ? '#E6F4EC' : '#FEF3DA', fg: ready ? '#1E6B3F' : '#8A4105' };
+}),
+t: tot,
+open: !closed,
+closed: closed,
+checks: labels.map((l, i) => ({ label: l, on: !!ch[i], toggle: () => { const c = ch.slice(); c[i] = !c[i]; this.setState({ checks: c }); } })),
+blocked: all ? 'false' : 'true',
+closeBg: all ? '#AF1839' : '#5A5958',
+close: () => { if (all) this.setState({ closed: true }); },
+reopen: () => this.setState({ closed: false, checks: [false, false, false] })
+};
+}
+}
+
+</script>
+</body>
+</html>

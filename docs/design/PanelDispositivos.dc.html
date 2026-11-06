@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Control de dispositivos</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.split4{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px}
+@media (max-width:1100px){.split4{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Control de dispositivos</h1>
+        <p style="margin: 0; font-size: 15px; color: #5A5958; max-width: 720px;">Con SOTI MobiControl, las apps corporativas solo se ven mientras la jornada está abierta. Fuera de jornada el dispositivo queda en kiosco con WorkLog y el teléfono.</p>
+      </div>
+      <button type="button" onClick="{{save}}" style="height: 44px; padding: 0 20px; border-radius: 10px; border: none; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">Guardar cambios</button>
+    </header>
+
+    <sc-if value="{{err}}" hint-placeholder-val="{{false}}">
+      <p role="alert" style="margin: 0; padding: 12px 16px; border-radius: 12px; background: #FBE9EE; color: #751326; font-size: 14px; font-weight: 600;">{{err}}</p>
+    </sc-if>
+    <sc-if value="{{saved}}" hint-placeholder-val="{{false}}">
+      <p role="status" style="margin: 0; padding: 12px 16px; border-radius: 12px; background: #E7F4EC; color: #1E6B3F; font-size: 14px; font-weight: 600;">{{saved}}</p>
+    </sc-if>
+
+    <div class="split4" style="align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0;">
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+            <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+              <h2 style="margin: 0; font-size: 18px; font-weight: 700;">Apps corporativas solo en jornada</h2>
+              <span style="font-size: 14px; color: #5A5958;">Aplica a dispositivos compartidos (Shared Device) y asignados a una persona.</span>
+            </div>
+            <button type="button" role="switch" aria-checked="{{switchPressed}}" onClick="{{toggleOn}}" style="display: flex; align-items: center; gap: 10px; border: none; background: none; font-family: inherit; font-size: 14px; font-weight: 600; color: #1E1F1D; cursor: pointer; min-height: 44px;"><span style="width: 46px; height: 26px; border-radius: 13px; background: {{switchBg}}; position: relative; display: block;"><span style="position: absolute; top: 2px; left: {{knobX}}; width: 22px; height: 22px; border-radius: 11px; background: #FFFFFF; display: block;"></span></span>{{switchLabel}}</button>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <sc-for list="{{checks}}" as="c" hint-placeholder-count="5">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid #E2E2E1; border-radius: 12px;">
+                <span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 14px; background: {{c.mbg}}; color: {{c.mfg}}; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0;">{{c.mark}}</span>
+                <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="font-size: 14px; font-weight: 600;">{{c.label}}</span><span style="font-size: 13px; color: #5A5958;">{{c.note}}</span></div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+            <span style="font-size: 14px; color: #3C3C3B;">{{checkSummary}}</span>
+            <button type="button" onClick="{{recheck}}" style="height: 40px; padding: 0 16px; border-radius: 10px; border: 1px solid #C9C9C8; background: #FFFFFF; color: #3C3C3B; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">{{recheckLabel}}</button>
+          </div>
+        </section>
+
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+          <h2 style="margin: 0; font-size: 18px; font-weight: 700;">Reglas</h2>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 14px; font-weight: 600;">Sedes y grupos donde aplica</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <sc-for list="{{scopes}}" as="s" hint-placeholder-count="4">
+                <button type="button" onClick="{{s.pick}}" aria-pressed="{{s.sel}}" style="min-height: 38px; padding: 0 14px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{s.border}}; background: {{s.bg}}; color: {{s.fg}};">{{s.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 14px; font-weight: 600;">Avisos antes del cierre</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <sc-for list="{{warns}}" as="w" hint-placeholder-count="4">
+                <button type="button" onClick="{{w.pick}}" aria-pressed="{{w.sel}}" style="min-height: 38px; padding: 0 14px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{w.border}}; background: {{w.bg}}; color: {{w.fg}};">{{w.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 14px; font-weight: 600;">Gracia después del fin del turno</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <sc-for list="{{graces}}" as="g" hint-placeholder-count="4">
+                  <button type="button" onClick="{{g.pick}}" aria-pressed="{{g.sel}}" style="min-height: 38px; padding: 0 14px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{g.border}}; background: {{g.bg}}; color: {{g.fg}};">{{g.label}}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 14px; font-weight: 600;">Puede iniciar antes del turno</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <sc-for list="{{tols}}" as="t" hint-placeholder-count="3">
+                  <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.sel}}" style="min-height: 38px; padding: 0 14px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{t.border}}; background: {{t.bg}}; color: {{t.fg}};">{{t.label}}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+          <p style="margin: 0; padding: 12px 14px; border-radius: 12px; background: #F5F5F4; font-size: 14px; line-height: 20px; color: #3C3C3B;">{{preview}} Con horas extra autorizadas, el cierre se corre hasta su fin.</p>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+            <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="font-size: 14px; font-weight: 600;">En dispositivos compartidos, cerrar la sesión de Shared Device al cerrar la jornada</span><span style="font-size: 13px; color: #5A5958;">Así el siguiente usuario no ve los datos de la persona anterior.</span></div>
+            <button type="button" role="switch" aria-checked="{{logoutPressed}}" onClick="{{toggleLogout}}" style="display: flex; align-items: center; gap: 10px; border: none; background: none; font-family: inherit; font-size: 14px; font-weight: 600; color: #1E1F1D; cursor: pointer; min-height: 44px;"><span style="width: 46px; height: 26px; border-radius: 13px; background: {{logoutBg}}; position: relative; display: block;"><span style="position: absolute; top: 2px; left: {{logoutX}}; width: 22px; height: 22px; border-radius: 11px; background: #FFFFFF; display: block;"></span></span>{{logoutLabel}}</button>
+          </div>
+          <fieldset style="border: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+            <legend style="font-size: 14px; font-weight: 600; padding: 0; margin-bottom: 8px;">Si MobiControl no responde al iniciar la jornada</legend>
+            <sc-for list="{{offlines}}" as="o" hint-placeholder-count="2">
+              <button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="text-align: left; padding: 12px 14px; border-radius: 12px; font-family: inherit; font-size: 14px; font-weight: 600; color: #1E1F1D; cursor: pointer; border: {{o.border}}; background: {{o.bg}};">{{o.label}}</button>
+            </sc-for>
+          </fieldset>
+        </section>
+
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 700;">Apps del dispositivo</h2>
+            <span style="font-size: 14px; color: #5A5958;">Lista leída del catálogo de apps de MobiControl. WorkLog y Teléfono siempre están disponibles.</span>
+          </div>
+          <div class="split" style="align-items: start;">
+            <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0;">
+              <span style="font-size: 13px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.08em;">Solo en jornada · {{corpCount}}</span>
+              <sc-for list="{{corpApps}}" as="a" hint-placeholder-count="4">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border: 1px solid #E2E2E1; border-radius: 12px;">
+                  <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><span style="font-size: 14px; font-weight: 600;">{{a.name}}</span><span style="font-size: 12px; color: #5A5958; font-family: ui-monospace, monospace; overflow-wrap: anywhere;">{{a.pkg}}</span></div>
+                  <button type="button" onClick="{{a.move}}" aria-label="{{a.moveLabel}}" style="flex-shrink: 0; height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9C9C8; background: #FFFFFF; color: #3C3C3B; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Mover →</button>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0;">
+              <span style="font-size: 13px; font-weight: 700; color: #1E6B3F; text-transform: uppercase; letter-spacing: 0.08em;">Siempre disponibles</span>
+              <div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border: 1px dashed #C9C9C8; border-radius: 12px;"><span style="font-size: 14px; font-weight: 600;">WorkLog y Teléfono</span><span style="font-size: 12px; color: #5A5958;">Fijas, no se pueden ocultar</span></div>
+              <sc-for list="{{freeApps}}" as="a" hint-placeholder-count="2">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border: 1px solid #E2E2E1; border-radius: 12px;">
+                  <button type="button" onClick="{{a.move}}" aria-label="{{a.moveLabel}}" style="flex-shrink: 0; height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9C9C8; background: #FFFFFF; color: #3C3C3B; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">← Mover</button>
+                  <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0; text-align: right;"><span style="font-size: 14px; font-weight: 600;">{{a.name}}</span><span style="font-size: 12px; color: #5A5958; font-family: ui-monospace, monospace; overflow-wrap: anywhere;">{{a.pkg}}</span></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside style="display: flex; flex-direction: column; gap: 16px; min-width: 0;">
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+          <h2 style="margin: 0; font-size: 16px; font-weight: 700;">Dispositivos ahora</h2>
+          <sc-for list="{{devices}}" as="d" hint-placeholder-count="4">
+            <div style="display: flex; flex-direction: column; gap: 4px; padding: 10px 0; border-top: 1px solid #E2E2E1;">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;"><span style="font-size: 14px; font-weight: 600;">{{d.who}}</span><span style="font-size: 12px; font-weight: 700; color: #5A5958;">{{d.kind}}</span></div>
+              <span style="font-size: 13px; color: #5A5958;">{{d.dev}}</span>
+              <span style="font-size: 13px; color: #3C3C3B;">Jornada {{d.state}} · desde {{d.since}}</span>
+              <span style="font-size: 13px; font-weight: 600; color: {{d.oc}};">Orden a MobiControl: {{d.order}}</span>
+            </div>
+          </sc-for>
+          <a href="PanelAuditoria.dc.html" style="font-size: 14px; font-weight: 600; text-decoration: none;">Ver órdenes en Auditoría</a>
+        </section>
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 8px;">
+          <h2 style="margin: 0; font-size: 16px; font-weight: 700;">Cómo lo ve el usuario</h2>
+          <a href="Kiosco.dc.html" style="font-size: 14px; font-weight: 600; text-decoration: none;">Kiosco fuera de jornada</a>
+          <a href="AvisoCierre.dc.html" style="font-size: 14px; font-weight: 600; text-decoration: none;">Aviso de fin de turno</a>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = {
+on: false, sdOk: false, checking: false,
+scope: ['bn', 'bs'], warn: [15, 5], grace: 10, tol: 10, logout: true, offline: 'allow',
+corp: ['mail', 'ot', 'inv', 'chat'], saved: '', err: ''
+};
+}
+renderVals() {
+const st = this.state;
+const hhmm = (m) => { const h = Math.floor(m / 60), mm = m % 60; return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm; };
+const S = [{ id: 'bn', label: 'Bogotá Norte' }, { id: 'bs', label: 'Bogotá Sur' }, { id: 'med', label: 'Medellín' }, { id: 'adm', label: 'Grupo Administrativo' }];
+const APPS = [
+{ id: 'mail', name: 'Correo corporativo', pkg: 'com.[EMPRESA].mail' },
+{ id: 'ot', name: 'Órdenes de trabajo', pkg: 'com.[EMPRESA].ot' },
+{ id: 'inv', name: 'Inventario', pkg: 'com.[EMPRESA].inventario' },
+{ id: 'chat', name: 'Chat del equipo', pkg: 'com.[EMPRESA].chat' },
+{ id: 'cam', name: 'Cámara', pkg: 'com.android.camera' },
+{ id: 'maps', name: 'Mapas', pkg: 'com.google.android.apps.maps' }
+];
+const checks = [
+{ label: 'Conexión con MobiControl', note: 'Configurada en INTECHSYS ONE · versión 2026.0', ok: true },
+{ label: 'Perfil «WorkLog · Fuera de jornada»', note: 'Lockdown con WorkLog y Teléfono', ok: true },
+{ label: 'Perfil «WorkLog · En jornada»', note: 'Lockdown con WorkLog y apps corporativas', ok: true },
+{ label: 'Atributo WL_JORNADA y filtros de asignación', note: 'Valores ABIERTA / CERRADA', ok: true },
+{ label: 'Shared Device abre WorkLog al ingresar', note: st.sdOk ? 'Configurado en el grupo Campo' : 'Falta en el grupo Campo: WorkLog no está como app de inicio', ok: st.sdOk }
+];
+const allOk = checks.every((c) => c.ok);
+const chip = (on) => ({ sel: on ? 'true' : 'false', bg: on ? '#AF1839' : '#FFFFFF', fg: on ? '#FFFFFF' : '#3C3C3B', border: on ? '1px solid #AF1839' : '1px solid #C9C9C8' });
+const toggle = (arr, v) => arr.indexOf(v) >= 0 ? arr.filter((x) => x !== v) : arr.concat([v]);
+const dirty = () => ({ saved: '', err: '' });
+const D = [
+{ dev: '[MODELO] · [SERIE-A]', who: 'Andrés Mora', kind: 'Compartido', state: 'Abierta', since: '06:55', order: 'Aplicada', oc: '#1E6B3F' },
+{ dev: '[MODELO] · [SERIE-B]', who: 'Luis Herrera', kind: 'Asignado', state: 'Abierta', since: '07:02', order: 'Aplicada', oc: '#1E6B3F' },
+{ dev: '[MODELO] · [SERIE-C]', who: 'Sin sesión', kind: 'Compartido', state: 'Cerrada', since: 'ayer 16:08', order: 'En cola · sin conexión', oc: '#8A4105' },
+{ dev: '[MODELO] · [SERIE-D]', who: 'Natalia Pineda', kind: 'Asignado', state: 'Cerrada', since: 'ayer 17:01', order: 'Aplicada', oc: '#1E6B3F' }
+];
+return {
+isOn: st.on, isOff: !st.on,
+switchLabel: st.on ? 'Activado' : 'Apagado',
+switchBg: st.on ? '#AF1839' : '#C9C9C8',
+knobX: st.on ? '22px' : '2px',
+switchPressed: st.on ? 'true' : 'false',
+toggleOn: () => {
+if (!st.on && !allOk) { this.setState({ err: 'Antes de activar, resuelve lo que falta en la verificación de MobiControl.', saved: '' }); return; }
+this.setState(Object.assign({ on: !st.on }, dirty()));
+},
+checks: checks.map((c) => Object.assign({}, c, { mark: c.ok ? '✓' : '!', mbg: c.ok ? '#E7F4EC' : '#FEF3DA', mfg: c.ok ? '#1E6B3F' : '#8A4105' })),
+checkSummary: allOk ? 'Todo listo en MobiControl.' : '1 punto pendiente en MobiControl.',
+recheckLabel: st.checking ? 'Verificando…' : 'Verificar de nuevo',
+recheck: () => {
+if (st.checking) return;
+this.setState({ checking: true });
+setTimeout(() => this.setState({ checking: false, sdOk: true, err: '' }), 800);
+},
+scopes: S.map((s) => Object.assign({}, s, chip(st.scope.indexOf(s.id) >= 0), { pick: () => this.setState(Object.assign({ scope: toggle(st.scope, s.id) }, dirty())) })),
+warns: [30, 15, 10, 5].map((m) => Object.assign({ label: m + ' min antes' }, chip(st.warn.indexOf(m) >= 0), { pick: () => this.setState(Object.assign({ warn: toggle(st.warn, m).sort((a, b) => b - a) }, dirty())) })),
+graces: [0, 5, 10, 15].map((m) => Object.assign({ label: m === 0 ? 'Sin gracia' : m + ' min' }, chip(st.grace === m), { pick: () => this.setState(Object.assign({ grace: m }, dirty())) })),
+tols: [5, 10, 15].map((m) => Object.assign({ label: m + ' min' }, chip(st.tol === m), { pick: () => this.setState(Object.assign({ tol: m }, dirty())) })),
+logoutLabel: st.logout ? 'Sí, cerrar la sesión' : 'No, solo ocultar las apps',
+logoutBg: st.logout ? '#AF1839' : '#C9C9C8',
+logoutX: st.logout ? '22px' : '2px',
+logoutPressed: st.logout ? 'true' : 'false',
+toggleLogout: () => this.setState(Object.assign({ logout: !st.logout }, dirty())),
+offlines: [{ id: 'allow', label: 'Dejar iniciar la jornada y avisar al administrador' }, { id: 'block', label: 'No dejar iniciar hasta que MobiControl responda' }].map((o) => {
+const on = st.offline === o.id;
+return Object.assign({}, o, { sel: on ? 'true' : 'false', border: on ? '2px solid #AF1839' : '1px solid #C9C9C8', bg: on ? '#FBE9EE' : '#FFFFFF', pick: () => this.setState(Object.assign({ offline: o.id }, dirty())) });
+}),
+corpApps: APPS.filter((a) => st.corp.indexOf(a.id) >= 0).map((a) => Object.assign({}, a, { move: () => this.setState(Object.assign({ corp: st.corp.filter((x) => x !== a.id) }, dirty())), moveLabel: 'Pasar a siempre disponibles' })),
+freeApps: APPS.filter((a) => st.corp.indexOf(a.id) < 0).map((a) => Object.assign({}, a, { move: () => this.setState(Object.assign({ corp: st.corp.concat([a.id]) }, dirty())), moveLabel: 'Pasar a solo en jornada' })),
+corpCount: String(st.corp.length),
+preview: 'Ejemplo con turno 07:00 – 16:00: se puede iniciar desde las ' + hhmm(7 * 60 - st.tol) + (st.warn.length ? '; avisos a las ' + st.warn.map((m) => hhmm(16 * 60 + st.grace - m)).join(' y ') : '; sin avisos') + '; cierre a las ' + hhmm(16 * 60 + st.grace) + '.',
+devices: D,
+saved: st.saved, err: st.err,
+save: () => {
+if (st.on && st.scope.length === 0) { this.setState({ err: 'Elige al menos una sede o grupo.', saved: '' }); return; }
+if (st.on && st.warn.length === 0) { this.setState({ err: 'Deja al menos un aviso antes del cierre: es la única forma de que el usuario guarde su trabajo a tiempo.', saved: '' }); return; }
+this.setState({ err: '', saved: st.on ? 'Guardado. WorkLog empezará a enviar órdenes a MobiControl en los próximos minutos. Queda en Auditoría.' : 'Guardado. La opción está apagada: los dispositivos no cambian.' });
+}
+};
+}
+}
+</script>
+</body>
+</html>

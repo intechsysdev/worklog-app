@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Actividades y resultados</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:288px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.split4{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px}
+@media (max-width:1100px){.split4{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Actividades y resultados</h1>
+        <p style="margin: 0; font-size: 15px; color: #5A5958;">El catálogo que ve el usuario en la app y lo que exige cada actividad al finalizar.</p>
+      </div>
+      <button type="button" onClick="{{openNew}}" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border: none; border-radius: 12px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nueva actividad</button>
+    </header>
+
+    <div class="split4" style="align-items: start;">
+      <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; overflow-x: auto;">
+        <div role="table" class="tbl" style="width: 100%; min-width: 720px; font-size: 14px;">
+          <div role="rowgroup" style="display: contents;">
+            <div role="row" class="thead" style="display: grid; grid-template-columns: minmax(190px,2fr) 150px 96px 96px 120px 96px; align-items: center; text-align: left; color: #5A5958; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;">
+              <div role="columnheader" style="padding: 14px 20px; font-weight: 600;">Actividad</div><div role="columnheader" style="padding: 14px 12px; font-weight: 600;">Categoría</div><div role="columnheader" style="padding: 14px 12px; font-weight: 600; text-align: center;">Foto</div><div role="columnheader" style="padding: 14px 12px; font-weight: 600; text-align: center;">Firma</div><div role="columnheader" style="padding: 14px 12px; font-weight: 600; text-align: center;">Observación</div><div role="columnheader" style="padding: 14px 20px; font-weight: 600; text-align: center;">Activa</div>
+            </div>
+          </div>
+          <div role="rowgroup" style="display: contents;">
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
+              <div role="row" class="trow" style="display: grid; grid-template-columns: minmax(190px,2fr) 150px 96px 96px 120px 96px; align-items: center; border-top: 1px solid #EFEFEE;">
+                <div role="cell" style="padding: 12px 20px; font-weight: 600;">{{r.name}}<span style="margin-left: 8px; font-size: 11px; font-weight: 700; color: #AF1839;">{{r.tag}}</span></div>
+                <div role="cell" data-label="Categoría" style="padding: 12px;"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px;"><span style="width: 10px; height: 10px; border-radius: 3px; background: {{r.catColor}};"></span>{{r.cat}}</span></div>
+                <sc-for list="{{r.flags}}" as="g" hint-placeholder-count="4">
+                  <div role="cell" style="padding: 12px; text-align: center;"><button type="button" onClick="{{g.toggle}}" aria-pressed="{{g.on}}" aria-label="{{g.aria}}" style="min-width: 64px; height: 34px; border-radius: 999px; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; border: {{g.border}}; background: {{g.bg}}; color: {{g.fg}};">{{g.label}}</button></div>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <p style="margin: 0; padding: 12px 20px; border-top: 1px solid #E2E2E1; font-size: 12px; color: #5A5958;">La categoría define el color en el historial y si el tiempo cuenta como productivo. Los cambios llegan a la app en la siguiente sincronización.</p>
+      </section>
+
+      <aside style="display: flex; flex-direction: column; gap: 16px;">
+        <sc-if value="{{formOpen}}" hint-placeholder-val="{{false}}">
+          <section aria-label="Nueva actividad" style="background: #FFFFFF; border: 2px solid #AF1839; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+            <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Nueva actividad</h2>
+            <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Nombre</span><input type="text" value="{{nName}}" onChange="{{setName}}" placeholder="Ej.: Soporte remoto" style="height: 44px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D;"></label>
+            <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Categoría</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{cats}}" as="o" hint-placeholder-count="4"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div></div>
+            <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Al finalizar exige</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{reqs}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div></div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button type="button" onClick="{{create}}" style="height: 44px; padding: 0 18px; border: none; border-radius: 10px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Crear actividad</button>
+              <button type="button" onClick="{{closeNew}}" style="height: 44px; padding: 0 14px; border: none; background: transparent; color: #3C3C3B; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Cancelar</button>
+            </div>
+          </section>
+        </sc-if>
+        <sc-if value="{{msg}}" hint-placeholder-val="{{false}}">
+          <p role="status" style="margin: 0; padding: 10px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; background: {{msgBg}}; color: {{msgFg}};">{{msg}}</p>
+        </sc-if>
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+          <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Resultados de cierre</h2>
+          <sc-for list="{{results}}" as="x" hint-placeholder-count="3">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #EFEFEE;">
+              <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 14px; font-weight: 600;">{{x.name}}</span><span style="font-size: 12px; color: #5A5958;">{{x.note}}</span></span>
+              <button type="button" onClick="{{x.toggle}}" aria-pressed="{{x.on}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; border: {{x.border}}; background: {{x.bg}}; color: {{x.fg}}; white-space: nowrap;">{{x.label}}</button>
+            </div>
+          </sc-for>
+        </section>
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+            <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Categorías</h2>
+            <button type="button" onClick="{{openCat}}" style="min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1.5px dashed #AF1839; background: #FFFFFF; color: #AF1839; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">+ Nueva categoría</button>
+          </div>
+          <sc-for list="{{catList}}" as="k" hint-placeholder-count="4">
+            <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px;"><span style="width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; background: {{k.color}};"></span><span><strong>{{k.label}}</strong> · {{k.kindText}}</span></span>
+          </sc-for>
+          <sc-if value="{{catOpen}}" hint-placeholder-val="{{false}}">
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 6px; padding: 14px; border-radius: 12px; background: #F5F5F4;">
+              <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 13px; font-weight: 600;">Nombre</span><input type="text" value="{{cName}}" onChange="{{setCName}}" placeholder="Ej.: Capacitación externa" style="height: 40px; padding: 0 10px; border: 1px solid #C9C9C8; border-radius: 8px; font-family: inherit; font-size: 14px; color: #1E1F1D;"></label>
+              <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 13px; font-weight: 600;">Cómo cuenta el tiempo</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{kinds}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div></div>
+              <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 13px; font-weight: 600;">Color en el historial</span><div style="display: flex; flex-wrap: wrap; gap: 8px;"><sc-for list="{{colors}}" as="o" hint-placeholder-count="6"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" aria-label="{{o.name}}" style="width: 36px; height: 36px; border-radius: 10px; cursor: pointer; background: {{o.color}}; border: {{o.ring}};"></button></sc-for></div></div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;"><button type="button" onClick="{{addCat}}" style="height: 40px; padding: 0 14px; border: none; border-radius: 8px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Crear categoría</button><button type="button" onClick="{{closeCat}}" style="height: 40px; padding: 0 12px; border: none; background: transparent; color: #3C3C3B; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Cancelar</button></div>
+            </div>
+          </sc-if>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = {
+catOpen: false, cName: '', cKind: 'pag', cColor: '#751326',
+cats: { p: ['Productivo', '#AF1839', 'prod'], t: ['Traslado', '#868787', 'pag'], i: ['Interna', '#3C3C3B', 'pag'], m: ['Improductivo', '#DA830B', 'imp'] },
+formOpen: false, nName: '', nCat: 'p', nFoto: 0, nFirma: 0, nObs: 0, msg: '', msgOk: false,
+acts: [
+{ name: 'Instalación de equipo', cat: 'p', foto: 1, firma: 1, obs: 0, on: 1 },
+{ name: 'Mantenimiento preventivo', cat: 'p', foto: 1, firma: 0, obs: 0, on: 1 },
+{ name: 'Visita técnica', cat: 'p', foto: 0, firma: 1, obs: 0, on: 1 },
+{ name: 'Revisión de garantía', cat: 'p', foto: 1, firma: 1, obs: 1, on: 1 },
+{ name: 'Traslado entre sitios', cat: 't', foto: 0, firma: 0, obs: 0, on: 1 },
+{ name: 'Labores administrativas', cat: 'i', foto: 0, firma: 0, obs: 0, on: 1 },
+{ name: 'Capacitación', cat: 'i', foto: 0, firma: 0, obs: 0, on: 1 },
+{ name: 'Espera de materiales', cat: 'm', foto: 0, firma: 0, obs: 1, on: 1 },
+{ name: 'Inventario de bodega', cat: 'p', foto: 1, firma: 0, obs: 0, on: 0 }
+],
+res: [
+{ name: 'Completada', note: 'La actividad terminó', obs: 0 },
+{ name: 'Incompleta', note: 'Quedó trabajo pendiente', obs: 1 },
+{ name: 'Reprogramar', note: 'Se mueve a otra fecha', obs: 1 }
+]
+};
+}
+renderVals() {
+const C = this.state.cats;
+const acts = this.state.acts;
+const res = this.state.res;
+const pill = (on, yes, no) => ({ on: on ? 'true' : 'false', label: on ? yes : no, bg: on ? '#AF1839' : '#FFFFFF', fg: on ? '#FFFFFF' : '#3C3C3B', border: on ? '1px solid #AF1839' : '1px solid #C9C9C8' });
+const flip = (i, k) => { const a = acts.map((x) => Object.assign({}, x)); a[i][k] = a[i][k] ? 0 : 1; this.setState({ acts: a }); };
+const st = this.state;
+const KIND = { prod: 'cuenta como tiempo productivo', pag: 'tiempo pagado, no productivo', imp: 'improductivo, se reporta como sin actividad' };
+const KSHORT = { prod: 'Productivo', pag: 'Pagado, no productivo', imp: 'Improductivo' };
+const PAL = [['#751326', 'Borgoña'], ['#E51E49', 'Rojo principal'], ['#5A5958', 'Gris medio'], ['#1E1F1D', 'Gris profundo'], ['#F8B21D', 'Amarillo'], ['#1E6B3F', 'Verde']];
+const chip = (x) => ({ sel: x ? 'true' : 'false', bg: x ? '#AF1839' : '#FFFFFF', fg: x ? '#FFFFFF' : '#3C3C3B', border: x ? '1px solid #AF1839' : '1px solid #C9C9C8' });
+const nn = st.nName.trim();
+return {
+formOpen: st.formOpen,
+catList: Object.keys(C).map((k) => ({ label: C[k][0], color: C[k][1], kindText: KIND[C[k][2]] })),
+catOpen: st.catOpen,
+openCat: () => this.setState({ catOpen: true, cName: '', cKind: 'pag', cColor: '#751326', msg: '' }),
+closeCat: () => this.setState({ catOpen: false }),
+cName: st.cName,
+setCName: (e) => this.setState({ cName: e.target.value, msg: '' }),
+kinds: Object.keys(KIND).map((k) => Object.assign({ label: KSHORT[k] }, chip(k === st.cKind), { pick: () => this.setState({ cKind: k }) })),
+colors: PAL.map((c) => ({ color: c[0], name: c[1], sel: c[0] === st.cColor ? 'true' : 'false', ring: c[0] === st.cColor ? '3px solid #1E1F1D' : '1px solid #C9C9C8', pick: () => this.setState({ cColor: c[0] }) })),
+addCat: () => {
+const v = st.cName.trim();
+if (v.length < 3) { this.setState({ msg: 'Escribe el nombre de la categoría.', msgOk: false }); return; }
+if (Object.keys(C).some((k) => C[k][0].toLowerCase() === v.toLowerCase())) { this.setState({ msg: 'Ya existe una categoría con ese nombre.', msgOk: false }); return; }
+const id = 'c' + Object.keys(C).length;
+this.setState({ catOpen: false, nCat: id, cats: Object.assign({}, C, { [id]: [v, st.cColor, st.cKind] }), msg: 'Categoría «' + v + '» creada. Ya puedes usarla en una actividad.', msgOk: true });
+},
+openNew: () => this.setState({ formOpen: true, nName: '', nCat: 'p', nFoto: 0, nFirma: 0, nObs: 0, msg: '' }),
+closeNew: () => this.setState({ formOpen: false, msg: '' }),
+nName: st.nName,
+setName: (e) => this.setState({ nName: e.target.value, msg: '' }),
+cats: Object.keys(C).map((k) => Object.assign({ label: C[k][0] }, chip(k === st.nCat), { pick: () => this.setState({ nCat: k }) })),
+reqs: [['nFoto', 'Foto'], ['nFirma', 'Firma del cliente'], ['nObs', 'Observación']].map((q) => Object.assign({ label: q[1] }, chip(!!st[q[0]]), { pick: () => this.setState({ [q[0]]: st[q[0]] ? 0 : 1 }) })),
+create: () => {
+if (nn.length < 3) { this.setState({ msg: 'Escribe el nombre de la actividad.', msgOk: false }); return; }
+if (acts.some((a) => a.name.toLowerCase() === nn.toLowerCase())) { this.setState({ msg: 'Ya existe una actividad con ese nombre.', msgOk: false }); return; }
+this.setState({ formOpen: false, acts: [{ name: nn, cat: st.nCat, foto: st.nFoto, firma: st.nFirma, obs: st.nObs, on: 1, fresh: 1 }].concat(acts), msg: '«' + nn + '» creada. Aparece en el catálogo de la app en la siguiente sincronización.', msgOk: true });
+},
+msg: st.msg, msgBg: st.msgOk ? '#E6F4EC' : '#FEF3DA', msgFg: st.msgOk ? '#1E6B3F' : '#8A4105',
+rows: acts.map((a, i) => ({
+tag: a.fresh ? 'Nueva' : '',
+name: a.name, cat: C[a.cat][0], catColor: C[a.cat][1],
+flags: [
+Object.assign(pill(a.foto, 'Sí', 'No'), { aria: 'Foto obligatoria en ' + a.name, toggle: () => flip(i, 'foto') }),
+Object.assign(pill(a.firma, 'Sí', 'No'), { aria: 'Firma obligatoria en ' + a.name, toggle: () => flip(i, 'firma') }),
+Object.assign(pill(a.obs, 'Siempre', 'Opcional'), { aria: 'Observación obligatoria en ' + a.name, toggle: () => flip(i, 'obs') }),
+Object.assign(pill(a.on, 'Activa', 'Inactiva'), { aria: a.name + ' activa', toggle: () => flip(i, 'on') })
+]
+})),
+results: res.map((r, i) => Object.assign({}, r, pill(r.obs, 'Pide observación', 'Sin observación'), {
+toggle: () => { const x = res.map((y) => Object.assign({}, y)); x[i].obs = x[i].obs ? 0 : 1; this.setState({ res: x }); }
+}))
+};
+}
+}
+
+</script>
+</body>
+</html>

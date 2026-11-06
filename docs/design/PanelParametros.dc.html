@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Parámetros</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:288px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.split4{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px}
+@media (max-width:1100px){.split4{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 20px;">
+    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Parámetros</h1>
+        <p style="margin: 0; font-size: 15px; color: #5A5958;">Gana el valor del nivel más específico. Los cambios quedan en la auditoría.</p>
+      </div>
+      <span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: #F5F5F4; font-size: 13px; color: #3C3C3B;">Tu rol: <strong>Administrador</strong></span>
+    </header>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 13px; font-weight: 600; color: #3C3C3B;">Nivel que estás editando</span>
+      <div role="tablist" aria-label="Nivel" style="display: flex; flex-wrap: wrap; gap: 6px;">
+        <sc-for list="{{levels}}" as="l" hint-placeholder-count="4">
+          <button type="button" role="tab" aria-selected="{{l.sel}}" onClick="{{l.pick}}" style="min-height: 38px; padding: 0 14px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{l.border}}; background: {{l.bg}}; color: {{l.fg}};">{{l.label}}</button>
+        </sc-for>
+        <button type="button" onClick="{{openAdd}}" style="min-height: 38px; padding: 0 14px; border-radius: 999px; border: 1.5px dashed #AF1839; background: #FFFFFF; color: #AF1839; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">+ Agregar país</button>
+      </div>
+      <span style="font-size: 12px; color: #5A5958;">{{levelHint}}</span>
+      <sc-if value="{{addOpen}}" hint-placeholder-val="{{false}}">
+        <section aria-label="Agregar país" style="max-width: 720px; display: flex; flex-direction: column; gap: 14px; padding: 18px; border-radius: 14px; border: 2px solid #AF1839; background: #FFFFFF;">
+          <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Agregar país</h2>
+          <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">País</span><input type="search" value="{{addQ}}" onChange="{{setAddQ}}" placeholder="Escribe para buscar, ej.: Perú" style="height: 44px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D;"></label>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{addOpts}}" as="o" hint-placeholder-count="4"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Punto de partida</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{copyOpts}}" as="o" hint-placeholder-count="2"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div><span style="font-size: 12px; color: #5A5958;">{{copyHint}}</span></div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;"><button type="button" onClick="{{addCountry}}" style="height: 44px; padding: 0 18px; border: none; border-radius: 10px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Crear país en borrador</button><button type="button" onClick="{{closeAdd}}" style="height: 44px; padding: 0 14px; border: none; background: transparent; color: #3C3C3B; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Cancelar</button></div>
+          <sc-if value="{{addMsg}}" hint-placeholder-val="{{false}}"><p style="margin: 0; font-size: 13px; font-weight: 600; color: #8A4105;">{{addMsg}}</p></sc-if>
+        </section>
+      </sc-if>
+    </div>
+
+    <div class="split4" style="align-items: start;">
+      <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; overflow-x: auto;">
+        <div role="table" class="tbl" style="width: 100%; min-width: 640px; font-size: 14px;">
+          <div role="rowgroup" style="display: contents;">
+            <div role="row" class="thead" style="display: grid; grid-template-columns: minmax(220px,2fr) minmax(110px,1fr) 120px 170px; align-items: center; text-align: left; color: #5A5958; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;">
+              <div role="columnheader" style="padding: 14px 20px; font-weight: 600;">Parámetro</div><div role="columnheader" style="padding: 14px 12px; font-weight: 600;">Valor</div><div role="columnheader" style="padding: 14px 12px; font-weight: 600;">Viene de</div><div role="columnheader" style="padding: 14px 20px; font-weight: 600;"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Acción</span></div>
+            </div>
+          </div>
+          <div role="rowgroup" style="display: contents;">
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="12">
+              <div role="row" class="trow" style="display: grid; grid-template-columns: minmax(220px,2fr) minmax(110px,1fr) 120px 170px; align-items: center; border-top: 1px solid #EFEFEE; background: {{r.rowBg}};">
+                <div role="cell" style="padding: 12px 20px;"><span style="display: block; font-size: 11px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.08em;">{{r.group}}</span><span style="font-weight: 600;">{{r.name}}</span></div>
+                <div role="cell" data-label="Valor" style="padding: 12px; font-variant-numeric: tabular-nums;">{{r.shown}}</div>
+                <div role="cell" data-label="Viene de" style="padding: 12px;"><span style="padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: {{r.srcBg}}; color: {{r.srcFg}};">{{r.src}}</span></div>
+                <div role="cell" data-label="Acción" style="padding: 12px 20px; text-align: right;">
+                  <sc-if value="{{r.editable}}" hint-placeholder-val="{{true}}">
+                    <button type="button" onClick="{{r.pick}}" style="min-height: 36px; padding: 0 14px; border: 1px solid #C9C9C8; border-radius: 9px; background: #FFFFFF; color: #1E1F1D; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Editar</button>
+                  </sc-if>
+                  <sc-if value="{{r.locked}}" hint-placeholder-val="{{false}}">
+                    <span style="font-size: 12px; color: #5A5958;">{{r.lockText}}</span>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <aside aria-label="Editar parámetro" style="background: #FFFFFF; border: 1px solid #AF1839; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+        <sc-if value="{{pk.show}}" hint-placeholder-val="{{false}}">
+          <section style="display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 12px; background: {{pk.bg}};">
+            <span style="display: flex; justify-content: space-between; align-items: center; gap: 8px;"><span style="font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.08em;">Reglas de {{pk.country}}</span><span style="padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: #FFFFFF; color: {{pk.fg}};">{{pk.state}}</span></span>
+            <span style="font-size: 13px; line-height: 18px; color: #3C3C3B;">{{pk.text}}</span>
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px;">
+              <sc-for list="{{pk.steps}}" as="k" hint-placeholder-count="4"><li style="display: flex; gap: 8px; align-items: center; font-size: 13px; color: #1E1F1D;"><span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #FFFFFF; background: {{k.dot}};">{{k.icon}}</span>{{k.t}}</li></sc-for>
+            </ul>
+            <sc-if value="{{pk.canValidate}}" hint-placeholder-val="{{false}}">
+              <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 13px; font-weight: 600;">Asesor laboral que validó</span><input type="text" value="{{pk.adv}}" onChange="{{pk.setAdv}}" placeholder="Nombre y firma o entidad" style="height: 40px; padding: 0 10px; border: 1px solid #C9C9C8; border-radius: 8px; font-family: inherit; font-size: 14px; color: #1E1F1D;"></label>
+              <button type="button" onClick="{{pk.loadHol}}" style="align-self: flex-start; height: 40px; padding: 0 14px; border: 1px solid #C9C9C8; border-radius: 8px; background: #FFFFFF; color: #1E1F1D; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Cargar festivos del año</button>
+              <button type="button" onClick="{{pk.validate}}" style="align-self: flex-start; height: 40px; padding: 0 14px; border: none; border-radius: 8px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Marcar como validadas</button>
+            </sc-if>
+          </section>
+        </sc-if>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.08em;">Editar en {{e.levelName}}</span>
+          <h2 style="margin: 0; font-size: 19px; font-weight: 700;">{{e.name}}</h2>
+          <span style="font-size: 13px; color: #5A5958;">{{e.help}}</span>
+        </div>
+        <dl style="margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 12px; font-size: 13px;">
+          <dt style="color: #5A5958;">{{e.inhLabel}}</dt><dd style="margin: 0; font-weight: 600;">{{e.inherited}}</dd>
+          <dt style="color: #5A5958;">Rango permitido</dt><dd style="margin: 0; font-weight: 600;">{{e.range}}</dd>
+        </dl>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 14px; font-weight: 600;">Nuevo valor</span>
+          <div style="display: flex; align-items: center; align-self: flex-start; border: 1px solid #C9C9C8; border-radius: 10px; overflow: hidden;">
+            <button type="button" onClick="{{e.dec}}" aria-label="Disminuir" style="width: 44px; height: 44px; border: none; background: #F5F5F4; font-family: inherit; font-size: 18px; color: #1E1F1D; cursor: pointer;">−</button>
+            <span style="min-width: 96px; text-align: center; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums;">{{e.draft}}</span>
+            <button type="button" onClick="{{e.inc}}" aria-label="Aumentar" style="width: 44px; height: 44px; border: none; background: #F5F5F4; font-family: inherit; font-size: 18px; color: #1E1F1D; cursor: pointer;">+</button>
+          </div>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 14px; font-weight: 600;">Aplica desde</span>
+          <input type="date" value="2026-11-03" style="height: 44px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; font-family: inherit; font-size: 14px; color: #1E1F1D;">
+        </label>
+        <sc-if value="{{e.legal}}" hint-placeholder-val="{{false}}">
+          <label style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 14px; font-weight: 600;">Norma o soporte del cambio <span style="font-weight: 400; color: #751326;">(obligatorio)</span></span>
+            <input type="text" value="{{e.norma}}" onChange="{{e.setNorma}}" placeholder="Ej.: Ley 2466 de 2025, art. 14" style="height: 44px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; font-family: inherit; font-size: 14px; color: #1E1F1D;">
+          </label>
+        </sc-if>
+        <p style="margin: 0; padding: 10px 12px; border-radius: 10px; background: {{e.warnBg}}; color: {{e.warnFg}}; font-size: 13px; line-height: 18px;">{{e.impact}}</p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button type="button" onClick="{{e.save}}" style="height: 44px; padding: 0 20px; border: none; border-radius: 10px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Guardar</button>
+          <button type="button" onClick="{{e.reset}}" style="height: 44px; padding: 0 16px; border: 1px solid #C9C9C8; border-radius: 10px; background: #FFFFFF; color: #1E1F1D; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Usar el heredado</button>
+        </div>
+        <sc-if value="{{e.savedMsg}}" hint-placeholder-val="{{false}}">
+          <p style="margin: 0; font-size: 13px; font-weight: 600; color: {{e.msgColor}};">{{e.savedMsg}}</p>
+        </sc-if>
+      </aside>
+    </div>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { addOpen: false, addQ: '', addCc: '', copyFrom: 'none', addMsg: '', countries: [['CO', 'Colombia'], ['MX', 'México']], hol: { CO: 1, MX: 0 },
+lvl: 'sede', sel: 'tol', draft: {}, saved: '', ok: true, norma: '', adv: '',
+pkg: { CO: { state: 'ok', by: '[ASESOR LABORAL]', date: '15 de julio de 2026' }, MX: { state: 'draft' } },
+vals: {
+global: { ant: 15, tol: 5, rec: 15, rad: 100, pre: 50, mue: 15, ina: 20, fin: 15, paus: 30 },
+'pais:CO': { top: 42, noc: 19, dom: 90 },
+'pais:MX': {},
+empresa: {},
+sede: { tol: 10 }
+} };
+}
+renderVals() {
+const st = this.state;
+const P = [
+{ id: 'ant', group: 'Jornada', name: 'Inicio anticipado permitido', unit: 'min antes', min: 0, max: 60, step: 5, help: 'Desde cuándo puede iniciar jornada antes del turno.' },
+{ id: 'tol', group: 'Jornada', name: 'Tolerancia de llegada', unit: 'min', min: 0, max: 30, step: 5, help: 'Después de este tiempo la llegada se marca como tarde.' },
+{ id: 'rec', group: 'Jornada', name: 'Recordatorio si no inicia', unit: 'min después', min: 5, max: 60, step: 5, help: 'Aviso al usuario y al supervisor si no ha iniciado jornada.' },
+{ id: 'rad', group: 'Ubicación', name: 'Radio de geocerca por defecto', unit: 'm', min: 30, max: 500, step: 10, help: 'Se usa en los sitios que no tienen un radio propio.' },
+{ id: 'pre', group: 'Ubicación', name: 'Precisión GPS mínima', unit: 'm', min: 10, max: 200, step: 10, help: 'Puntos con menos precisión se guardan pero no validan geocerca.' },
+{ id: 'mue', group: 'Ubicación', name: 'Muestreo en actividad', unit: 'min', min: 5, max: 60, step: 5, help: 'Cada cuánto se toma ubicación durante una actividad.' },
+{ id: 'ina', group: 'Avisos', name: 'Aviso por inactividad', unit: 'min', min: 5, max: 60, step: 5, help: 'Tiempo sin actividad antes de avisar.' },
+{ id: 'fin', group: 'Avisos', name: 'Aviso de fin de turno', unit: 'min antes', min: 5, max: 60, step: 5, help: 'Antes del cierre automático.' },
+{ id: 'paus', group: 'Pausas', name: 'Duración máxima de pausa', unit: 'min', min: 10, max: 120, step: 5, help: 'Al pasarla se avisa al usuario.' },
+{ id: 'top', group: 'Legal', name: 'Tope semanal', unit: 'h', min: 30, max: 60, step: 1, legal: 1, def: 42, help: 'Horas ordinarias máximas por semana. Lo que pase es trabajo suplementario.' },
+{ id: 'noc', group: 'Legal', name: 'Inicio de franja nocturna', unit: ':00 h', min: 18, max: 22, step: 1, legal: 1, def: 20, help: 'Desde esta hora aplica el recargo nocturno.' },
+{ id: 'dom', group: 'Legal', name: 'Recargo dominical y festivo', unit: '%', min: 0, max: 200, step: 5, legal: 1, def: 25, help: 'Porcentaje sobre la hora ordinaria por trabajar domingo o festivo.' }
+];
+const ALL = [['AR', 'Argentina'], ['BR', 'Brasil'], ['CA', 'Canadá'], ['CL', 'Chile'], ['CR', 'Costa Rica'], ['EC', 'Ecuador'], ['ES', 'España'], ['US', 'Estados Unidos'], ['GT', 'Guatemala'], ['PA', 'Panamá'], ['PE', 'Perú'], ['DO', 'República Dominicana'], ['GB', 'Reino Unido'], ['UY', 'Uruguay']];
+const CN = {}; st.countries.forEach((c) => { CN[c[0]] = c[1]; });
+const LEVELS = ['global'].concat(st.countries.map((c) => 'pais:' + c[0])).concat(['empresa', 'sede']);
+const NAMES = { global: 'Global · producto', empresa: 'Empresa · INTECHSYS', sede: 'Sede · Bogotá Norte (Colombia)' };
+const SRC = { global: 'Global', empresa: 'Empresa', sede: 'Sede' };
+const CH = { global: ['global'], empresa: ['global', 'empresa'], sede: ['global', 'pais:CO', 'empresa', 'sede'] };
+st.countries.forEach((c) => { NAMES['pais:' + c[0]] = 'País · ' + c[1]; SRC['pais:' + c[0]] = c[1]; CH['pais:' + c[0]] = ['global', 'pais:' + c[0]]; });
+const fold = (t) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const free = ALL.filter((c) => !CN[c[0]]);
+const lvl = st.lvl;
+const chain = CH[lvl];
+const isPais = lvl.indexOf('pais:') === 0;
+const cc = isPais ? lvl.slice(5) : (lvl === 'sede' ? 'CO' : '');
+const resolve = (id, upto) => { for (let i = upto; i >= 0; i -= 1) { const v = st.vals[chain.at(i)][id]; if (v !== undefined) return { v: v, from: chain.at(i) }; } return { v: undefined, from: '' }; };
+const top = chain.length - 1;
+const fmt = (p, v) => v === undefined ? 'Por configurar' : (p.id === 'noc' ? v + ':00' : v + ' ' + p.unit);
+const canEdit = (p) => p.legal ? isPais : true;
+const visible = P.filter((p) => !(p.legal && (lvl === 'global' || lvl === 'empresa')));
+const cur = visible.find((p) => p.id === st.sel) || visible[1];
+const parent = top > 0 ? resolve(cur.id, top - 1) : { v: undefined, from: '' };
+const effective = resolve(cur.id, top).v;
+const d = st.draft[cur.id] !== undefined ? st.draft[cur.id] : (effective !== undefined ? effective : cur.def);
+const setDraft = (v) => this.setState({ draft: Object.assign({}, st.draft, { [cur.id]: Math.max(cur.min, Math.min(cur.max, v)) }), saved: '' });
+const pk = cc ? st.pkg[cc] : null;
+const legalMissing = P.filter((p) => p.legal && (cc ? st.vals['pais:' + cc][p.id] : 0) === undefined).length;
+const aq = fold(st.addQ.trim());
+return {
+addOpen: st.addOpen,
+openAdd: () => this.setState({ addOpen: true, addQ: '', addCc: '', copyFrom: 'none', addMsg: '' }),
+closeAdd: () => this.setState({ addOpen: false }),
+addQ: st.addQ,
+setAddQ: (e) => this.setState({ addQ: e.target.value, addMsg: '' }),
+addOpts: free.filter((c) => !aq || fold(c[1]).indexOf(aq) >= 0).slice(0, 8).map((c) => { const on = c[0] === st.addCc; return { label: c[1], sel: on ? 'true' : 'false', bg: on ? '#AF1839' : '#FFFFFF', fg: on ? '#FFFFFF' : '#3C3C3B', border: on ? '1px solid #AF1839' : '1px solid #C9C9C8', pick: () => this.setState({ addCc: c[0], addMsg: '' }) }; }),
+copyOpts: [['none', 'Desde cero'], ['CO', 'Copiar valores de Colombia']].map((c) => { const on = c[0] === st.copyFrom; return { label: c[1], sel: on ? 'true' : 'false', bg: on ? '#AF1839' : '#FFFFFF', fg: on ? '#FFFFFF' : '#3C3C3B', border: on ? '1px solid #AF1839' : '1px solid #C9C9C8', pick: () => this.setState({ copyFrom: c[0] }) }; }),
+copyHint: st.copyFrom === 'CO' ? 'Se copian como punto de partida y quedan marcados para revisar; no son la ley del nuevo país.' : 'Las reglas legales empiezan sin valor y los demás parámetros se heredan de Global.',
+addMsg: st.addMsg,
+addCountry: () => {
+const c = ALL.find((x) => x[0] === st.addCc);
+if (!c) { this.setState({ addMsg: 'Elige el país de la lista.' }); return; }
+const base = st.copyFrom === 'CO' ? Object.assign({}, st.vals['pais:CO']) : {};
+this.setState({ addOpen: false, countries: st.countries.concat([c]), vals: Object.assign({}, st.vals, { ['pais:' + c[0]]: base }), pkg: Object.assign({}, st.pkg, { [c[0]]: { state: 'draft', copied: st.copyFrom === 'CO' } }), hol: Object.assign({}, st.hol, { [c[0]]: 0 }), lvl: 'pais:' + c[0], sel: 'top', draft: {}, saved: 'País ' + c[1] + ' creado en borrador. Completa sus reglas y pide la validación.', ok: true });
+},
+levelHint: lvl === 'global' ? 'Valores por defecto del producto para cualquier país. Las reglas legales no van aquí: cada país tiene las suyas.' : (isPais ? 'Reglas legales y valores propios de ' + CN[cc] + '. Toda sede de ' + CN[cc] + ' las hereda.' : (lvl === 'empresa' ? 'Ajustes de la empresa en todos sus países. Las reglas legales dependen del país de cada sede.' : 'Esta sede está en Colombia: hereda de Global, de Colombia y de la empresa.')),
+levels: LEVELS.map((l) => { const on = l === lvl; return { label: NAMES[l], sel: on ? 'true' : 'false', bg: on ? '#AF1839' : '#FFFFFF', fg: on ? '#FFFFFF' : '#3C3C3B', border: on ? '1px solid #AF1839' : '1px solid #C9C9C8', pick: () => this.setState({ lvl: l, draft: {}, saved: '', norma: '', adv: '', sel: 'tol' }) }; }),
+rows: visible.map((p) => {
+const r = resolve(p.id, top);
+const mine = r.from === lvl;
+return {
+group: p.legal ? 'Legal · ' + (CN[cc] || '') : p.group, name: p.name,
+shown: fmt(p, r.v),
+src: r.v === undefined ? 'Sin definir' : (mine ? 'Este nivel' : SRC[r.from]),
+srcBg: r.v === undefined ? '#FEF3DA' : (mine ? '#FBE9EE' : '#F5F5F4'), srcFg: r.v === undefined ? '#8A4105' : (mine ? '#751326' : '#3C3C3B'),
+editable: canEdit(p), locked: !canEdit(p),
+lockText: 'Se edita en el país',
+rowBg: p.id === cur.id ? '#FBF7F8' : '#FFFFFF',
+pick: () => this.setState({ sel: p.id, saved: '', norma: '' })
+};
+}),
+pk: {
+show: !!pk,
+country: CN[cc] || '',
+state: pk && pk.state === 'ok' ? 'Validadas' : 'Borrador',
+bg: pk && pk.state === 'ok' ? '#E6F4EC' : '#FEF3DA',
+fg: pk && pk.state === 'ok' ? '#1E6B3F' : '#8A4105',
+text: !pk ? '' : (pk.state === 'ok' ? 'Validadas por ' + pk.by + ' el ' + pk.date + '. WorkLog calcula horas extra y recargos en las sedes de ' + CN[cc] + '.' : (legalMissing ? 'Faltan ' + legalMissing + ' reglas legales. Mientras estén en borrador, las sedes de ' + CN[cc] + ' registran jornada pero no se calculan horas extra ni recargos.' : 'Las reglas están completas. Falta que un asesor laboral de ' + CN[cc] + ' las valide.')),
+canValidate: !!pk && pk.state !== 'ok' && isPais,
+steps: !pk ? [] : [
+{ t: 'Reglas legales completas (' + (3 - legalMissing) + ' de 3)' + (pk.copied ? ' · copiadas de Colombia, revisar' : ''), done: !legalMissing },
+{ t: 'Festivos del año cargados', done: !!st.hol[cc] },
+{ t: 'Validación de un asesor laboral', done: pk.state === 'ok' }
+].map((k) => ({ t: k.t, icon: k.done ? '✓' : '!', dot: k.done ? '#1E7A46' : '#DA830B' })),
+loadHol: () => this.setState({ hol: Object.assign({}, st.hol, { [cc]: 1 }) }),
+adv: st.adv,
+setAdv: (e) => this.setState({ adv: e.target.value }),
+validate: () => {
+if (legalMissing) { this.setState({ saved: 'Completa las ' + legalMissing + ' reglas legales antes de validar.', ok: false }); return; }
+if (!st.hol[cc]) { this.setState({ saved: 'Carga los festivos del año antes de validar.', ok: false }); return; }
+if (st.adv.trim().length < 3) { this.setState({ saved: 'Escribe quién validó las reglas.', ok: false }); return; }
+this.setState({ pkg: Object.assign({}, st.pkg, { [cc]: { state: 'ok', by: st.adv.trim(), date: '3 de noviembre de 2026' } }), adv: '', saved: 'Reglas de ' + CN[cc] + ' validadas y activas.', ok: true });
+}
+},
+e: {
+name: cur.name, help: cur.help, levelName: NAMES[lvl],
+inhLabel: top === 0 ? 'Valor actual' : 'Heredado de ' + (parent.from ? SRC[parent.from] : '—'),
+inherited: top === 0 ? fmt(cur, effective) : fmt(cur, parent.v),
+range: cur.min + ' a ' + cur.max + ' ' + (cur.id === 'noc' ? 'h' : cur.unit),
+draft: fmt(cur, d),
+dec: () => setDraft(d - cur.step),
+inc: () => setDraft(d + cur.step),
+legal: !!cur.legal,
+norma: st.norma,
+setNorma: (ev) => this.setState({ norma: ev.target.value, saved: '' }),
+impact: cur.legal ? 'Cambia el cálculo de horas, extra y recargos de todas las sedes de ' + (CN[cc] || 'ese país') + ' desde la fecha elegida. Las horas ya cerradas no se recalculan. Queda en la auditoría con la norma.' : (lvl === 'global' ? 'Afecta a todos los países y sedes que no tengan un valor propio.' : 'Afecta a quienes heredan de ' + NAMES[lvl] + '. Se aplica en la siguiente sincronización de cada dispositivo.'),
+warnBg: cur.legal ? '#FBE9EE' : '#FEF3DA', warnFg: cur.legal ? '#751326' : '#6E3504',
+save: () => {
+if (cur.legal && st.norma.trim().length < 5) { this.setState({ saved: 'Escribe la norma o el soporte del cambio.', ok: false }); return; }
+const vals = Object.assign({}, st.vals, { [lvl]: Object.assign({}, st.vals[lvl], { [cur.id]: d }) });
+const pkg = cur.legal && pk && pk.state === 'ok' ? Object.assign({}, st.pkg, { [cc]: { state: 'draft' } }) : st.pkg;
+this.setState({ vals: vals, pkg: pkg, saved: 'Guardado en ' + NAMES[lvl] + '.' + (pkg !== st.pkg ? ' Las reglas de ' + CN[cc] + ' vuelven a borrador hasta validarlas de nuevo.' : ''), ok: true, norma: '' });
+},
+reset: () => {
+if (top === 0) { this.setState({ saved: 'Global no hereda de nadie; cambia el valor directamente.', ok: false }); return; }
+const o = Object.assign({}, st.vals[lvl]); delete o[cur.id]; const dr = Object.assign({}, st.draft); delete dr[cur.id];
+this.setState({ vals: Object.assign({}, st.vals, { [lvl]: o }), draft: dr, saved: 'Este nivel vuelve a usar el valor heredado.', ok: true });
+},
+savedMsg: st.saved,
+msgColor: st.ok ? '#1E6B3F' : '#8A4105'
+}
+};
+}
+}
+
+</script>
+</body>
+</html>

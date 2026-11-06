@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Aprobaciones</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:288px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" aria-current="page" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-direction: column; gap: 4px;">
+      <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Aprobaciones</h1>
+      <p style="margin: 0; font-size: 15px; color: #5A5958;">Ajustes, horas extra y cambios de turno de tu equipo · {{pendingCount}} pendientes</p>
+    </header>
+
+    <div class="split" style="align-items: start;">
+      <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; display: flex; flex-direction: column;">
+        <div style="padding: 16px 20px; border-bottom: 1px solid #E2E2E1;">
+          <div role="tablist" style="display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 12px; background: #E8E8E7; align-self: flex-start;">
+            <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+              <button type="button" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" style="height: 36px; padding: 0 14px; border: none; border-radius: 9px; font-family: inherit; font-size: 14px; cursor: pointer; background: {{t.bg}}; color: {{t.fg}}; font-weight: {{t.w}};">{{t.label}}</button>
+            </sc-for>
+          </div>
+        </div>
+        <ul style="list-style: none; margin: 0; padding: 8px; display: flex; flex-direction: column; gap: 4px;">
+          <sc-for list="{{items}}" as="r" hint-placeholder-count="3">
+            <li>
+              <button type="button" onClick="{{r.pick}}" aria-pressed="{{r.sel}}" style="width: 100%; text-align: left; display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 12px; font-family: inherit; cursor: pointer; box-sizing: border-box; border: {{r.border}}; background: {{r.bg}};">
+                <span style="display: flex; justify-content: space-between; gap: 8px; width: 100%;">
+                  <span style="font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.08em;">{{r.kind}}</span>
+                  <span style="padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: {{r.chipBg}}; color: {{r.chipFg}};">{{r.status}}</span>
+                </span>
+                <span style="font-size: 15px; font-weight: 600; color: #1E1F1D;">{{r.person}} · {{r.title}}</span>
+                <span style="font-size: 13px; color: #5A5958;">{{r.summary}}</span>
+              </button>
+            </li>
+          </sc-for>
+        </ul>
+      </section>
+
+      <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.08em;">{{d.kind}}</span>
+          <h2 style="margin: 0; font-size: 22px; font-weight: 700;">{{d.person}} · {{d.title}}</h2>
+          <span style="font-size: 14px; color: #5A5958;">{{d.sent}}</span>
+        </div>
+        <dl style="margin: 0; display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 10px 16px; font-size: 14px;">
+          <sc-for list="{{d.fields}}" as="x" hint-placeholder-count="3">
+            <dt style="color: #5A5958;">{{x.k}}</dt>
+            <dd style="margin: 0; font-weight: 500;">{{x.v}}</dd>
+          </sc-for>
+        </dl>
+        <div style="display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 12px; background: #F5F5F4;">
+          <span style="font-size: 13px; font-weight: 600;">Efecto en las horas</span>
+          <sc-for list="{{d.impact}}" as="m" hint-placeholder-count="2">
+            <span style="font-size: 14px; color: #3C3C3B;">{{m.t}}</span>
+          </sc-for>
+        </div>
+        <sc-if value="{{d.isPending}}" hint-placeholder-val="{{true}}">
+          <label style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 14px; font-weight: 600;">Comentario para el usuario <span style="font-weight: 400; color: #5A5958;">(obligatorio si rechazas)</span></span>
+            <textarea rows="2" style="border: 1px solid #C9C9C8; border-radius: 10px; padding: 10px 12px; font-family: inherit; font-size: 14px; color: #1E1F1D; resize: vertical;"></textarea>
+          </label>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button type="button" onClick="{{d.approve}}" style="height: 48px; padding: 0 24px; border: none; border-radius: 12px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">Aprobar</button>
+            <button type="button" onClick="{{d.reject}}" style="height: 48px; padding: 0 24px; border: 1px solid #C9C9C8; border-radius: 12px; background: #FFFFFF; color: #1E1F1D; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">Rechazar</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{d.isDone}}" hint-placeholder-val="{{false}}">
+          <p style="margin: 0; font-size: 14px; font-weight: 600; color: #3C3C3B;">{{d.doneText}}</p>
+        </sc-if>
+      </section>
+    </div>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { tab: 'all', sel: 'a1', done: {} };
+}
+renderVals() {
+const reqs = [
+{ id: 'a1', type: 'aj', kind: 'Ajuste de registro', person: 'Andrés Mora', title: 'Instalación de equipo · 29 oct', summary: 'Fin 09:40 → 09:55', sent: 'Enviada hoy a las 10:05 desde la app',
+fields: [{ k: 'Registro', v: 'OT-1042 · Almacén Norte' }, { k: 'Cambio', v: 'Fin 09:40 → 09:55' }, { k: 'Motivo', v: 'Olvidé finalizar al salir del sitio.' }, { k: 'Ubicación a las 09:55', v: 'Dentro de la geocerca · 8 m' }],
+impact: [{ t: 'Productivo del día: 2 h 28 m → 2 h 43 m' }, { t: 'Sin actividad del día: 12 m → 0 m' }] },
+{ id: 'a2', type: 'he', kind: 'Horas extra', person: 'Diana Ruiz', title: 'Viernes 30 oct', summary: '2 h · 16:00 – 18:00', sent: 'Enviada ayer a las 17:20',
+fields: [{ k: 'Horario', v: '16:00 – 18:00 (diurnas)' }, { k: 'Motivo', v: 'Cierre de la instalación en Almacén Norte' }, { k: 'Autorización Mintrabajo', v: 'Vigente · [NÚMERO DE RESOLUCIÓN]' }],
+impact: [{ t: 'Semana: 40 h ordinarias + 2 h extra' }, { t: 'Extra usadas: 2 de 12 en la semana, 2 de 2 en el día' }] },
+{ id: 'a3', type: 'ct', kind: 'Cambio de turno', person: 'Luis Ortega', title: 'Sábado 31 oct', summary: 'Trabajar sábado 07:00 – 10:00 en lugar del viernes por la tarde', sent: 'Enviada el 27 oct',
+fields: [{ k: 'Turno actual', v: 'Viernes 30 · 07:00 – 16:00' }, { k: 'Propuesto', v: 'Viernes 30 · 07:00 – 12:00 y sábado 31 · 07:00 – 10:00' }, { k: 'Motivo', v: 'Cita médica el viernes por la tarde' }],
+impact: [{ t: 'Semana: 40 h → 40 h, sin horas extra' }, { t: 'Sábado dentro de la jornada de 6 días' }] }
+];
+const done = this.state.done;
+const statusOf = (r) => done[r.id] === 'ok' ? { status: 'Aprobada', chipBg: '#E6F4EC', chipFg: '#1E6B3F' } : done[r.id] === 'no' ? { status: 'Rechazada', chipBg: '#E8E8E7', chipFg: '#3C3C3B' } : { status: 'Pendiente', chipBg: '#FEF3DA', chipFg: '#8A4105' };
+const tab = this.state.tab;
+const list = reqs.filter((r) => tab === 'all' || r.type === tab);
+const tabs = [{ id: 'all', label: 'Todas' }, { id: 'aj', label: 'Ajustes' }, { id: 'he', label: 'Horas extra' }, { id: 'ct', label: 'Cambios de turno' }];
+const cur = reqs.find((r) => r.id === this.state.sel) || reqs[0];
+const cs = done[cur.id];
+const setDone = (v) => this.setState({ done: Object.assign({}, done, { [cur.id]: v }) });
+return {
+pendingCount: String(reqs.filter((r) => !done[r.id]).length),
+tabs: tabs.map((t) => {
+const on = t.id === tab;
+return Object.assign({}, t, { sel: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#1E1F1D' : '#3C3C3B', w: on ? '600' : '500', pick: () => this.setState({ tab: t.id }) });
+}),
+items: list.map((r) => {
+const on = r.id === cur.id;
+return Object.assign({}, r, statusOf(r), { sel: on ? 'true' : 'false', border: on ? '2px solid #AF1839' : '1px solid transparent', bg: on ? '#FBE9EE' : '#FFFFFF', pick: () => this.setState({ sel: r.id }) });
+}),
+d: Object.assign({}, cur, {
+isPending: !cs,
+isDone: !!cs,
+doneText: cs === 'ok' ? 'Aprobada. El usuario verá el cambio en su historial.' : 'Rechazada. El usuario recibirá tu comentario.',
+approve: () => setDone('ok'),
+reject: () => setDone('no')
+})
+};
+}
+}
+
+</script>
+</body>
+</html>

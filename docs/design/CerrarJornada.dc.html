@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Cerrar jornada</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;">
+  <header style="display: flex; align-items: center; gap: 8px; padding: 16px 12px 8px;">
+    <a href="Actividad.dc.html" aria-label="Volver" style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: #1E1F1D;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></a>
+    <h1 style="margin: 0; font-size: 20px; font-weight: 700;">Cerrar jornada</h1>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 16px;">
+    <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <span style="font-size: 14px; color: #3C3C3B;">07:03 → 15:58</span>
+        <span style="font-size: 14px; color: #5A5958;">Jueves 29 de octubre</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 34px; font-weight: 700; letter-spacing: -0.01em;">7 h 55 m</span>
+        <span style="font-size: 13px; color: #5A5958;">Horas de la jornada · provisional</span>
+      </div>
+      <div role="img" aria-label="Productivo 6 horas 40 minutos, traslado 1 hora, sin actividad 15 minutos, almuerzo 1 hora" style="display: flex; height: 12px; border-radius: 6px; overflow: hidden; gap: 2px;">
+        <span style="flex: 400 1 0; background: #AF1839;"></span>
+        <span style="flex: 60 1 0; background: #868787;"></span>
+        <span style="flex: 15 1 0; background: #DA830B;"></span>
+        <span style="flex: 60 1 0; background: #E8E8E7;"></span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; font-size: 13px; color: #3C3C3B;">
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 3px; background: #AF1839;"></span>Productivo 6 h 40 m</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 3px; background: #868787;"></span>Traslado 1 h</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 3px; background: #DA830B;"></span>Sin actividad 15 m</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 3px; background: #E8E8E7; border: 1px solid #C9C9C8; box-sizing: border-box;"></span>Almuerzo 1 h (no cuenta)</span>
+      </div>
+    </section>
+
+    <div style="display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 12px; background: #FEF3DA; color: #6E3504; font-size: 13px; line-height: 18px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.5"></path></svg>
+      <span>Tienes <strong>Mantenimiento preventivo</strong> en curso. Se finalizará como Completada a las 15:58.</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #3C3C3B;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7A46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+      Ubicación de cierre capturada · precisión 9 m
+    </div>
+
+    <label style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 14px; font-weight: 600;">Nota del día <span style="font-weight: 400; color: #5A5958;">(opcional)</span></span>
+      <textarea rows="3" placeholder="Algo que tu supervisor deba saber" style="border: 1px solid #C9C9C8; border-radius: 12px; padding: 12px; font-family: inherit; font-size: 15px; color: #1E1F1D; background: #FFFFFF; resize: none;"></textarea>
+    </label>
+
+    <div style="flex-grow: 1;"></div>
+
+    <a href="Historial.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 10px; height: 56px; border-radius: 16px; background: #AF1839; color: #FFFFFF; font-size: 17px; font-weight: 600; text-decoration: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect></svg>Cerrar jornada</a>
+    <a href="Actividad.dc.html" style="display: flex; align-items: center; justify-content: center; height: 48px; font-size: 15px; font-weight: 600; text-decoration: none;">Seguir trabajando</a>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

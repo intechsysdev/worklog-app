@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Asignaciones y calendario</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:288px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Asignaciones y calendario</h1>
+        <p style="margin: 0; font-size: 15px; color: #5A5958;">El turno de cada día sale de la novedad, el cambio puntual o la asignación más específica.</p>
+      </div>
+      <button type="button" onClick="{{openForm}}" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border: none; border-radius: 12px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nueva asignación</button>
+    </header>
+
+    <div class="split3" style="align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <sc-if value="{{formOpen}}" hint-placeholder-val="{{false}}">
+          <section aria-label="Nueva asignación" style="background: #FFFFFF; border: 2px solid #AF1839; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 14px;">
+            <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Nueva asignación</h2>
+            <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Aplica a</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{levels}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div></div>
+            <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">{{targetLabel}}</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{targets}}" as="o" hint-placeholder-count="4"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div></div>
+            <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Horario</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{tplOpts}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div></div>
+            <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Desde</span><input type="date" value="{{fromVal}}" onChange="{{setFrom}}" min="2026-11-01" max="2026-12-31" style="height: 44px; padding: 0 10px; border: 1px solid #C9C9C8; border-radius: 10px; font-family: inherit; font-size: 14px; color: #1E1F1D;"></label>
+            <p style="margin: 0; font-size: 12px; line-height: 17px; color: #5A5958;">{{formHint}}</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button type="button" onClick="{{saveForm}}" style="height: 44px; padding: 0 18px; border: none; border-radius: 10px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Crear asignación</button>
+              <button type="button" onClick="{{closeForm}}" style="height: 44px; padding: 0 14px; border: none; background: transparent; color: #3C3C3B; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Cancelar</button>
+            </div>
+          </section>
+        </sc-if>
+        <sc-if value="{{msg}}" hint-placeholder-val="{{false}}">
+          <p role="status" style="margin: 0; padding: 10px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; background: {{msgBg}}; color: {{msgFg}};">{{msg}}</p>
+        </sc-if>
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+          <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Asignaciones vigentes</h2>
+          <sc-for list="{{rules}}" as="a" hint-placeholder-count="3">
+            <div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 0; border-top: 1px solid #EFEFEE;">
+              <span style="display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: #5A5958;">{{a.level}}<span style="font-weight: 700; color: #AF1839;">{{a.tag}}</span></span>
+              <span style="font-size: 14px; font-weight: 600;">{{a.who}}</span>
+              <span style="font-size: 13px; color: #3C3C3B;">{{a.what}}</span>
+            </div>
+          </sc-for>
+        </section>
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 8px; display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em; padding: 8px 8px 4px;">Ver calendario de</span>
+          <sc-for list="{{people}}" as="p" hint-placeholder-count="3">
+            <button type="button" onClick="{{p.pick}}" aria-pressed="{{p.sel}}" style="text-align: left; display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; font-family: inherit; cursor: pointer; border: {{p.border}}; background: {{p.bg}};">
+              <span style="font-size: 14px; font-weight: 600; color: #1E1F1D;">{{p.name}}</span>
+              <span style="font-size: 12px; color: #5A5958;">{{p.note}}</span>
+            </button>
+          </sc-for>
+        </section>
+      </div>
+
+      <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
+          <h2 style="margin: 0; font-size: 20px; font-weight: 700;">{{personName}} · noviembre de 2026</h2>
+          <span style="font-size: 14px; color: #3C3C3B;">{{monthTotal}}</span>
+          <span style="flex-basis: 100%; font-size: 13px; color: #5A5958;">{{sourceLine}}</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: #3C3C3B;">
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 3px; background: #FBE9EE; border: 1px solid #AF1839;"></span>Turno</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 3px; background: #FEF3DA; border: 1px solid #DA830B;"></span>Novedad</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 3px; background: #FFFFFF; border: 2px dashed #3C3C3B; box-sizing: border-box;"></span>Cambio puntual</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 3px; background: #E8E8E7;"></span>Festivo o descanso</span>
+        </div>
+        <div style="overflow-x: auto;">
+          <div class="cal" style="display: grid; grid-template-columns: repeat(7, minmax(96px, 1fr)); gap: 6px; min-width: 700px;">
+            <span class="calhead" style="font-size: 12px; font-weight: 600; color: #5A5958; padding: 4px;">Lun</span><span class="calhead" style="font-size: 12px; font-weight: 600; color: #5A5958; padding: 4px;">Mar</span><span class="calhead" style="font-size: 12px; font-weight: 600; color: #5A5958; padding: 4px;">Mié</span><span class="calhead" style="font-size: 12px; font-weight: 600; color: #5A5958; padding: 4px;">Jue</span><span class="calhead" style="font-size: 12px; font-weight: 600; color: #5A5958; padding: 4px;">Vie</span><span class="calhead" style="font-size: 12px; font-weight: 600; color: #5A5958; padding: 4px;">Sáb</span><span class="calhead" style="font-size: 12px; font-weight: 600; color: #5A5958; padding: 4px;">Dom</span>
+            <sc-for list="{{cells}}" as="d" hint-placeholder-count="42">
+              <div class="{{d.cls}}" style="min-height: 84px; border-radius: 10px; padding: 8px; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px; background: {{d.bg}}; border: {{d.border}}; opacity: {{d.op}};">
+                <span style="font-size: 13px; font-weight: 700; color: #1E1F1D;"><span class="calwd">{{d.wd}} </span>{{d.n}}</span>
+                <span style="font-size: 12px; font-weight: 600; color: {{d.fg}};">{{d.label}}</span>
+                <span style="font-size: 11px; color: #3C3C3B;">{{d.sub}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = {
+who: 'andres', formOpen: false, lvl: 'persona', target: '', tpl: 'media', from: '2026-11-17', msg: '', msgOk: false, seq: 1,
+rules: [
+{ id: 'r1', lvl: 'sede', target: 'Bogotá Norte', tpl: 'campo', from: '2026-10-26' },
+{ id: 'r2', lvl: 'grupo', target: 'Instalaciones', tpl: 'campo', from: '2026-10-26' },
+{ id: 'r3', lvl: 'persona', target: 'Paula Herrera', tpl: 'admin', from: '2026-10-15' }
+]
+};
+}
+renderVals() {
+const st = this.state;
+const T = { campo: { label: 'Campo L–V', hours: '07:00 – 16:00', mins: 480, days: 5 }, admin: { label: 'Administrativo L–V', hours: '08:00 – 17:00', mins: 480, days: 5 }, media: { label: 'Media jornada L–S', hours: '07:00 – 11:00', mins: 240, days: 6 } };
+const LV = { sede: 'Sede', grupo: 'Grupo', persona: 'Persona' };
+const RANK = { persona: 3, grupo: 2, sede: 1 };
+const TARGETS = { sede: ['Bogotá Norte', 'Bogotá Sur'], grupo: ['Instalaciones', 'Mantenimiento', 'Administrativo'], persona: ['Andrés Mora', 'Diana Ruiz', 'Luis Ortega', 'Paula Herrera'] };
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const fdate = (iso) => Number(iso.slice(8, 10)) + ' de ' + MESES.at(Number(iso.slice(5, 7)) - 1);
+const people = [
+{ id: 'andres', name: 'Andrés Mora', sede: 'Bogotá Norte', group: 'Instalaciones', note: 'Instalaciones · vacaciones del 3 al 13 nov', vac: [3, 13], change: null },
+{ id: 'diana', name: 'Diana Ruiz', sede: 'Bogotá Norte', group: 'Instalaciones', note: 'Instalaciones · sin novedades', vac: null, change: null },
+{ id: 'luis', name: 'Luis Ortega', sede: 'Bogotá Norte', group: 'Mantenimiento', note: 'Mantenimiento · cambio puntual el 20 y 21 nov', vac: null, change: { 20: ['Cambio', '07:00 – 12:00', 300], 21: ['Cambio', '07:00 – 10:00', 180] } }
+];
+const holidays = { 2: 'Todos los Santos', 16: 'Independencia de Cartagena' };
+const p = people.find((x) => x.id === st.who) || people[0];
+const applies = (r) => (r.lvl === 'persona' && r.target === p.name) || (r.lvl === 'grupo' && r.target === p.group) || (r.lvl === 'sede' && r.target === p.sede);
+const ruleFor = (iso) => st.rules.filter((r) => applies(r) && r.from <= iso).sort((a, b) => (RANK[b.lvl] - RANK[a.lvl]) || (a.from < b.from ? 1 : -1))[0];
+const start = Date.UTC(2026, 9, 26);
+let mins = 0;
+const used = {};
+const cells = Array.from({ length: 42 }, (_, i) => {
+const dt = new Date(start + i * 864e5);
+const iso = dt.toISOString().slice(0, 10);
+const m = dt.getUTCMonth();
+const d = dt.getUTCDate();
+const wd = (dt.getUTCDay() + 6) % 7;
+const base = { n: String(d), wd: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'].at(wd), cls: m === 10 ? '' : 'calout', op: m === 10 ? '1' : '0.45', label: '', sub: '', bg: '#FFFFFF', border: '1px solid #E2E2E1', fg: '#3C3C3B' };
+if (m !== 10) return Object.assign(base, { bg: '#F5F5F4' });
+if (holidays[d]) return Object.assign(base, { label: 'Festivo', sub: holidays[d], bg: '#E8E8E7', border: '1px solid #E8E8E7' });
+if (p.change && p.change[d]) { mins += p.change[d][2]; return Object.assign(base, { label: p.change[d][0], sub: p.change[d][1], border: '2px dashed #3C3C3B', fg: '#1E1F1D' }); }
+if (p.vac && d >= p.vac[0] && d <= p.vac[1] && wd < 5) return Object.assign(base, { label: 'Vacaciones', sub: 'Novedad aprobada', bg: '#FEF3DA', border: '1px solid #DA830B', fg: '#8A4105' });
+const r = ruleFor(iso);
+if (!r) return Object.assign(base, { label: 'Sin horario', sub: 'No hay asignación', fg: '#751326' });
+const t = T[r.tpl];
+if (wd >= t.days) return Object.assign(base, { label: 'Descanso', bg: '#E8E8E7', border: '1px solid #E8E8E7' });
+mins += t.mins;
+used[LV[r.lvl] + ' ' + r.target + ' (' + t.label + ')'] = 1;
+return Object.assign(base, { label: t.label, sub: t.hours, bg: '#FBE9EE', border: '1px solid #AF1839', fg: '#751326' });
+});
+const chip = (x) => ({ sel: x ? 'true' : 'false', bg: x ? '#AF1839' : '#FFFFFF', fg: x ? '#FFFFFF' : '#3C3C3B', border: x ? '1px solid #AF1839' : '1px solid #C9C9C8' });
+const dupe = st.rules.some((r) => r.lvl === st.lvl && r.target === st.target && r.from === st.from);
+return {
+openForm: () => this.setState({ formOpen: true, target: '', msg: '' }),
+closeForm: () => this.setState({ formOpen: false, msg: '' }),
+formOpen: st.formOpen,
+levels: ['persona', 'grupo', 'sede'].map((l) => Object.assign({ label: LV[l] }, chip(l === st.lvl), { pick: () => this.setState({ lvl: l, target: '', msg: '' }) })),
+targetLabel: st.lvl === 'persona' ? '¿A quién?' : (st.lvl === 'grupo' ? '¿Qué grupo?' : '¿Qué sede?'),
+targets: TARGETS[st.lvl].map((t) => Object.assign({ label: t }, chip(t === st.target), { pick: () => this.setState({ target: t, msg: '' }) })),
+tplOpts: Object.keys(T).map((k) => Object.assign({ label: T[k].label }, chip(k === st.tpl), { pick: () => this.setState({ tpl: k }) })),
+fromVal: st.from,
+setFrom: (e) => this.setState({ from: e.target.value, msg: '' }),
+formHint: st.lvl === 'persona' ? 'Una asignación a la persona gana sobre la de su grupo y su sede. Las novedades y los cambios puntuales siguen mandando.' : 'Aplica a todas las personas de ' + (st.lvl === 'grupo' ? 'ese grupo' : 'esa sede') + ' que no tengan una asignación más específica.',
+saveForm: () => {
+if (!st.target) { this.setState({ msg: 'Elige ' + (st.lvl === 'persona' ? 'la persona' : (st.lvl === 'grupo' ? 'el grupo' : 'la sede')) + '.', msgOk: false }); return; }
+if (!/^\d{4}-\d{2}-\d{2}$/.test(st.from)) { this.setState({ msg: 'Elige la fecha de inicio.', msgOk: false }); return; }
+if (dupe) { this.setState({ msg: 'Ya existe una asignación igual desde esa fecha.', msgOk: false }); return; }
+const id = 'n' + st.seq;
+this.setState({ seq: st.seq + 1, formOpen: false, rules: st.rules.concat([{ id: id, lvl: st.lvl, target: st.target, tpl: st.tpl, from: st.from, fresh: 1 }]), msg: 'Asignación creada: ' + T[st.tpl].label + ' para ' + st.target + ' desde el ' + fdate(st.from) + '. El calendario ya la usa.', msgOk: true });
+},
+msg: st.msg, msgBg: st.msgOk ? '#E6F4EC' : '#FEF3DA', msgFg: st.msgOk ? '#1E6B3F' : '#8A4105',
+rules: st.rules.slice().sort((a, b) => RANK[a.lvl] - RANK[b.lvl]).map((r) => ({ level: LV[r.lvl], who: r.target, what: T[r.tpl].label + ' · desde el ' + fdate(r.from), tag: r.fresh ? 'Nueva' : '' })),
+people: people.map((x) => {
+const on = x.id === p.id;
+return { name: x.name, note: x.note, sel: on ? 'true' : 'false', border: on ? '2px solid #AF1839' : '1px solid transparent', bg: on ? '#FBE9EE' : '#FFFFFF', pick: () => this.setState({ who: x.id }) };
+}),
+personName: p.name,
+monthTotal: 'Programadas: ' + Math.floor(mins / 60) + ' h' + (mins % 60 ? ' ' + (mins % 60) + ' m' : ''),
+sourceLine: Object.keys(used).length ? 'Turno según: ' + Object.keys(used).join(' · ') : 'Sin asignación vigente en el mes',
+cells: cells
+};
+}
+}
+
+</script>
+</body>
+</html>

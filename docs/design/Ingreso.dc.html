@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ingreso</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column; padding: 72px 24px 32px; gap: 32px;">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+    <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 10px;">
+      <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 56px; height: 57px; display: block;">
+      <span aria-hidden="true" style="font-size: 50px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <h1 style="margin: 0; font-size: 26px; font-weight: 700;">WorkLog</h1>
+      <p style="margin: 0; font-size: 15px; color: #5A5958;">Bitácora de actividades</p>
+    </div>
+  </div>
+
+  <form style="display: flex; flex-direction: column; gap: 16px;">
+    <label style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 14px; font-weight: 600;">Usuario corporativo <span style="font-weight: 400; color: #5A5958;">· asignado a este dispositivo</span></span>
+      <input type="text" value="amora@[DOMINIO]" autocomplete="username" style="height: 52px; padding: 0 14px; border: 1px solid #C9C9C8; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #1E1F1D;">
+    </label>
+    <label style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 14px; font-weight: 600;">Contraseña</span>
+      <input type="password" placeholder="Tu contraseña" autocomplete="current-password" style="height: 52px; padding: 0 14px; border: 1px solid #C9C9C8; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #1E1F1D;">
+    </label>
+    <a href="Politica.dc.html" style="display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 16px; background: #AF1839; color: #FFFFFF; font-size: 17px; font-weight: 600; text-decoration: none; margin-top: 4px;">Ingresar</a>
+    <div style="display: flex; align-items: center; gap: 12px; color: #5A5958; font-size: 13px;">
+      <span style="flex-grow: 1; height: 1px; background: #E2E2E1;"></span>o<span style="flex-grow: 1; height: 1px; background: #E2E2E1;"></span>
+    </div>
+    <a href="Politica.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 10px; height: 52px; border-radius: 14px; border: 1px solid #C9C9C8; background: #FFFFFF; color: #1E1F1D; font-size: 15px; font-weight: 600; text-decoration: none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>Ingresar con la cuenta de la empresa</a>
+    <a href="#" style="align-self: center; font-size: 14px; font-weight: 500; padding: 12px;">¿Olvidaste tu contraseña?</a>
+  </form>
+
+  <div style="flex-grow: 1;"></div>
+
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;">
+    <p style="margin: 0; font-size: 13px; color: #3C3C3B;">Conectamos tecnología.</p>
+    <p style="margin: 0; font-size: 13px; font-weight: 600; color: #3C3C3B;">Impulsamos negocios.</p>
+    <p style="margin: 8px 0 0; font-size: 12px; color: #5A5958;">Dispositivo administrado por SOTI MobiControl · serie [SERIE]</p>
+    <p style="margin: 0; font-size: 12px; color: #5A5958;">INTECHSYS ONE · WorkLog 1.0.0</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

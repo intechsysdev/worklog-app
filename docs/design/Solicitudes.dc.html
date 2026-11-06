@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Mis solicitudes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;">
+  <header style="display: flex; align-items: center; gap: 8px; padding: 16px 12px 8px;">
+    <a href="Perfil.dc.html" aria-label="Volver" style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: #1E1F1D;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></a>
+    <h1 style="margin: 0; font-size: 20px; font-weight: 700;">Mis solicitudes</h1>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 16px; min-height: 0;">
+    <div role="tablist" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 12px; background: #E8E8E7;">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+        <button type="button" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" style="height: 40px; border: none; border-radius: 9px; font-family: inherit; font-size: 14px; cursor: pointer; background: {{t.bg}}; color: {{t.fg}}; font-weight: {{t.w}};">{{t.label}}</button>
+      </sc-for>
+    </div>
+
+    <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; overflow: auto;">
+      <sc-for list="{{items}}" as="r" hint-placeholder-count="3">
+        <li style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.08em;">{{r.kind}}</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: {{r.chipBg}}; color: {{r.chipFg}};"><span style="width: 7px; height: 7px; border-radius: 4px; background: {{r.dot}};"></span>{{r.status}}</span>
+          </div>
+          <span style="font-size: 16px; font-weight: 600;">{{r.title}}</span>
+          <span style="font-size: 14px; color: #3C3C3B;">{{r.detail}}</span>
+          <span style="font-size: 13px; color: #5A5958;">{{r.meta}}</span>
+        </li>
+      </sc-for>
+    </ul>
+
+    <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 10px; height: 56px; border-radius: 16px; background: #AF1839; color: #FFFFFF; font-size: 17px; font-weight: 600; text-decoration: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nueva solicitud</a>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { tab: 'all' };
+}
+renderVals() {
+const st = {
+pend: { status: 'Pendiente', chipBg: '#FEF3DA', chipFg: '#8A4105', dot: '#DA830B' },
+ok: { status: 'Aprobada', chipBg: '#E6F4EC', chipFg: '#1E6B3F', dot: '#1E7A46' },
+no: { status: 'Rechazada', chipBg: '#E8E8E7', chipFg: '#3C3C3B', dot: '#5A5958' }
+};
+const all = [
+{ s: 'pend', kind: 'Ajuste de registro', title: 'Instalación de equipo · 29 oct', detail: 'Fin 09:40 → 09:55. Olvidé finalizar al salir del sitio.', meta: 'Enviada hoy 10:05 · Laura Gómez' },
+{ s: 'ok', kind: 'Horas extra', title: 'Viernes 23 de octubre', detail: '1 h 30 m · cierre de obra en Bodega Sur', meta: 'Aprobada por Laura Gómez el 23 oct' },
+{ s: 'no', kind: 'Cambio de turno', title: 'Sábado 7 de noviembre', detail: '07:00 – 11:00', meta: 'Rechazada: la sede está cerrada ese día' }
+];
+const tab = this.state.tab;
+const list = all.filter((x) => tab === 'all' || (tab === 'pend' ? x.s === 'pend' : x.s !== 'pend'));
+const tabs = [{ id: 'all', label: 'Todas' }, { id: 'pend', label: 'Pendientes' }, { id: 'done', label: 'Resueltas' }];
+return {
+tabs: tabs.map((t) => {
+const on = t.id === tab;
+return Object.assign({}, t, { sel: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#1E1F1D' : '#3C3C3B', w: on ? '600' : '500', pick: () => this.setState({ tab: t.id }) });
+}),
+items: list.map((x) => Object.assign({}, x, st[x.s]))
+};
+}
+}
+</script>
+</body>
+</html>

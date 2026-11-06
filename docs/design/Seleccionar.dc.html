@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Seleccionar actividad</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;">
+  <header style="display: flex; align-items: center; gap: 8px; padding: 16px 12px 8px;">
+    <a href="Actividad.dc.html" aria-label="Volver" style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: #1E1F1D;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></a>
+    <h1 style="margin: 0; font-size: 20px; font-weight: 700;">Nueva actividad</h1>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 16px; min-height: 0;">
+    <label style="display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 14px; border-radius: 14px; background: #FFFFFF; border: 1px solid #C9C9C8;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A5958" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Buscar actividad</span>
+      <input type="search" placeholder="Buscar actividad u orden" style="flex-grow: 1; border: none; outline: none; background: transparent; font-family: inherit; font-size: 15px; color: #1E1F1D;">
+    </label>
+
+    <div role="tablist" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 12px; background: #E8E8E7;">
+      <button type="button" role="tab" aria-selected="{{tabAsignadas}}" onClick="{{showAsignadas}}" style="height: 40px; border: none; border-radius: 9px; font-family: inherit; font-size: 14px; cursor: pointer; background: {{tabBgA}}; color: {{tabFgA}}; font-weight: {{tabWA}};">Asignadas hoy</button>
+      <button type="button" role="tab" aria-selected="{{tabCatalogo}}" onClick="{{showCatalogo}}" style="height: 40px; border: none; border-radius: 9px; font-family: inherit; font-size: 14px; cursor: pointer; background: {{tabBgC}}; color: {{tabFgC}}; font-weight: {{tabWC}};">Catálogo</button>
+    </div>
+
+    <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; overflow: auto;">
+      <sc-for list="{{items}}" as="item" hint-placeholder-count="4">
+        <li>
+          <button type="button" onClick="{{item.pick}}" aria-pressed="{{item.selected}}" style="width: 100%; min-height: 72px; display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; background: #FFFFFF; font-family: inherit; cursor: pointer; box-sizing: border-box; border: {{item.border}};">
+            <span style="display: flex; flex-direction: column; gap: 4px; flex-grow: 1; text-align: left;">
+              <span style="font-size: 16px; font-weight: 600; color: #1E1F1D;">{{item.title}}</span>
+              <span style="font-size: 13px; color: #5A5958;">{{item.meta}}</span>
+            </span>
+            <span style="width: 22px; height: 22px; flex-shrink: 0; border-radius: 11px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid {{item.ring}};"><span style="width: 10px; height: 10px; border-radius: 5px; background: {{item.dot}};"></span></span>
+          </button>
+        </li>
+      </sc-for>
+    </ul>
+
+    <div style="display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 12px; background: #FEF3DA; color: #6E3504; font-size: 13px; line-height: 18px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.5"></path></svg>
+      <span>Tienes <strong>Instalación de equipo</strong> en curso. Al iniciar otra, se finalizará automáticamente a las 09:40.</span>
+    </div>
+
+    <a href="Actividad.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 10px; height: 56px; border-radius: 16px; background: #AF1839; color: #FFFFFF; font-size: 17px; font-weight: 600; text-decoration: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 5l12 7-12 7z"></path></svg>Iniciar actividad</a>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { tab: 'asignadas', picked: 'a1' };
+}
+renderVals() {
+const asignadas = [
+{ id: 'a1', title: 'Mantenimiento preventivo', meta: 'Bodega Sur · OT-1043 · 10:00' },
+{ id: 'a2', title: 'Visita técnica', meta: 'Oficina Centro · OT-1047 · 13:30' },
+{ id: 'a3', title: 'Revisión de garantía', meta: 'Almacén Norte · OT-1051 · 15:00' }
+];
+const catalogo = [
+{ id: 'c1', title: 'Traslado entre sitios', meta: 'Desplazamiento' },
+{ id: 'c2', title: 'Labores administrativas', meta: 'Interna' },
+{ id: 'c3', title: 'Capacitación', meta: 'Interna' },
+{ id: 'c4', title: 'Espera de materiales', meta: 'Tiempo improductivo' }
+];
+const tab = this.state.tab;
+const list = tab === 'asignadas' ? asignadas : catalogo;
+const a = tab === 'asignadas';
+return {
+tabAsignadas: a ? 'true' : 'false',
+tabCatalogo: a ? 'false' : 'true',
+tabBgA: a ? '#FFFFFF' : 'transparent', tabFgA: a ? '#1E1F1D' : '#3C3C3B', tabWA: a ? '600' : '500',
+tabBgC: a ? 'transparent' : '#FFFFFF', tabFgC: a ? '#3C3C3B' : '#1E1F1D', tabWC: a ? '500' : '600',
+showAsignadas: () => this.setState({ tab: 'asignadas' }),
+showCatalogo: () => this.setState({ tab: 'catalogo' }),
+items: list.map((x) => {
+const sel = this.state.picked === x.id;
+return Object.assign({}, x, {
+selected: sel ? 'true' : 'false',
+pick: () => this.setState({ picked: x.id }),
+border: sel ? '2px solid #AF1839' : '1px solid #E2E2E1',
+ring: sel ? '#AF1839' : '#868787',
+dot: sel ? '#AF1839' : 'transparent'
+});
+})
+};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Equipo hoy</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:288px minmax(0,1fr)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Equipo hoy</h1>
+        <p style="margin: 0; font-size: 15px; color: #5A5958;">Jueves 29 de octubre · actualizado 10:42</p>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #3C3C3B;">Sede
+          <select style="height: 40px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; background: #FFFFFF; font-family: inherit; font-size: 14px; color: #1E1F1D;"><option>Bogotá Norte</option><option>Bogotá Sur</option></select>
+        </label>
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px;"><span aria-hidden="true" style="width: 32px; height: 32px; border-radius: 16px; background: #3C3C3B; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">LG</span>Laura Gómez · Supervisora</span>
+      </div>
+    </header>
+
+    <section class="kpis">
+      <div style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 13px; color: #5A5958;">En actividad</span><span style="font-size: 32px; font-weight: 700;">8</span><span style="font-size: 13px; color: #3C3C3B;">de 14 usuarios</span></div>
+      <div style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 13px; color: #5A5958;">En pausa</span><span style="font-size: 32px; font-weight: 700;">1</span><span style="font-size: 13px; color: #3C3C3B;">almuerzo</span></div>
+      <div style="background: #FFFFFF; border: 1px solid #DA830B; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 13px; color: #8A4105; font-weight: 600;">Sin actividad</span><span style="font-size: 32px; font-weight: 700;">2</span><span style="font-size: 13px; color: #3C3C3B;">1 lleva más de 20 min</span></div>
+      <div style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 13px; color: #5A5958;">Sin iniciar jornada</span><span style="font-size: 32px; font-weight: 700;">3</span><span style="font-size: 13px; color: #3C3C3B;">1 tarde · 2 con novedad</span></div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; display: flex; flex-direction: column;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid #E2E2E1;">
+        <div role="tablist" style="display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 12px; background: #E8E8E7;">
+          <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
+            <button type="button" role="tab" aria-selected="{{f.sel}}" onClick="{{f.pick}}" style="height: 36px; padding: 0 14px; border: none; border-radius: 9px; font-family: inherit; font-size: 14px; cursor: pointer; background: {{f.bg}}; color: {{f.fg}}; font-weight: {{f.w}};">{{f.label}}</button>
+          </sc-for>
+        </div>
+        <label style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; min-width: 240px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A5958" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Buscar técnico</span>
+          <input type="search" placeholder="Buscar usuario u OT" style="flex-grow: 1; border: none; outline: none; background: transparent; font-family: inherit; font-size: 14px; color: #1E1F1D;">
+        </label>
+      </div>
+      <div style="overflow-x: auto;">
+        <div role="table" class="tbl" style="width: 100%; min-width: 1000px; font-size: 14px;">
+          <div role="rowgroup" style="display: contents;">
+            <div role="row" class="thead" style="display: grid; grid-template-columns: minmax(150px,1.3fr) 150px minmax(220px,2.2fr) minmax(120px,1fr) 70px 170px minmax(110px,1fr) 130px; align-items: center; text-align: left; color: #5A5958; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;">
+              <div role="columnheader" style="padding: 12px 20px; font-weight: 600;">Usuario</div><div role="columnheader" style="padding: 12px; font-weight: 600;">Estado</div><div role="columnheader" style="padding: 12px; font-weight: 600;">Actividad</div><div role="columnheader" style="padding: 12px; font-weight: 600;">Sitio</div><div role="columnheader" style="padding: 12px; font-weight: 600;">Desde</div><div role="columnheader" style="padding: 12px; font-weight: 600;">Semana</div><div role="columnheader" style="padding: 12px 20px; font-weight: 600;">Geocerca</div><div role="columnheader" style="padding: 12px 20px; font-weight: 600;">Dispositivo</div>
+            </div>
+          </div>
+          <div role="rowgroup" style="display: contents;">
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
+              <div role="row" class="trow" style="display: grid; grid-template-columns: minmax(150px,1.3fr) 150px minmax(220px,2.2fr) minmax(120px,1fr) 70px 170px minmax(110px,1fr) 130px; align-items: center; border-top: 1px solid #EFEFEE;">
+                <div role="cell" style="padding: 14px 20px;"><a href="#" style="color: #1E1F1D; font-weight: 600; text-decoration: none;">{{r.name}}</a></div>
+                <div role="cell" data-label="Estado" style="padding: 14px 12px;"><span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: {{r.bg}}; color: {{r.fg}};"><span style="width: 7px; height: 7px; border-radius: 4px; background: {{r.dot}};"></span>{{r.state}}</span></div>
+                <div role="cell" data-label="Actividad" style="padding: 14px 12px;">{{r.act}}</div>
+                <div role="cell" data-label="Sitio" style="padding: 14px 12px; color: #3C3C3B;">{{r.site}}</div>
+                <div role="cell" data-label="Desde" style="padding: 14px 12px; color: #3C3C3B; font-variant-numeric: tabular-nums;">{{r.since}}</div>
+                <div role="cell" data-label="Semana" style="padding: 14px 12px; font-variant-numeric: tabular-nums; font-weight: {{r.weekW}}; color: {{r.weekC}};">{{r.week}}</div>
+                <div role="cell" data-label="Geocerca" style="padding: 14px 12px; color: #3C3C3B;">{{r.geo}}</div>
+                <div role="cell" data-label="Dispositivo" style="padding: 14px 20px; font-size: 13px; color: {{r.devC}};">{{r.dev}}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-top: 1px solid #E2E2E1; font-size: 13px; color: #5A5958;"><span>Mostrando 9 de 14 usuarios</span><a href="#" style="font-weight: 600; padding: 8px 0;">Ver todos</a></div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { f: 'all' };
+}
+renderVals() {
+const S = {
+act: { state: 'En actividad', bg: '#FBE9EE', fg: '#751326', dot: '#AF1839' },
+pau: { state: 'En pausa', bg: '#E8E8E7', fg: '#3C3C3B', dot: '#5A5958' },
+idle: { state: 'Sin actividad', bg: '#FEF3DA', fg: '#8A4105', dot: '#DA830B' },
+off: { state: 'Sin iniciar', bg: '#FFFFFF', fg: '#3C3C3B', dot: '#C9C9C8' },
+nov: { state: 'Vacaciones', bg: '#FFFFFF', fg: '#3C3C3B', dot: '#C9C9C8' }
+};
+const all = [
+{ k: 'idle', name: 'Carlos Pérez', dev: 'En línea · 52%', act: '— hace 38 min', site: 'Oficina Centro', since: '10:04', week: '29 h 10 m', geo: 'Dentro' },
+{ k: 'act', name: 'Andrés Mora', dev: 'En línea · 78%', act: 'Mantenimiento preventivo · OT-1043', site: 'Bodega Sur', since: '09:45', week: '31 h 20 m', geo: 'Dentro · 6 m' },
+{ k: 'act', name: 'Diana Ruiz', dev: 'En línea · 64%', act: 'Instalación de equipo · OT-1052', site: 'Almacén Norte', since: '08:30', week: '38 h 40 m', geo: 'Dentro · 9 m', near: true },
+{ k: 'act', name: 'Jorge Castaño', dev: 'En línea · 33%', act: 'Traslado entre sitios', site: '—', since: '10:20', week: '30 h 05 m', geo: 'En ruta' },
+{ k: 'act', name: 'Paula Herrera', dev: 'En línea · 81%', act: 'Visita técnica · OT-1047', site: 'Oficina Centro', since: '09:10', week: '31 h 50 m', geo: 'Dentro · 4 m' },
+{ k: 'pau', name: 'Miguel Torres', dev: 'En línea · 57%', act: 'Revisión de garantía · OT-1051', site: 'Almacén Norte', since: '10:35', week: '30 h 40 m', geo: 'Dentro · 11 m' },
+{ k: 'idle', name: 'Sofía Rincón', dev: 'Batería baja · 12%', act: '— hace 6 min', site: 'Bodega Sur', since: '10:36', week: '28 h 15 m', geo: 'Dentro' },
+{ k: 'off', name: 'Luis Ortega', dev: 'Sin conexión desde ayer', act: 'Turno desde 07:00 · 3 h 42 m tarde', site: '—', since: '—', week: '24 h 00 m', geo: '—' },
+{ k: 'nov', name: 'Camila Vargas', dev: 'Apagado', act: 'Vacaciones hasta el 6 nov', site: '—', since: '—', week: '0 h', geo: '—' }
+];
+const f = this.state.f;
+const match = (r) => f === 'all' || (f === 'act' && (r.k === 'act' || r.k === 'pau')) || (f === 'idle' && r.k === 'idle') || (f === 'off' && (r.k === 'off' || r.k === 'nov'));
+const filters = [{ id: 'all', label: 'Todos' }, { id: 'act', label: 'Trabajando' }, { id: 'idle', label: 'Sin actividad' }, { id: 'off', label: 'Sin iniciar' }];
+return {
+filters: filters.map((x) => {
+const on = x.id === f;
+return Object.assign({}, x, { sel: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#1E1F1D' : '#3C3C3B', w: on ? '600' : '500', pick: () => this.setState({ f: x.id }) });
+}),
+rows: all.filter(match).map((r) => Object.assign({}, r, S[r.k], { weekW: r.near ? '700' : '400', devC: /baja|Sin conexión/.test(r.dev) ? '#8A4105' : '#3C3C3B', weekC: r.near ? '#8A4105' : '#3C3C3B', week: r.near ? r.week + ' · cerca del tope' : r.week }))
+};
+}
+}
+</script>
+</body>
+</html>

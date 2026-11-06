@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Plantillas de horario</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:288px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Plantillas de horario</h1>
+        <p style="margin: 0; font-size: 15px; color: #5A5958;">Cada plantilla se valida con los topes legales vigentes antes de guardarse.</p>
+      </div>
+      <button type="button" onClick="{{newTpl}}" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border: none; border-radius: 12px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nueva plantilla</button>
+    </header>
+
+    <div class="split3" style="align-items: start;">
+      <ul style="list-style: none; margin: 0; padding: 8px; background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; display: flex; flex-direction: column; gap: 4px;">
+        <sc-for list="{{list}}" as="t" hint-placeholder-count="4">
+          <li>
+            <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.sel}}" style="width: 100%; text-align: left; display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 12px; font-family: inherit; cursor: pointer; box-sizing: border-box; border: {{t.border}}; background: {{t.bg}};">
+              <span style="display: flex; justify-content: space-between; gap: 8px; width: 100%; align-items: center;">
+                <span style="font-size: 15px; font-weight: 600; color: #1E1F1D;">{{t.name}}</span>
+                <span style="padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; background: {{t.chipBg}}; color: {{t.chipFg}};">{{t.chip}}</span>
+              </span>
+              <span style="font-size: 13px; color: #3C3C3B;">{{t.line}}</span>
+              <span style="font-size: 12px; color: #5A5958;">{{t.use}}</span>
+            </button>
+          </li>
+        </sc-for>
+      </ul>
+
+      <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 22px;">
+        <label style="display: flex; flex-direction: column; gap: 8px; max-width: 420px;">
+          <span style="font-size: 14px; font-weight: 600;">Nombre</span>
+          <input type="text" value="{{c.name}}" onChange="{{c.setName}}" placeholder="Ej.: Turno tarde L–V" style="height: 44px; padding: 0 12px; border: 1px solid {{c.nameBorder}}; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D;">
+        </label>
+
+        <fieldset style="border: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+          <legend style="font-size: 14px; font-weight: 600; padding: 0; margin-bottom: 10px;">Días de trabajo</legend>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <sc-for list="{{c.days}}" as="d" hint-placeholder-count="7">
+              <button type="button" onClick="{{d.toggle}}" aria-pressed="{{d.on}}" style="width: 52px; height: 44px; border-radius: 10px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; border: {{d.border}}; background: {{d.bg}}; color: {{d.fg}};">{{d.label}}</button>
+            </sc-for>
+          </div>
+        </fieldset>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+          <sc-for list="{{c.steppers}}" as="s" hint-placeholder-count="3">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 14px; font-weight: 600;">{{s.label}}</span>
+              <div style="display: flex; align-items: center; border: 1px solid #C9C9C8; border-radius: 10px; overflow: hidden;">
+                <button type="button" onClick="{{s.dec}}" aria-label="{{s.decLabel}}" style="width: 44px; height: 44px; border: none; background: #F5F5F4; font-family: inherit; font-size: 18px; color: #1E1F1D; cursor: pointer;">−</button>
+                <span style="min-width: 84px; text-align: center; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums;">{{s.value}}</span>
+                <button type="button" onClick="{{s.inc}}" aria-label="{{s.incLabel}}" style="width: 44px; height: 44px; border: none; background: #F5F5F4; font-family: inherit; font-size: 18px; color: #1E1F1D; cursor: pointer;">+</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+          <div style="flex: 1 1 180px; padding: 16px; border-radius: 12px; background: #F5F5F4; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 13px; color: #5A5958;">Horas por día</span><span style="font-size: 26px; font-weight: 700;">{{c.daily}}</span></div>
+          <div style="flex: 1 1 180px; padding: 16px; border-radius: 12px; background: #F5F5F4; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 13px; color: #5A5958;">Horas por semana</span><span style="font-size: 26px; font-weight: 700;">{{c.weekly}}</span></div>
+        </div>
+
+        <ul aria-label="Validaciones" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+          <sc-for list="{{c.checks}}" as="k" hint-placeholder-count="4">
+            <li style="display: flex; gap: 10px; align-items: center; font-size: 14px; color: {{k.fg}};">
+              <span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #FFFFFF; background: {{k.dot}};">{{k.icon}}</span>
+              <span><strong>{{k.state}}</strong> · {{k.text}}</span>
+            </li>
+          </sc-for>
+        </ul>
+
+        <sc-if value="{{c.night}}" hint-placeholder-val="{{false}}">
+          <p style="margin: 0; padding: 12px 14px; border-radius: 10px; background: #FEF3DA; color: #6E3504; font-size: 13px;">Incluye horas después de las 19:00: se pagan con recargo nocturno del 35%.</p>
+        </sc-if>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; padding-top: 4px; border-top: 1px solid #EFEFEE;">
+          <button type="button" onClick="{{c.save}}" aria-disabled="{{c.blocked}}" style="height: 48px; padding: 0 24px; border: none; border-radius: 12px; background: {{c.saveBg}}; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 16px;">Guardar plantilla</button>
+          <span style="font-size: 13px; color: {{c.noteColor}}; margin-top: 16px; font-weight: {{c.noteW}};">{{c.saveNote}}</span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = {
+sel: 'campo', seq: 1, msg: '', msgOk: false,
+tpl: {
+campo: { name: 'Campo L–V', days: [1, 1, 1, 1, 1, 0, 0], start: 420, end: 960, lunch: 60, use: '12 personas · Sede Bogotá Norte' },
+admin: { name: 'Administrativo L–V', days: [1, 1, 1, 1, 1, 0, 0], start: 480, end: 1020, lunch: 60, use: '6 personas · Oficina Centro' },
+media: { name: 'Media jornada L–S', days: [1, 1, 1, 1, 1, 1, 0], start: 420, end: 660, lunch: 0, use: '2 personas' },
+viejo: { name: 'Campo L–S (anterior)', days: [1, 1, 1, 1, 1, 1, 0], start: 420, end: 1020, lunch: 0, use: 'Sin asignar · del primer diseño' }
+}
+};
+}
+renderVals() {
+const order = Object.keys(this.state.tpl);
+const tpl = this.state.tpl;
+const hhmm = (m) => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+const dur = (m) => Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + String(m % 60).padStart(2, '0') + ' m' : '');
+const L = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+const calc = (t) => {
+const daily = t.end - t.start - t.lunch;
+const n = t.days.reduce((a, b) => a + b, 0);
+const weekly = daily * n;
+const checks = [
+{ ok: daily >= 240 && daily <= 540, text: 'Entre 4 y 9 horas diarias (' + dur(daily) + ')' },
+{ ok: weekly <= 42 * 60, text: 'Máximo 42 horas semanales (' + dur(weekly) + ')' },
+{ ok: n === 5 || n === 6, text: 'Repartidas en 5 o 6 días (' + n + ' días)' },
+{ ok: !t.days[6], text: 'Sin domingo; si se trabaja, aplica recargo del 90%' }
+];
+return { daily, n, weekly, checks, valid: checks.slice(0, 3).every((c) => c.ok) };
+};
+const set = (id, patch) => this.setState({ tpl: Object.assign({}, tpl, { [id]: Object.assign({}, tpl[id], patch) }) });
+const sel = this.state.sel;
+const t = tpl[sel];
+const r = calc(t);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const st = this.state;
+const nm = (t.name || '').trim();
+return {
+newTpl: () => { const id = 'n' + st.seq; this.setState({ seq: st.seq + 1, sel: id, msg: '', tpl: Object.assign({}, tpl, { [id]: { name: '', days: [1, 1, 1, 1, 1, 0, 0], start: 420, end: 960, lunch: 60, use: 'Borrador · sin asignar', draft: 1 } }) }); },
+list: order.map((id) => {
+const x = tpl[id];
+const k = calc(x);
+const on = id === sel;
+return {
+name: (x.name || 'Plantilla sin nombre') + (x.draft ? ' · borrador' : ''), use: x.use,
+line: x.days.map((d, i) => d ? L[i] : '').join('') + ' · ' + hhmm(x.start) + '–' + hhmm(x.end) + ' · ' + dur(k.weekly) + '/sem',
+chip: k.valid ? 'Válida' : 'No cumple', chipBg: k.valid ? '#E6F4EC' : '#FBE9EE', chipFg: k.valid ? '#1E6B3F' : '#751326',
+sel: on ? 'true' : 'false', border: on ? '2px solid #AF1839' : '1px solid transparent', bg: on ? '#FBE9EE' : '#FFFFFF',
+pick: () => this.setState({ sel: id })
+};
+}),
+c: {
+name: t.name,
+setName: (e) => this.setState({ msg: '', tpl: Object.assign({}, tpl, { [sel]: Object.assign({}, t, { name: e.target.value }) }) }),
+nameBorder: t.draft && !nm ? '#AF1839' : '#C9C9C8',
+save: () => {
+if (nm.length < 3) { this.setState({ msg: 'Escribe el nombre de la plantilla.', msgOk: false }); return; }
+if (order.some((k) => k !== sel && tpl[k].name.trim().toLowerCase() === nm.toLowerCase())) { this.setState({ msg: 'Ya existe una plantilla con ese nombre.', msgOk: false }); return; }
+if (!r.valid) { this.setState({ msg: 'Corrige lo que no cumple para poder guardar.', msgOk: false }); return; }
+this.setState({ msg: t.draft ? 'Plantilla creada. Ya se puede usar en Asignaciones.' : 'Cambios guardados.', msgOk: true, tpl: Object.assign({}, tpl, { [sel]: Object.assign({}, t, { name: nm, draft: 0, use: t.draft ? 'Sin asignar' : t.use }) }) });
+},
+noteColor: st.msg ? (st.msgOk ? '#1E6B3F' : '#8A4105') : '#5A5958',
+noteW: st.msg ? '600' : '400',
+days: t.days.map((d, i) => ({
+label: L[i], on: d ? 'true' : 'false',
+bg: d ? '#AF1839' : '#FFFFFF', fg: d ? '#FFFFFF' : '#3C3C3B', border: d ? '1px solid #AF1839' : '1px solid #C9C9C8',
+toggle: () => { const nd = t.days.slice(); nd[i] = d ? 0 : 1; set(sel, { days: nd }); }
+})),
+steppers: [
+{ label: 'Entrada', value: hhmm(t.start), decLabel: 'Entrada 30 minutos antes', incLabel: 'Entrada 30 minutos después', dec: () => set(sel, { start: clamp(t.start - 30, 300, t.end - 60) }), inc: () => set(sel, { start: clamp(t.start + 30, 300, t.end - 60) }) },
+{ label: 'Salida', value: hhmm(t.end), decLabel: 'Salida 30 minutos antes', incLabel: 'Salida 30 minutos después', dec: () => set(sel, { end: clamp(t.end - 30, t.start + 60, 1380) }), inc: () => set(sel, { end: clamp(t.end + 30, t.start + 60, 1380) }) },
+{ label: 'Almuerzo', value: t.lunch + ' min', decLabel: 'Menos almuerzo', incLabel: 'Más almuerzo', dec: () => set(sel, { lunch: clamp(t.lunch - 30, 0, 120) }), inc: () => set(sel, { lunch: clamp(t.lunch + 30, 0, 120) }) }
+],
+daily: dur(r.daily),
+weekly: dur(r.weekly),
+checks: r.checks.map((k, i) => ({
+text: k.text,
+state: k.ok ? 'Cumple' : (i === 3 ? 'Aviso' : 'No cumple'),
+icon: k.ok ? '✓' : '!',
+dot: k.ok ? '#1E7A46' : (i === 3 ? '#DA830B' : '#AF1839'),
+fg: k.ok ? '#1E1F1D' : (i === 3 ? '#8A4105' : '#751326')
+})),
+night: t.end > 1140,
+blocked: r.valid ? 'false' : 'true',
+saveBg: r.valid ? '#AF1839' : '#5A5958',
+saveNote: st.msg ? st.msg : (r.valid ? 'Aplica a nuevas asignaciones desde la fecha que elijas.' : 'Corrige lo que no cumple para poder guardar.')
+}
+};
+}
+}
+
+</script>
+</body>
+</html>

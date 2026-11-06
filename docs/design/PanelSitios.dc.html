@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Sitios y geocercas</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:288px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.split4{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px}
+@media (max-width:1100px){.split4{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Sitios y geocercas</h1>
+        <p style="margin: 0; font-size: 15px; color: #5A5958;">La app valida que el usuario esté dentro de la geocerca al iniciar y finalizar cada actividad.</p>
+      </div>
+      <button type="button" onClick="{{newSite}}" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border: none; border-radius: 12px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nuevo sitio</button>
+    </header>
+
+    <div class="split3" style="align-items: start;">
+      <ul style="list-style: none; margin: 0; padding: 8px; background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; display: flex; flex-direction: column; gap: 4px;">
+        <sc-for list="{{sites}}" as="s" hint-placeholder-count="5">
+          <li>
+            <button type="button" onClick="{{s.pick}}" aria-pressed="{{s.sel}}" style="width: 100%; text-align: left; display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border-radius: 12px; font-family: inherit; cursor: pointer; box-sizing: border-box; border: {{s.border}}; background: {{s.bg}};">
+              <span style="font-size: 15px; font-weight: 600; color: #1E1F1D;">{{s.name}}</span>
+              <span style="font-size: 13px; color: #3C3C3B;">{{s.addr}}</span>
+              <span style="font-size: 12px; color: #5A5958;">{{s.line}}</span>
+            </button>
+          </li>
+        </sc-for>
+      </ul>
+
+      <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 18px; min-width: 0;">
+        <div style="position: relative; border-radius: 12px; overflow: hidden; border: 1px solid #E2E2E1; background: #F5F5F4;">
+          <svg viewBox="0 0 640 360" width="100%" role="img" aria-label="{{mapLabel}}" style="display: block;">
+            <rect x="0" y="0" width="640" height="360" fill="#F5F5F4"></rect>
+            <rect x="40" y="30" width="150" height="110" rx="6" fill="#EFEFEE"></rect>
+            <rect x="220" y="30" width="200" height="110" rx="6" fill="#EFEFEE"></rect>
+            <rect x="450" y="30" width="150" height="110" rx="6" fill="#EFEFEE"></rect>
+            <rect x="40" y="200" width="150" height="130" rx="6" fill="#EFEFEE"></rect>
+            <rect x="220" y="200" width="200" height="130" rx="6" fill="#E8E8E7"></rect>
+            <rect x="450" y="200" width="150" height="130" rx="6" fill="#EFEFEE"></rect>
+            <path d="M0 170H640M205 0V360M435 0V360" stroke="#FFFFFF" stroke-width="22"></path>
+            <circle cx="320" cy="200" r="{{r}}" fill="#AF1839" fill-opacity="0.12" stroke="#AF1839" stroke-width="2"></circle>
+            <circle cx="340" cy="170" r="6" fill="{{pc0}}" stroke="#FFFFFF" stroke-width="2"></circle>
+            <circle cx="280" cy="210" r="6" fill="{{pc1}}" stroke="#FFFFFF" stroke-width="2"></circle>
+            <circle cx="380" cy="240" r="6" fill="{{pc2}}" stroke="#FFFFFF" stroke-width="2"></circle>
+            <circle cx="250" cy="150" r="6" fill="{{pc3}}" stroke="#FFFFFF" stroke-width="2"></circle>
+            <circle cx="410" cy="190" r="6" fill="{{pc4}}" stroke="#FFFFFF" stroke-width="2"></circle>
+            <circle cx="330" cy="270" r="6" fill="{{pc5}}" stroke="#FFFFFF" stroke-width="2"></circle>
+            <circle cx="210" cy="230" r="6" fill="{{pc6}}" stroke="#FFFFFF" stroke-width="2"></circle>
+            <circle cx="450" cy="260" r="6" fill="{{pc7}}" stroke="#FFFFFF" stroke-width="2"></circle>
+            <path d="M320 200c0 0-12-14-12-24a12 12 0 0 1 24 0c0 10-12 24-12 24z" fill="#1E1F1D"></path>
+            <circle cx="320" cy="176" r="4" fill="#FFFFFF"></circle>
+          </svg>
+          <span style="position: absolute; left: 12px; bottom: 10px; padding: 4px 8px; border-radius: 6px; background: #FFFFFF; font-size: 12px; color: #3C3C3B;">Mapa ilustrativo · en producción, MapLibre con mapa base</span>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+          <div style="flex: 1 1 160px; padding: 14px; border-radius: 12px; background: #F5F5F4; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 13px; color: #5A5958;">Puntos de hoy dentro</span><span style="font-size: 24px; font-weight: 700;">{{inside}}</span></div>
+          <div style="flex: 1 1 160px; padding: 14px; border-radius: 12px; background: #F5F5F4; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 13px; color: #5A5958;">Fuera de la geocerca</span><span style="font-size: 24px; font-weight: 700; color: {{outColor}};">{{outside}}</span></div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end;">
+          <label style="display: flex; flex-direction: column; gap: 8px; flex: 1 1 220px;">
+            <span style="font-size: 14px; font-weight: 600;">Nombre</span>
+            <input type="text" value="{{cur.name}}" onChange="{{setName}}" placeholder="Ej.: Bodega Occidente" style="height: 44px; padding: 0 12px; border: 1px solid {{nameBorder}}; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D;">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 8px; flex: 2 1 280px;">
+            <span style="font-size: 14px; font-weight: 600;">Dirección</span>
+            <input type="text" value="{{cur.addr}}" onChange="{{setAddr}}" placeholder="Calle, número y ciudad" style="height: 44px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D;">
+          </label>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end;">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 14px; font-weight: 600;">Forma</span>
+            <div role="tablist" style="display: flex; gap: 4px; padding: 4px; border-radius: 12px; background: #E8E8E7;">
+              <sc-for list="{{shapes}}" as="t" hint-placeholder-count="2">
+                <button type="button" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" style="height: 36px; padding: 0 14px; border: none; border-radius: 9px; font-family: inherit; font-size: 14px; cursor: pointer; background: {{t.bg}}; color: {{t.fg}}; font-weight: {{t.w}};">{{t.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 14px; font-weight: 600;">Radio</span>
+            <div style="display: flex; align-items: center; border: 1px solid #C9C9C8; border-radius: 10px; overflow: hidden;">
+              <button type="button" onClick="{{dec}}" aria-label="Reducir radio 10 metros" style="width: 44px; height: 44px; border: none; background: #F5F5F4; font-family: inherit; font-size: 18px; color: #1E1F1D; cursor: pointer;">−</button>
+              <span style="min-width: 84px; text-align: center; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums;">{{cur.radius}} m</span>
+              <button type="button" onClick="{{inc}}" aria-label="Ampliar radio 10 metros" style="width: 44px; height: 44px; border: none; background: #F5F5F4; font-family: inherit; font-size: 18px; color: #1E1F1D; cursor: pointer;">+</button>
+            </div>
+          </div>
+          <button type="button" onClick="{{save}}" style="height: 44px; padding: 0 20px; border: none; border-radius: 10px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">{{saveLabel}}</button>
+          <sc-if value="{{isDraft}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{discard}}" style="height: 44px; padding: 0 14px; border: none; background: transparent; color: #AF1839; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Descartar</button></sc-if>
+        </div>
+        <sc-if value="{{msg}}" hint-placeholder-val="{{false}}">
+          <p style="margin: 0; font-size: 13px; font-weight: 600; color: {{msgColor}};">{{msg}}</p>
+        </sc-if>
+        <sc-if value="{{isPoly}}" hint-placeholder-val="{{false}}">
+          <p style="margin: 0; font-size: 13px; color: #3C3C3B;">Con polígono, haz clic en el mapa para marcar cada esquina del sitio. Úsalo en bodegas o sedes alargadas.</p>
+        </sc-if>
+      </section>
+    </div>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = {
+sel: 'norte', seq: 1, msg: '', msgOk: false,
+shape: 'circle',
+sites: {
+norte: { name: 'Almacén Norte', addr: '[DIRECCIÓN], Bogotá', radius: 120, ot: 3 },
+sur: { name: 'Bodega Sur', addr: '[DIRECCIÓN], Bogotá', radius: 80, ot: 2 },
+centro: { name: 'Oficina Centro', addr: '[DIRECCIÓN], Bogotá', radius: 60, ot: 2 },
+sede: { name: 'Sede Bogotá Norte', addr: '[DIRECCIÓN], Bogotá', radius: 150, ot: 0 }
+}
+};
+}
+renderVals() {
+const order = Object.keys(this.state.sites);
+const sites = this.state.sites;
+const cur = sites[this.state.sel];
+const scale = 0.6;
+const P = [[20, -30], [-40, 10], [60, 40], [-70, -50], [90, -10], [10, 70], [-110, 30], [130, 60]];
+let inside = 0;
+const vals = {};
+P.forEach((p, i) => {
+const m = Math.sqrt(p[0] * p[0] + p[1] * p[1]) / scale;
+const ok = m <= cur.radius;
+if (ok) inside += 1;
+vals['pc' + i] = ok ? '#1E7A46' : '#DA830B';
+});
+const out = P.length - inside;
+const setR = (v) => this.setState({ sites: Object.assign({}, sites, { [this.state.sel]: Object.assign({}, cur, { radius: Math.max(30, Math.min(500, v)) }) }) });
+const shape = this.state.shape;
+const st = this.state;
+const id0 = st.sel;
+const upd = (patch) => this.setState({ msg: '', sites: Object.assign({}, sites, { [id0]: Object.assign({}, cur, patch) }) });
+const n = (cur.name || '').trim();
+const dup = order.some((k) => k !== id0 && sites[k].name.trim().toLowerCase() === n.toLowerCase());
+return Object.assign(vals, {
+newSite: () => { const id = 'n' + st.seq; this.setState({ seq: st.seq + 1, sel: id, msg: '', sites: Object.assign({}, sites, { [id]: { name: '', addr: '', radius: 100, ot: 0, draft: 1 } }) }); },
+setName: (e) => upd({ name: e.target.value }),
+setAddr: (e) => upd({ addr: e.target.value }),
+nameBorder: cur.draft && !n ? '#AF1839' : '#C9C9C8',
+isDraft: !!cur.draft,
+saveLabel: cur.draft ? 'Crear sitio' : 'Guardar sitio',
+save: () => { if (n.length < 2) { this.setState({ msg: 'Escribe el nombre del sitio.', msgOk: false }); return; } if (dup) { this.setState({ msg: 'Ya existe un sitio con ese nombre.', msgOk: false }); return; } this.setState({ msg: cur.draft ? 'Sitio creado. Ya se puede elegir como sitio principal de una sede.' : 'Cambios guardados.', msgOk: true, sites: Object.assign({}, sites, { [id0]: Object.assign({}, cur, { name: n, draft: 0 }) }) }); },
+discard: () => { const rest = Object.assign({}, sites); delete rest[id0]; this.setState({ sites: rest, sel: Object.keys(rest)[0], msg: 'Se descartó el borrador.', msgOk: true }); },
+msg: st.msg, msgColor: st.msgOk ? '#1E6B3F' : '#8A4105',
+sites: order.map((id) => {
+const s = sites[id];
+const on = id === this.state.sel;
+return { name: (s.name || 'Sitio sin nombre') + (s.draft ? ' · borrador' : ''), addr: s.addr || 'Sin dirección', line: 'Círculo de ' + s.radius + ' m' + (s.ot ? ' · ' + s.ot + ' OT esta semana' : ' · sede'), sel: on ? 'true' : 'false', border: on ? '2px solid #AF1839' : '1px solid transparent', bg: on ? '#FBE9EE' : '#FFFFFF', pick: () => this.setState({ sel: id }) };
+}),
+cur: cur,
+r: Math.round(cur.radius * scale),
+mapLabel: 'Geocerca de ' + cur.name + ': círculo de ' + cur.radius + ' metros, ' + inside + ' de ' + P.length + ' puntos de hoy dentro',
+inside: inside + ' de ' + P.length,
+outside: String(out),
+outColor: out ? '#8A4105' : '#1E1F1D',
+dec: () => setR(cur.radius - 10),
+inc: () => setR(cur.radius + 10),
+isPoly: shape === 'poly',
+shapes: [{ id: 'circle', label: 'Círculo' }, { id: 'poly', label: 'Polígono' }].map((t) => {
+const on = t.id === shape;
+return Object.assign({}, t, { sel: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#1E1F1D' : '#3C3C3B', w: on ? '600' : '500', pick: () => this.setState({ shape: t.id }) });
+})
+});
+}
+}
+
+</script>
+</body>
+</html>

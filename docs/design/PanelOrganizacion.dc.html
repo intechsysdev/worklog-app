@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Organización</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.split4{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px}
+@media (max-width:1100px){.split4{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Organización</h1>
+        <p style="margin: 0; font-size: 15px; color: #5A5958;">Sedes, grupos y roles que usan los usuarios, los horarios y los permisos. Solo los administradores pueden cambiarlos.</p>
+      </div>
+      <button type="button" onClick="{{create}}" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border: none; border-radius: 12px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>{{createLabel}}</button>
+    </header>
+
+    <div role="tablist" style="display: inline-flex; align-self: flex-start; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 12px; background: #E8E8E7;">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+        <button type="button" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" style="height: 38px; padding: 0 18px; border: none; border-radius: 9px; font-family: inherit; font-size: 14px; cursor: pointer; background: {{t.bg}}; color: {{t.fg}}; font-weight: {{t.w}};">{{t.label}}</button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{showSedes}}" hint-placeholder-val="{{true}}">
+      <div class="split4" style="align-items: start;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px;">
+          <sc-for list="{{sedes}}" as="s" hint-placeholder-count="2">
+            <button type="button" onClick="{{s.pick}}" aria-pressed="{{s.sel}}" style="text-align: left; display: flex; flex-direction: column; gap: 8px; padding: 18px; border-radius: 16px; font-family: inherit; cursor: pointer; border: {{s.border}}; background: {{s.bg}};">
+              <span style="display: flex; justify-content: space-between; gap: 8px; width: 100%; align-items: center;"><span style="font-size: 17px; font-weight: 700; color: #1E1F1D;">{{s.name}}</span><span style="padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: {{s.chipBg}}; color: {{s.chipFg}};">{{s.status}}</span></span>
+              <span style="font-size: 13px; color: #3C3C3B;">{{s.city}} · {{s.cal}}</span>
+              <span style="font-size: 13px; color: #5A5958;">{{s.counts}}</span>
+            </button>
+          </sc-for>
+        </div>
+        <aside aria-label="Editar sede" style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+          <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">{{cs.title}}</h2>
+          <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Nombre</span><input type="text" value="{{cs.name}}" onChange="{{cs.setName}}" placeholder="Ej.: Medellín Centro" style="height: 44px; padding: 0 12px; border: 1px solid {{cs.nameBorder}}; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D;"></label>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <span id="pais-label" style="font-size: 14px; font-weight: 600;">País</span>
+            <sc-if value="{{cs.coHas}}" hint-placeholder-val="{{true}}">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; padding: 6px 8px 6px 12px; border: 1px solid #C9C9C8; border-radius: 10px; box-sizing: border-box;">
+                <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 600;">{{cs.coName}}</span><span style="font-size: 12px; color: #5A5958;">{{cs.coMeta}}</span></span>
+                <button type="button" onClick="{{cs.coClear}}" style="min-height: 36px; padding: 0 10px; border: none; background: transparent; color: #AF1839; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Cambiar</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{cs.coEmpty}}" hint-placeholder-val="{{false}}">
+              <input type="search" role="combobox" aria-labelledby="pais-label" aria-expanded="{{cs.coOpen}}" aria-autocomplete="list" value="{{cs.coQ}}" onChange="{{cs.coSetQ}}" disabled="{{cs.coDisabled}}" placeholder="Escribe para buscar, ej.: México" style="height: 44px; padding: 0 12px; border: 1px solid {{cs.coBorder}}; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D; background: {{cs.coBg}};">
+              <sc-if value="{{cs.coOpen}}" hint-placeholder-val="{{false}}">
+                <ul role="listbox" aria-labelledby="pais-label" style="list-style: none; margin: 0; padding: 4px; border: 1px solid #E2E2E1; border-radius: 10px; background: #FFFFFF; display: flex; flex-direction: column;">
+                  <sc-for list="{{cs.coOptions}}" as="c" hint-placeholder-count="4">
+                    <li role="option" aria-selected="false"><button type="button" onClick="{{c.pick}}" style="width: 100%; text-align: left; display: flex; justify-content: space-between; gap: 10px; min-height: 40px; padding: 8px 10px; border: none; border-radius: 8px; background: #FFFFFF; font-family: inherit; font-size: 14px; color: #1E1F1D; cursor: pointer;"><span><strong>{{c.name}}</strong> · {{c.sub}}</span><span style="font-size: 12px; color: #5A5958;">{{c.right}}</span></button></li>
+                  </sc-for>
+                </ul>
+              </sc-if>
+              <sc-if value="{{cs.coNone}}" hint-placeholder-val="{{false}}">
+                <span style="font-size: 13px; color: #8A4105;">{{cs.coNoneText}}</span>
+              </sc-if>
+              <span style="font-size: 12px; color: #5A5958;">Lista ISO 3166 de países.</span>
+            </sc-if>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <span id="ciudad-label" style="font-size: 14px; font-weight: 600;">Ciudad</span>
+            <sc-if value="{{cs.ciHas}}" hint-placeholder-val="{{true}}">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; padding: 6px 8px 6px 12px; border: 1px solid #C9C9C8; border-radius: 10px; box-sizing: border-box;">
+                <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 600;">{{cs.ciName}}</span><span style="font-size: 12px; color: #5A5958;">{{cs.ciMeta}}</span></span>
+                <button type="button" onClick="{{cs.ciClear}}" style="min-height: 36px; padding: 0 10px; border: none; background: transparent; color: #AF1839; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Cambiar</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{cs.ciEmpty}}" hint-placeholder-val="{{false}}">
+              <input type="search" role="combobox" aria-labelledby="ciudad-label" aria-expanded="{{cs.ciOpen}}" aria-autocomplete="list" value="{{cs.ciQ}}" onChange="{{cs.ciSetQ}}" disabled="{{cs.ciDisabled}}" placeholder="{{cs.ciPh}}" style="height: 44px; padding: 0 12px; border: 1px solid {{cs.ciBorder}}; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D; background: {{cs.ciBg}};">
+              <sc-if value="{{cs.ciOpen}}" hint-placeholder-val="{{false}}">
+                <ul role="listbox" aria-labelledby="ciudad-label" style="list-style: none; margin: 0; padding: 4px; border: 1px solid #E2E2E1; border-radius: 10px; background: #FFFFFF; display: flex; flex-direction: column;">
+                  <sc-for list="{{cs.ciOptions}}" as="c" hint-placeholder-count="4">
+                    <li role="option" aria-selected="false"><button type="button" onClick="{{c.pick}}" style="width: 100%; text-align: left; display: flex; justify-content: space-between; gap: 10px; min-height: 40px; padding: 8px 10px; border: none; border-radius: 8px; background: #FFFFFF; font-family: inherit; font-size: 14px; color: #1E1F1D; cursor: pointer;"><span><strong>{{c.name}}</strong> · {{c.sub}}</span><span style="font-size: 12px; color: #5A5958;">{{c.right}}</span></button></li>
+                  </sc-for>
+                </ul>
+              </sc-if>
+              <sc-if value="{{cs.ciNone}}" hint-placeholder-val="{{false}}">
+                <span style="font-size: 13px; color: #8A4105;">{{cs.ciNoneText}}</span>
+              </sc-if>
+              <span style="font-size: 12px; color: #5A5958;">Catálogo mundial de ciudades (GeoNames). Solo se puede elegir de la lista.</span>
+            </sc-if>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Sitio principal</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{cs.sites}}" as="o" hint-placeholder-count="4"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for><button type="button" onClick="{{cs.openSite}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: 1.5px dashed #AF1839; background: #FFFFFF; color: #AF1839;">+ Crear sitio</button></div>
+            <sc-if value="{{cs.adding}}" hint-placeholder-val="{{false}}">
+              <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: #F5F5F4;">
+                <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 13px; font-weight: 600;">Nombre del sitio</span><input type="text" value="{{cs.newSite}}" onChange="{{cs.setNewSite}}" placeholder="Ej.: Sede Medellín" style="height: 40px; padding: 0 10px; border: 1px solid #C9C9C8; border-radius: 8px; font-family: inherit; font-size: 14px; color: #1E1F1D;"></label>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;"><button type="button" onClick="{{cs.addSite}}" style="height: 40px; padding: 0 14px; border: none; border-radius: 8px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Crear y elegir</button><button type="button" onClick="{{cs.closeSite}}" style="height: 40px; padding: 0 12px; border: none; background: transparent; color: #3C3C3B; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;">Cancelar</button></div>
+                <span style="font-size: 12px; color: #5A5958;">Se crea con un círculo de 100 m. Ajusta la dirección y la geocerca en <a href="PanelSitios.dc.html">Sitios y geocercas</a>.</span>
+              </div>
+            </sc-if>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Horario por defecto</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{cs.tpls}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div></div>
+          <dl style="margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 12px; font-size: 13px;">
+            <dt style="color: #5A5958;">Festivos</dt><dd style="margin: 0; font-weight: 600;">{{cs.hol}}</dd>
+            <dt style="color: #5A5958;">Zona horaria</dt><dd style="margin: 0; font-weight: 600;">{{cs.tz}}</dd>
+            <dt style="color: #5A5958;">Reglas laborales</dt><dd style="margin: 0; font-weight: 600;">{{cs.law}}</dd>
+          </dl>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" onClick="{{cs.save}}" style="height: 44px; padding: 0 18px; border: none; border-radius: 10px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">{{cs.saveLabel}}</button>
+            <button type="button" onClick="{{cs.toggle}}" style="height: 44px; padding: 0 14px; border: none; background: transparent; color: #AF1839; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">{{cs.toggleLabel}}</button>
+          </div>
+          <sc-if value="{{cs.msg}}" hint-placeholder-val="{{false}}">
+            <p style="margin: 0; font-size: 13px; font-weight: 600; color: {{cs.msgColor}};">{{cs.msg}}</p>
+          </sc-if>
+        </aside>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{showGrupos}}" hint-placeholder-val="{{false}}">
+      <div class="split4" style="align-items: start;">
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; overflow-x: auto;">
+          <div class="tbl" style="min-width: 720px; font-size: 14px;">
+            <div class="thead" aria-hidden="true" style="display: grid; grid-template-columns: minmax(140px,1.2fr) 120px 130px minmax(170px,1.4fr) 80px; align-items: center; color: #5A5958; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
+              <div style="padding: 14px 20px; font-weight: 600;">Grupo</div><div style="padding: 14px 8px; font-weight: 600;">Sede</div><div style="padding: 14px 8px; font-weight: 600;">Supervisor</div><div style="padding: 14px 8px; font-weight: 600;">Grupo MobiControl</div><div style="padding: 14px 20px; font-weight: 600; text-align: right;">Personas</div>
+            </div>
+            <sc-for list="{{grupos}}" as="g" hint-placeholder-count="4">
+              <div style="border-top: 1px solid #EFEFEE;">
+                <button type="button" class="trow" onClick="{{g.pick}}" aria-pressed="{{g.sel}}" style="width: 100%; display: grid; grid-template-columns: minmax(140px,1.2fr) 120px 130px minmax(170px,1.4fr) 80px; align-items: center; text-align: left; padding: 0; border: none; font-family: inherit; font-size: 14px; color: #1E1F1D; cursor: pointer; background: {{g.bg}}; box-shadow: {{g.mark}}; opacity: {{g.op}};">
+                  <span style="padding: 12px 20px; font-weight: 600;">{{g.name}}</span>
+                  <span data-label="Sede" style="padding: 12px 8px; color: #3C3C3B;">{{g.sede}}</span>
+                  <span data-label="Supervisor" style="padding: 12px 8px; color: #3C3C3B;">{{g.boss}}</span>
+                  <span data-label="Grupo MobiControl" style="padding: 12px 8px; font-size: 13px; color: #3C3C3B;">{{g.mc}}</span>
+                  <span data-label="Personas" style="padding: 12px 20px; text-align: right; font-variant-numeric: tabular-nums;">{{g.people}}</span>
+                </button>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+        <aside aria-label="Editar grupo" style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+          <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">{{cg.title}}</h2>
+          <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Nombre</span><input type="text" value="{{cg.name}}" onChange="{{cg.setName}}" placeholder="Ej.: Soporte en sitio" style="height: 44px; padding: 0 12px; border: 1px solid {{cg.nameBorder}}; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D;"></label>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Sede</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{cg.sedes}}" as="o" hint-placeholder-count="2"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div></div>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Supervisor</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{cg.bosses}}" as="o" hint-placeholder-count="2"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div></div>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Horario por defecto</span><div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{cg.tpls}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.sel}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{o.border}}; background: {{o.bg}}; color: {{o.fg}};">{{o.label}}</button></sc-for></div></div>
+          <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Grupo MobiControl</span><input type="text" value="{{cg.mc}}" onChange="{{cg.setMc}}" placeholder="Ej.: INTECHSYS / Campo / Medellín" style="height: 44px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; font-family: inherit; font-size: 14px; color: #1E1F1D;"></label>
+          <p style="margin: 0; font-size: 12px; line-height: 17px; color: #5A5958;">Al invitar a alguien cuyo dispositivo está en este grupo de MobiControl, WorkLog sugiere este grupo.</p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" onClick="{{cg.save}}" style="height: 44px; padding: 0 18px; border: none; border-radius: 10px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">{{cg.saveLabel}}</button>
+            <button type="button" onClick="{{cg.toggle}}" style="height: 44px; padding: 0 14px; border: none; background: transparent; color: #AF1839; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">{{cg.toggleLabel}}</button>
+          </div>
+          <sc-if value="{{cg.msg}}" hint-placeholder-val="{{false}}">
+            <p style="margin: 0; font-size: 13px; font-weight: 600; color: {{cg.msgColor}};">{{cg.msg}}</p>
+          </sc-if>
+        </aside>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{showRoles}}" hint-placeholder-val="{{false}}">
+      <div class="split4" style="align-items: start;">
+        <ul style="list-style: none; margin: 0; padding: 8px; background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; display: flex; flex-direction: column; gap: 4px;">
+          <sc-for list="{{roles}}" as="r" hint-placeholder-count="5">
+            <li>
+              <button type="button" onClick="{{r.pick}}" aria-pressed="{{r.sel}}" style="width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 12px; font-family: inherit; cursor: pointer; box-sizing: border-box; border: {{r.border}}; background: {{r.bg}};">
+                <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 15px; font-weight: 600; color: #1E1F1D;">{{r.name}}</span><span style="font-size: 12px; color: #5A5958;">{{r.meta}}</span></span>
+                <span style="padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: {{r.chipBg}}; color: {{r.chipFg}};">{{r.kind}}</span>
+              </button>
+            </li>
+          </sc-for>
+        </ul>
+        <aside style="display: flex; flex-direction: column; gap: 16px;">
+          <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+            <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Permisos de {{cr.name}}</h2>
+            <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #3C3C3B;">
+              <sc-for list="{{cr.perms}}" as="p" hint-placeholder-count="4"><li>{{p.t}}</li></sc-for>
+            </ul>
+            <a href="PanelUsuarios.dc.html" style="align-self: flex-start; font-size: 14px; font-weight: 600; padding: 6px 0;">Editar permisos en Usuarios y roles</a>
+          </section>
+          <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+            <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Nuevo rol</h2>
+            <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 14px; font-weight: 600;">Nombre</span><input type="text" value="{{newName}}" onChange="{{setNewName}}" placeholder="Ej.: Coordinador de campo" style="height: 44px; padding: 0 12px; border: 1px solid #C9C9C8; border-radius: 10px; font-family: inherit; font-size: 15px; color: #1E1F1D;"></label>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 14px; font-weight: 600;">Copiar permisos de</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <sc-for list="{{bases}}" as="b" hint-placeholder-count="4">
+                  <button type="button" onClick="{{b.pick}}" aria-pressed="{{b.sel}}" style="min-height: 36px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{b.border}}; background: {{b.bg}}; color: {{b.fg}};">{{b.name}}</button>
+                </sc-for>
+              </div>
+            </div>
+            <button type="button" onClick="{{addRole}}" aria-disabled="{{addBlocked}}" style="height: 44px; border: none; border-radius: 10px; background: {{addBg}}; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Crear rol</button>
+          </section>
+        </aside>
+      </div>
+    </sc-if>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = {
+tab: 'sedes', sede: 'norte', grupo: 'ins', role: 'tec', base: 'sup', newName: '', msg: '', msgOk: false, seq: 1, adding: false, newSite: '', cityQ: '', coQ: '', siteList: ['Sede Bogotá Norte', 'Almacén Norte', 'Bodega Sur', 'Oficina Centro', 'Sin sitio'],
+sedes: [
+{ id: 'norte', name: 'Bogotá Norte', country: 'CO', city: 'co-bog', site: 'Sede Bogotá Norte', tpl: 'Campo L–V', people: 16, active: 1 },
+{ id: 'sur', name: 'Bogotá Sur', country: 'CO', city: 'co-bog', site: 'Bodega Sur', tpl: 'Campo L–V', people: 0, active: 1 }
+],
+grupos: [
+{ id: 'ins', name: 'Instalaciones', sede: 'norte', boss: 'Laura Gómez', tpl: 'Campo L–V', mc: 'INTECHSYS / Campo / Bogotá Norte', people: 7, active: 1 },
+{ id: 'man', name: 'Mantenimiento', sede: 'norte', boss: 'Laura Gómez', tpl: 'Campo L–V', mc: 'INTECHSYS / Campo / Bogotá Norte', people: 5, active: 1 },
+{ id: 'adm', name: 'Administrativo', sede: 'norte', boss: 'Marta Ríos', tpl: 'Administrativo L–V', mc: '', people: 4, active: 1 },
+{ id: 'csur', name: 'Campo Sur', sede: 'sur', boss: 'Sin asignar', tpl: 'Campo L–V', mc: 'INTECHSYS / Campo / Bogotá Sur', people: 0, active: 1 }
+],
+roles: [
+{ id: 'tec', name: 'Usuario móvil', base: 1, people: 12, perms: ['Ver su jornada, semana y solicitudes', 'Registrar jornada y actividades en la app'] },
+{ id: 'sup', name: 'Supervisor', base: 1, people: 1, perms: ['Ver el equipo hoy y sus horas', 'Ver puntos de ubicación del equipo', 'Aprobar ajustes, horas extra y cambios de turno', 'Cerrar el periodo de horas'] },
+{ id: 'rh', name: 'Recursos humanos', base: 1, people: 1, perms: ['Ver el equipo y sus horas', 'Registrar y aprobar novedades', 'Crear plantillas y asignar horarios', 'Invitar usuarios y cambiar roles'] },
+{ id: 'nom', name: 'Nómina', base: 1, people: 1, perms: ['Ver el equipo y sus horas', 'Cerrar el periodo de horas', 'Exportar horas para nómina'] },
+{ id: 'adm', name: 'Administrador', base: 1, fixed: 1, people: 1, perms: ['Todos los permisos; no se puede limitar'] }
+]
+};
+}
+renderVals() {
+const st = this.state;
+const tab = st.tab;
+const SITES = st.siteList;
+const COUNTRIES = [['CO', 'Colombia', 'Ley 2101 de 2021 y CST'], ['MX', 'México', 'Por configurar'], ['PE', 'Perú', 'Por configurar'], ['EC', 'Ecuador', 'Por configurar'], ['PA', 'Panamá', 'Por configurar'], ['CL', 'Chile', 'Por configurar'], ['AR', 'Argentina', 'Por configurar'], ['BR', 'Brasil', 'Por configurar'], ['US', 'Estados Unidos', 'Por configurar'], ['CA', 'Canadá', 'Por configurar'], ['ES', 'España', 'Por configurar'], ['GB', 'Reino Unido', 'Por configurar']];
+const CITIES = [['co-bog', 'Bogotá', 'Bogotá D.C.', 'CO', 'America/Bogota', '11001'], ['co-med', 'Medellín', 'Antioquia', 'CO', 'America/Bogota', '05001'], ['co-cal', 'Cali', 'Valle del Cauca', 'CO', 'America/Bogota', '76001'], ['co-baq', 'Barranquilla', 'Atlántico', 'CO', 'America/Bogota', '08001'], ['co-bga', 'Bucaramanga', 'Santander', 'CO', 'America/Bogota', '68001'], ['mx-cdmx', 'Ciudad de México', 'Ciudad de México', 'MX', 'America/Mexico_City'], ['mx-mty', 'Monterrey', 'Nuevo León', 'MX', 'America/Monterrey'], ['mx-gdl', 'Guadalajara', 'Jalisco', 'MX', 'America/Mexico_City'], ['pe-lim', 'Lima', 'Lima', 'PE', 'America/Lima'], ['ec-uio', 'Quito', 'Pichincha', 'EC', 'America/Guayaquil'], ['ec-gye', 'Guayaquil', 'Guayas', 'EC', 'America/Guayaquil'], ['pa-pty', 'Ciudad de Panamá', 'Panamá', 'PA', 'America/Panama'], ['cl-scl', 'Santiago', 'Región Metropolitana', 'CL', 'America/Santiago'], ['ar-bue', 'Buenos Aires', 'Ciudad de Buenos Aires', 'AR', 'America/Argentina/Buenos_Aires'], ['br-sao', 'São Paulo', 'São Paulo', 'BR', 'America/Sao_Paulo'], ['us-mia', 'Miami', 'Florida', 'US', 'America/New_York'], ['us-hou', 'Houston', 'Texas', 'US', 'America/Chicago'], ['us-lax', 'Los Ángeles', 'California', 'US', 'America/Los_Angeles'], ['us-nyc', 'Nueva York', 'Nueva York', 'US', 'America/New_York'], ['ca-yto', 'Toronto', 'Ontario', 'CA', 'America/Toronto'], ['es-mad', 'Madrid', 'Comunidad de Madrid', 'ES', 'Europe/Madrid'], ['es-bcn', 'Barcelona', 'Cataluña', 'ES', 'Europe/Madrid'], ['gb-lon', 'Londres', 'Inglaterra', 'GB', 'Europe/London']];
+const fold = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const ctry = (c) => COUNTRIES.find((x) => x[0] === c);
+const cityBy = (id) => CITIES.find((x) => x[0] === id);
+const TPLS = ['Campo L–V', 'Administrativo L–V', 'Media jornada L–S'];
+const BOSSES = ['Laura Gómez', 'Marta Ríos', 'Sin asignar'];
+const on = (x) => ({ bg: x ? '#FFFFFF' : 'transparent', fg: x ? '#1E1F1D' : '#3C3C3B', w: x ? '600' : '500' });
+const pickCard = (x) => ({ sel: x ? 'true' : 'false', border: x ? '2px solid #AF1839' : '1px solid #E2E2E1', bg: x ? '#FBE9EE' : '#FFFFFF' });
+const chip = (x) => ({ sel: x ? 'true' : 'false', bg: x ? '#AF1839' : '#FFFFFF', fg: x ? '#FFFFFF' : '#3C3C3B', border: x ? '1px solid #AF1839' : '1px solid #C9C9C8' });
+const say = (m, ok) => ({ msg: m, msgOk: !!ok });
+const cs = st.sedes.find((s) => s.id === st.sede) || st.sedes[0];
+const cg = st.grupos.find((g) => g.id === st.grupo) || st.grupos[0];
+const cr = st.roles.find((r) => r.id === st.role) || st.roles[0];
+const updS = (patch) => this.setState(Object.assign({ sedes: st.sedes.map((x) => x.id === cs.id ? Object.assign({}, x, patch) : x) }, say('')));
+const updG = (patch) => this.setState(Object.assign({ grupos: st.grupos.map((x) => x.id === cg.id ? Object.assign({}, x, patch) : x) }, say('')));
+const sedeName = (id) => { const s = st.sedes.find((x) => x.id === id); return s ? (s.name || 'Sede sin nombre') : '—'; };
+const dupe = (list, item) => list.some((x) => x.id !== item.id && x.name.trim().toLowerCase() === item.name.trim().toLowerCase());
+const saveFor = (list, key, item, label) => () => {
+const n = item.name.trim();
+if (n.length < 2) { this.setState(say('Escribe el nombre ' + label + '.')); return; }
+if (key === 'sedes' && !ctry(item.country)) { this.setState(say('Elige el país de la lista.')); return; }
+if (key === 'sedes' && !cityBy(item.city)) { this.setState(say('Elige la ciudad de la lista.')); return; }
+if (dupe(list, item)) { this.setState(say('Ya existe ' + label.replace('de la', 'una').replace('del', 'un') + ' con ese nombre.')); return; }
+this.setState(Object.assign({ [key]: list.map((x) => x.id === item.id ? Object.assign({}, x, { name: n, draft: 0 }) : x) }, say(item.draft ? 'Creado. Ya aparece al invitar usuarios y asignar horarios.' : 'Cambios guardados.', true)));
+};
+const toggleIn = (list, key, item, label) => () => {
+if (item.draft) { const rest = list.filter((x) => x.id !== item.id); this.setState(Object.assign({ [key]: rest, [key === 'sedes' ? 'sede' : 'grupo']: rest[0].id }, say('Se descartó el borrador.', true))); return; }
+if (item.active && item.people > 0) { this.setState(say(label + ' tiene ' + item.people + ' personas asignadas. Muévelas antes de desactivarlo.')); return; }
+this.setState(Object.assign({ [key]: list.map((x) => x.id === item.id ? Object.assign({}, x, { active: x.active ? 0 : 1 }) : x) }, say(item.active ? 'Desactivado.' : 'Activado.', true)));
+};
+const status = (x) => x.draft ? ['Borrador', '#FEF3DA', '#8A4105'] : (x.active ? ['Activa', '#E6F4EC', '#1E6B3F'] : ['Inactiva', '#E8E8E7', '#3C3C3B']);
+const name = st.newName.trim();
+const addOk = name.length > 2 && !st.roles.some((r) => r.name.toLowerCase() === name.toLowerCase());
+const base = st.roles.find((r) => r.id === st.base) || st.roles[1];
+const msgColor = st.msgOk ? '#1E6B3F' : '#8A4105';
+return {
+tabs: [{ id: 'sedes', label: 'Sedes' }, { id: 'grupos', label: 'Grupos' }, { id: 'roles', label: 'Roles' }].map((t) => Object.assign({}, t, on(t.id === tab), { sel: t.id === tab ? 'true' : 'false', pick: () => this.setState(Object.assign({ tab: t.id }, say(''))) })),
+showSedes: tab === 'sedes', showGrupos: tab === 'grupos', showRoles: tab === 'roles',
+createLabel: tab === 'sedes' ? 'Nueva sede' : (tab === 'grupos' ? 'Nuevo grupo' : 'Nuevo rol'),
+create: () => {
+const id = 'n' + st.seq;
+if (tab === 'sedes') this.setState(Object.assign({ seq: st.seq + 1, sede: id, sedes: st.sedes.concat([{ id: id, name: '', country: '', city: '', site: 'Sin sitio', tpl: 'Campo L–V', people: 0, active: 1, draft: 1 }]) }, say('')));
+else if (tab === 'grupos') this.setState(Object.assign({ seq: st.seq + 1, grupo: id, grupos: st.grupos.concat([{ id: id, name: '', sede: st.sedes[0].id, boss: 'Sin asignar', tpl: 'Campo L–V', mc: '', people: 0, active: 1, draft: 1 }]) }, say('')));
+},
+sedes: st.sedes.map((s) => { const k = status(s); return Object.assign({}, s, pickCard(s.id === cs.id), {
+name: s.name || 'Sede sin nombre',
+city: cityBy(s.city) ? cityBy(s.city)[1] + ', ' + ctry(cityBy(s.city)[3])[1] : 'Sin ciudad',
+cal: ctry(s.country) ? cityBy(s.city) ? cityBy(s.city)[4] : 'Sin zona horaria' : 'Sin país',
+counts: st.grupos.filter((g) => g.sede === s.id).length + ' grupos · ' + s.people + ' personas',
+status: k[0], chipBg: k[1], chipFg: k[2],
+pick: () => this.setState(Object.assign({ sede: s.id }, say('')))
+}); }),
+cs: {
+title: cs.draft ? 'Nueva sede' : 'Sede',
+name: cs.name, city: cs.city,
+nameBorder: cs.draft && !cs.name.trim() ? '#AF1839' : '#C9C9C8',
+setName: (e) => updS({ name: e.target.value }),
+coHas: !!ctry(cs.country), coEmpty: !ctry(cs.country),
+coName: ctry(cs.country) ? ctry(cs.country)[1] : '', coMeta: ctry(cs.country) ? 'Código ISO ' + cs.country : '',
+coClear: () => { this.setState({ coQ: '', cityQ: '', msg: '', sedes: st.sedes.map((x) => x.id === cs.id ? Object.assign({}, x, { country: '', city: '' }) : x) }); },
+coQ: st.coQ, coSetQ: (e) => this.setState({ coQ: e.target.value }), coDisabled: false, coBg: '#FFFFFF',
+coBorder: cs.draft && !ctry(cs.country) ? '#AF1839' : '#C9C9C8',
+coOpen: st.coQ.trim().length >= 1 && COUNTRIES.some((x) => fold(x[1]).indexOf(fold(st.coQ.trim())) >= 0),
+coNone: st.coQ.trim().length >= 2 && !COUNTRIES.some((x) => fold(x[1]).indexOf(fold(st.coQ.trim())) >= 0),
+coNoneText: 'No encontramos ese país. Revisa cómo está escrito.',
+coOptions: COUNTRIES.filter((x) => st.coQ.trim().length >= 1 && fold(x[1]).indexOf(fold(st.coQ.trim())) >= 0).slice(0, 6).map((x) => ({ name: x[1], sub: x[0], right: '', pick: () => this.setState({ coQ: '', msg: '', sedes: st.sedes.map((y) => y.id === cs.id ? Object.assign({}, y, { country: x[0], city: '' }) : y) }) })),
+ciHas: !!cityBy(cs.city), ciEmpty: !cityBy(cs.city),
+ciName: cityBy(cs.city) ? cityBy(cs.city)[1] : '',
+ciMeta: cityBy(cs.city) ? cityBy(cs.city)[2] + ', ' + ctry(cityBy(cs.city)[3])[1] + (cityBy(cs.city)[5] ? ' · código DANE ' + cityBy(cs.city)[5] : '') : '',
+ciClear: () => { updS({ city: '' }); this.setState({ cityQ: '' }); },
+ciQ: st.cityQ, ciSetQ: (e) => this.setState({ cityQ: e.target.value }),
+ciDisabled: !ctry(cs.country), ciBg: ctry(cs.country) ? '#FFFFFF' : '#F5F5F4',
+ciPh: ctry(cs.country) ? 'Escribe para buscar en ' + ctry(cs.country)[1] : 'Primero elige el país',
+ciBorder: cs.draft && ctry(cs.country) && !cityBy(cs.city) ? '#AF1839' : '#C9C9C8',
+ciOpen: st.cityQ.trim().length >= 2 && CITIES.some((x) => x[3] === cs.country && fold(x[1]).indexOf(fold(st.cityQ.trim())) >= 0),
+ciNone: st.cityQ.trim().length >= 2 && !CITIES.some((x) => x[3] === cs.country && fold(x[1]).indexOf(fold(st.cityQ.trim())) >= 0),
+ciNoneText: 'No encontramos esa ciudad en ' + (ctry(cs.country) ? ctry(cs.country)[1] : 'el país') + '. Revisa cómo está escrita.',
+ciOptions: CITIES.filter((x) => st.cityQ.trim().length >= 2 && x[3] === cs.country && fold(x[1]).indexOf(fold(st.cityQ.trim())) >= 0).slice(0, 6).map((x) => ({ name: x[1], sub: x[2], right: x[4], pick: () => this.setState({ cityQ: '', msg: '', sedes: st.sedes.map((y) => y.id === cs.id ? Object.assign({}, y, { city: x[0] }) : y) }) })),
+tz: cityBy(cs.city) ? cityBy(cs.city)[4] + ' · se toma de la ciudad' : 'Se toma de la ciudad',
+hol: ctry(cs.country) ? 'Festivos de ' + ctry(cs.country)[1] : 'Se toma del país',
+law: ctry(cs.country) ? ctry(cs.country)[2] : 'Se toma del país',
+sites: SITES.map((l) => Object.assign({ label: l }, chip(l === cs.site), { pick: () => updS({ site: l }) })),
+tpls: TPLS.map((l) => Object.assign({ label: l }, chip(l === cs.tpl), { pick: () => updS({ tpl: l }) })),
+adding: st.adding, newSite: st.newSite,
+openSite: () => this.setState({ adding: true, newSite: '' }),
+closeSite: () => this.setState({ adding: false, newSite: '' }),
+setNewSite: (e) => this.setState({ newSite: e.target.value }),
+addSite: () => { const v = st.newSite.trim(); if (v.length < 2) { this.setState(say('Escribe el nombre del sitio.')); return; } if (SITES.some((x) => x.toLowerCase() === v.toLowerCase())) { this.setState(say('Ese sitio ya existe; elígelo de la lista.')); return; } this.setState(Object.assign({ adding: false, newSite: '', siteList: SITES.slice(0, -1).concat([v, 'Sin sitio']), sedes: st.sedes.map((x) => x.id === cs.id ? Object.assign({}, x, { site: v }) : x) }, say('Sitio «' + v + '» creado y elegido.', true))); },
+saveLabel: cs.draft ? 'Crear sede' : 'Guardar',
+save: saveFor(st.sedes, 'sedes', cs, 'de la sede'),
+toggleLabel: cs.draft ? 'Descartar' : (cs.active ? 'Desactivar sede' : 'Activar sede'),
+toggle: toggleIn(st.sedes, 'sedes', cs, 'La sede'),
+msg: tab === 'sedes' ? st.msg : '', msgColor: msgColor
+},
+grupos: st.grupos.map((g) => {
+const x = g.id === cg.id;
+return { name: (g.name || 'Grupo sin nombre') + (g.draft ? ' · borrador' : ''), sede: sedeName(g.sede), boss: g.boss, mc: g.mc || '— (solo panel web)', people: String(g.people), sel: x ? 'true' : 'false', bg: x ? '#FBF7F8' : '#FFFFFF', mark: x ? 'inset 3px 0 0 #AF1839' : 'none', op: g.active ? '1' : '0.55', pick: () => this.setState(Object.assign({ grupo: g.id }, say(''))) };
+}),
+cg: {
+title: cg.draft ? 'Nuevo grupo' : 'Grupo',
+name: cg.name, mc: cg.mc,
+nameBorder: cg.draft && !cg.name.trim() ? '#AF1839' : '#C9C9C8',
+setName: (e) => updG({ name: e.target.value }),
+setMc: (e) => updG({ mc: e.target.value }),
+sedes: st.sedes.filter((s) => s.active && !s.draft).map((s) => Object.assign({ label: s.name }, chip(s.id === cg.sede), { pick: () => updG({ sede: s.id }) })),
+bosses: BOSSES.map((l) => Object.assign({ label: l }, chip(l === cg.boss), { pick: () => updG({ boss: l }) })),
+tpls: TPLS.map((l) => Object.assign({ label: l }, chip(l === cg.tpl), { pick: () => updG({ tpl: l }) })),
+saveLabel: cg.draft ? 'Crear grupo' : 'Guardar',
+save: saveFor(st.grupos, 'grupos', cg, 'del grupo'),
+toggleLabel: cg.draft ? 'Descartar' : (cg.active ? 'Desactivar grupo' : 'Activar grupo'),
+toggle: toggleIn(st.grupos, 'grupos', cg, 'El grupo'),
+msg: tab === 'grupos' ? st.msg : '', msgColor: msgColor
+},
+roles: st.roles.map((r) => Object.assign({}, r, pickCard(r.id === cr.id), {
+meta: r.people + (r.people === 1 ? ' persona' : ' personas') + ' · ' + r.perms.length + (r.fixed ? '' : ' permisos'),
+kind: r.fixed ? 'Fijo' : (r.base ? 'Base' : 'Personalizado'),
+chipBg: r.base ? '#E8E8E7' : '#FBE9EE', chipFg: r.base ? '#3C3C3B' : '#751326',
+pick: () => this.setState({ role: r.id })
+})),
+cr: { name: cr.name, perms: cr.perms.map((t) => ({ t: t })) },
+newName: st.newName,
+setNewName: (e) => this.setState({ newName: e.target.value }),
+bases: st.roles.filter((r) => !r.fixed).map((r) => Object.assign({ name: r.name }, chip(r.id === base.id), { pick: () => this.setState({ base: r.id }) })),
+addBlocked: addOk ? 'false' : 'true',
+addBg: addOk ? '#AF1839' : '#5A5958',
+addRole: () => { if (!addOk) return; const id = 'r' + st.seq; this.setState({ seq: st.seq + 1, role: id, newName: '', roles: st.roles.concat([{ id: id, name: name, base: 0, people: 0, perms: base.perms.slice() }]) }); }
+};
+}
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Panel · Usuarios y roles</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+.shell{display:grid;grid-template-columns:288px minmax(0,1fr)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.split3{display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px}
+@media (max-width:900px){.shell{grid-template-columns:minmax(0,1fr)}.split,.split3{grid-template-columns:minmax(0,1fr)}}
+.split4{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px}
+@media (max-width:1100px){.split4{grid-template-columns:minmax(0,1fr)}}
+.navtoggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.menubtn{display:none}
+.calwd{display:none}
+@media (max-width:900px){.side{padding:12px 16px!important;gap:12px!important;border-right:none!important;border-bottom:1px solid #E2E2E1}.menubtn{display:flex!important}.sidenav{display:none!important}.navtoggle:checked ~ .sidenav{display:flex!important}.navtoggle:focus-visible ~ .sidenav{outline:2px solid #AF1839}.main{padding:20px 16px!important;gap:18px!important}.main h1{font-size:24px!important}}
+@media (max-width:640px){.tbl{min-width:0!important}.thead{display:none!important}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;padding:8px 4px;row-gap:2px}.trow>*{text-align:left!important;padding-top:6px!important;padding-bottom:6px!important}.trow>*:first-child{grid-column:1/-1}[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:#5A5958;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}.cal{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.calhead,.calout{display:none!important}.calwd{display:inline!important}}
+</style>
+</helmet>
+<div class="shell" style="min-height: 1000px; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif;">
+  <aside class="side" style="background: #FFFFFF; border-right: 1px solid #E2E2E1; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px; width: 100%;">
+      <div role="img" aria-label="INTECHSYS ONE" style="display: flex; align-items: center; gap: 6px;">
+        <img src="/_blob/b50bb62f27c6a12db166982603d31a4b" alt="" style="width: 30px; height: 31px; display: block;">
+        <span aria-hidden="true" style="font-size: 27px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #E51E49;">one</span>
+      </div>
+      <span aria-hidden="true" style="width: 1px; height: 28px; background: #E2E2E1;"></span>
+      <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 15px; font-weight: 700; color: #1E1F1D;">WorkLog</span><span style="font-size: 12px; color: #5A5958;">Bitácora de actividades</span></span>
+      <label for="navtoggle" class="menubtn" aria-label="Abrir o cerrar el menú" style="margin-left: auto; width: 44px; height: 44px; border-radius: 10px; border: 1px solid #C9C9C8; align-items: center; justify-content: center; cursor: pointer; color: #1E1F1D;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+    </div>
+    <input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Mostrar menú">
+    <nav aria-label="Panel" class="sidenav" style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Operación</span>
+        <a href="PanelEquipo.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Equipo hoy</a>
+        <a href="PanelAprobaciones.dc.html" style="display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Aprobaciones<span style="padding: 1px 8px; border-radius: 999px; background: #AF1839; color: #FFFFFF; font-size: 12px; font-weight: 600;">3</span></a>
+        <a href="PanelHoras.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Horas del equipo</a>
+        <a href="PanelCierre.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Cierre de periodo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #5A5958; text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 6px;">Configuración</span>
+        <a href="PanelOrganizacion.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Organización</a>
+        <a href="PanelPlantillas.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Plantillas de horario</a>
+        <a href="PanelAsignaciones.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Asignaciones</a>
+        <a href="PanelNovedades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Novedades</a>
+        <a href="PanelParametros.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Parámetros</a>
+        <a href="PanelActividades.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Actividades</a>
+        <a href="PanelSitios.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Sitios y geocercas</a>
+        <a href="PanelUsuarios.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; background: #FBE9EE; color: #AF1839; font-size: 14px; font-weight: 600; text-decoration: none;">Usuarios y roles</a>
+        <a href="PanelDispositivos.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Control de dispositivos</a>
+        <a href="PanelAuditoria.dc.html" style="display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #3C3C3B; font-size: 14px; font-weight: 500; text-decoration: none;">Auditoría</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main" style="min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px;">
+    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Usuarios y roles</h1>
+        <p style="margin: 0; font-size: 15px; color: #5A5958;">Quién entra a WorkLog, qué puede hacer y qué dispositivo de SOTI MobiControl tiene asignado.</p>
+      </div>
+      <a href="PanelInvitar.dc.html" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 12px; background: #AF1839; color: #FFFFFF; font-size: 14px; font-weight: 600; text-decoration: none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Invitar usuario</a>
+    </header>
+
+    <div role="tablist" style="display: inline-flex; align-self: flex-start; gap: 4px; padding: 4px; border-radius: 12px; background: #E8E8E7;">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="2">
+        <button type="button" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" style="height: 38px; padding: 0 18px; border: none; border-radius: 9px; font-family: inherit; font-size: 14px; cursor: pointer; background: {{t.bg}}; color: {{t.fg}}; font-weight: {{t.w}};">{{t.label}}</button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{showUsers}}" hint-placeholder-val="{{true}}">
+      <div class="split4" style="align-items: start;">
+        <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; overflow-x: auto;">
+          <div class="tbl" style="min-width: 680px; font-size: 14px;">
+            <div class="thead" aria-hidden="true" style="display: grid; grid-template-columns: minmax(160px,1.4fr) 130px minmax(120px,1fr) minmax(120px,1fr) 100px; align-items: center; color: #5A5958; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
+              <div style="padding: 14px 20px; font-weight: 600;">Nombre</div><div style="padding: 14px 8px; font-weight: 600;">Rol</div><div style="padding: 14px 8px; font-weight: 600;">Sede</div><div style="padding: 14px 8px; font-weight: 600;">Grupo</div><div style="padding: 14px 20px; font-weight: 600;">Estado</div>
+            </div>
+            <sc-for list="{{users}}" as="u" hint-placeholder-count="9">
+              <div style="border-top: 1px solid #EFEFEE;">
+                <button type="button" class="trow" onClick="{{u.pick}}" aria-pressed="{{u.sel}}" style="width: 100%; display: grid; grid-template-columns: minmax(160px,1.4fr) 130px minmax(120px,1fr) minmax(120px,1fr) 100px; align-items: center; text-align: left; padding: 0; border: none; font-family: inherit; font-size: 14px; color: #1E1F1D; cursor: pointer; background: {{u.bg}}; box-shadow: {{u.mark}};">
+                  <span style="padding: 12px 20px; display: flex; flex-direction: column; gap: 2px;"><span style="font-weight: 600;">{{u.name}}</span><span style="font-size: 12px; color: #5A5958;">{{u.email}}</span></span>
+                  <span style="padding: 12px 8px;">{{u.roleLabel}}</span>
+                  <span style="padding: 12px 8px; color: #3C3C3B;">{{u.sede}}</span>
+                  <span style="padding: 12px 8px; color: #3C3C3B;">{{u.group}}</span>
+                  <span style="padding: 12px 20px;"><span style="padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: {{u.sBg}}; color: {{u.sFg}};">{{u.status}}</span></span>
+                </button>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <aside aria-label="Editar usuario" style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 24px; background: #AF1839; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700;">{{c.initials}}</span>
+            <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 17px; font-weight: 700;">{{c.name}}</span><span style="font-size: 13px; color: #5A5958;">{{c.email}}</span></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 14px; font-weight: 600;">Rol</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <sc-for list="{{c.roles}}" as="r" hint-placeholder-count="5">
+                <button type="button" onClick="{{r.pick}}" aria-pressed="{{r.sel}}" style="min-height: 36px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: {{r.border}}; background: {{r.bg}}; color: {{r.fg}};">{{r.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <dl style="margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 12px; font-size: 13px;">
+            <dt style="color: #5A5958;">Sede</dt><dd style="margin: 0; font-weight: 600;">{{c.sede}}</dd>
+            <dt style="color: #5A5958;">Grupo</dt><dd style="margin: 0; font-weight: 600;">{{c.group}}</dd>
+            <dt style="color: #5A5958;">Supervisor</dt><dd style="margin: 0; font-weight: 600;">{{c.boss}}</dd>
+            <dt style="color: #5A5958;">Horario</dt><dd style="margin: 0; font-weight: 600;">{{c.tpl}}</dd>
+            <dt style="color: #5A5958;">Dispositivo</dt><dd style="margin: 0; font-weight: 600;">{{c.device}}</dd>
+            <dt style="color: #5A5958;">Grupo MobiControl</dt><dd style="margin: 0; font-weight: 600;">{{c.mc}}</dd>
+            <dt style="color: #5A5958;">Política de datos</dt><dd style="margin: 0; font-weight: 600;">{{c.policy}}</dd>
+          </dl>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <button type="button" style="height: 44px; padding: 0 18px; border: none; border-radius: 10px; background: #AF1839; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Guardar</button>
+            <button type="button" onClick="{{c.revoke}}" style="height: 44px; padding: 0 14px; border: 1px solid #C9C9C8; border-radius: 10px; background: #FFFFFF; color: #1E1F1D; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Desvincular dispositivo</button>
+            <button type="button" onClick="{{c.toggleActive}}" style="height: 44px; padding: 0 14px; border: none; background: transparent; color: #AF1839; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">{{c.activeLabel}}</button>
+          </div>
+          <p style="margin: 0; font-size: 12px; line-height: 17px; color: #5A5958;">Los dispositivos, su grupo y su estado vienen de SOTI MobiControl. Desvincular cierra la sesión de WorkLog en ese dispositivo; lo que estaba en su cola sin sincronizar se pierde.</p>
+        </aside>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{showRoles}}" hint-placeholder-val="{{false}}">
+      <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; overflow-x: auto;">
+        <div style="min-width: 820px; font-size: 14px;">
+          <div aria-hidden="true" style="display: grid; grid-template-columns: minmax(260px,2fr) repeat(5, minmax(100px,1fr)); align-items: center; color: #5A5958; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
+            <div style="padding: 14px 20px; font-weight: 600;">Permiso</div>
+            <sc-for list="{{roleCols}}" as="h" hint-placeholder-count="5"><div style="padding: 14px 8px; font-weight: 600; text-align: center;">{{h.label}}</div></sc-for>
+          </div>
+          <sc-for list="{{perms}}" as="p" hint-placeholder-count="10">
+            <div style="display: grid; grid-template-columns: minmax(260px,2fr) repeat(5, minmax(100px,1fr)); align-items: center; border-top: 1px solid #EFEFEE;">
+              <div style="padding: 12px 20px; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 11px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.08em;">{{p.group}}</span><span style="font-weight: 600;">{{p.name}}</span></div>
+              <sc-for list="{{p.cells}}" as="x" hint-placeholder-count="5">
+                <div style="padding: 10px 8px; display: flex; justify-content: center;">
+                  <button type="button" onClick="{{x.toggle}}" aria-pressed="{{x.on}}" aria-label="{{x.aria}}" style="width: 40px; height: 32px; border-radius: 8px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; border: {{x.border}}; background: {{x.bg}}; color: {{x.fg}};">{{x.mark}}</button>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+          <p style="margin: 0; padding: 12px 20px; border-top: 1px solid #E2E2E1; font-size: 12px; color: #5A5958;">El administrador tiene todos los permisos y no se puede limitar. Cada cambio de permisos queda en la auditoría.</p>
+        </div>
+      </section>
+    </sc-if>
+  </main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = {
+tab: 'users',
+sel: 'am',
+users: [
+{ id: 'am', name: 'Andrés Mora', email: 'amora@[DOMINIO]', role: 'tec', sede: 'Bogotá Norte', group: 'Instalaciones', boss: 'Laura Gómez', tpl: 'Campo L–V', device: '[MODELO] · en línea · batería 78%', mc: 'INTECHSYS / Campo / Bogotá Norte', policy: 'v1.0 aceptada el 29 oct', active: 1 },
+{ id: 'dr', name: 'Diana Ruiz', email: 'druiz@[DOMINIO]', role: 'tec', sede: 'Bogotá Norte', group: 'Instalaciones', boss: 'Laura Gómez', tpl: 'Campo L–V', device: '[MODELO] · en línea · batería 64%', mc: 'INTECHSYS / Campo / Bogotá Norte', policy: 'v1.0 aceptada el 26 oct', active: 1 },
+{ id: 'hd', name: 'Hernán Díaz', email: 'hdiaz@[DOMINIO]', role: 'tec', sede: 'Bogotá Norte', group: 'Mantenimiento', boss: 'Laura Gómez', tpl: 'Campo L–V', device: '[MODELO] · en línea · batería 41%', mc: 'INTECHSYS / Campo / Bogotá Norte', policy: 'v1.0 aceptada el 26 oct', active: 1 },
+{ id: 'lo', name: 'Luis Ortega', email: 'lortega@[DOMINIO]', role: 'tec', sede: 'Bogotá Norte', group: 'Mantenimiento', boss: 'Laura Gómez', tpl: 'Campo L–V', device: '[MODELO] · sin conexión desde ayer 16:02', mc: 'INTECHSYS / Campo / Bogotá Norte', policy: 'v1.0 aceptada el 26 oct', active: 1 },
+{ id: 'cv', name: 'Camila Vargas', email: 'cvargas@[DOMINIO]', role: 'tec', sede: 'Bogotá Norte', group: 'Instalaciones', boss: 'Laura Gómez', tpl: 'Campo L–V', device: '[MODELO] · apagado (vacaciones)', mc: 'INTECHSYS / Campo / Bogotá Norte', policy: 'v1.0 aceptada el 23 oct', active: 1 },
+{ id: 'lg', name: 'Laura Gómez', email: 'lgomez@[DOMINIO]', role: 'sup', sede: 'Bogotá Norte', group: '—', boss: 'Marta Ríos', tpl: 'Administrativo L–V', device: 'Solo panel web', mc: '—', policy: 'v1.0 aceptada el 23 oct', active: 1 },
+{ id: 'mr', name: 'Marta Ríos', email: 'mrios@[DOMINIO]', role: 'adm', sede: 'Todas', group: '—', boss: '—', tpl: 'Administrativo L–V', device: 'Solo panel web', mc: '—', policy: 'v1.0 aceptada el 23 oct', active: 1 },
+{ id: 'pc', name: 'Paola Cruz', email: 'pcruz@[DOMINIO]', role: 'rh', sede: 'Todas', group: '—', boss: 'Marta Ríos', tpl: 'Administrativo L–V', device: 'Solo panel web', mc: '—', policy: 'v1.0 aceptada el 23 oct', active: 1 },
+{ id: 'jm', name: 'Julián Mesa', email: 'jmesa@[DOMINIO]', role: 'nom', sede: 'Todas', group: '—', boss: 'Marta Ríos', tpl: 'Administrativo L–V', device: 'Solo panel web', mc: '—', policy: 'Pendiente', active: 0, invited: 1 }
+],
+grant: {
+ver_propio: [1, 1, 1, 1, 1], registrar: [1, 0, 0, 0, 1], ver_equipo: [0, 1, 1, 1, 1], ver_ubicacion: [0, 1, 0, 0, 1], aprobar: [0, 1, 0, 0, 1],
+novedades: [0, 0, 1, 0, 1], cerrar: [0, 1, 0, 1, 1], exportar: [0, 0, 0, 1, 1], horarios: [0, 0, 1, 0, 1], parametros: [0, 0, 0, 0, 1], usuarios: [0, 0, 1, 0, 1], auditoria: [0, 0, 0, 0, 1]
+}
+};
+}
+renderVals() {
+const R = [{ id: 'tec', label: 'Usuario móvil' }, { id: 'sup', label: 'Supervisor' }, { id: 'rh', label: 'Recursos humanos' }, { id: 'nom', label: 'Nómina' }, { id: 'adm', label: 'Administrador' }];
+const RL = {}; R.forEach((r) => { RL[r.id] = r.label; });
+const users = this.state.users;
+const cur = users.find((u) => u.id === this.state.sel) || users[0];
+const upd = (patch) => this.setState({ users: users.map((u) => u.id === cur.id ? Object.assign({}, u, patch) : u) });
+const chip = (on) => ({ bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#1E1F1D' : '#3C3C3B', w: on ? '600' : '500' });
+const tab = this.state.tab;
+const P = [
+['ver_propio', 'Mi información', 'Ver su propia jornada, semana y solicitudes'],
+['registrar', 'Mi información', 'Registrar jornada y actividades en la app'],
+['ver_equipo', 'Equipo', 'Ver el equipo hoy y sus horas'],
+['ver_ubicacion', 'Equipo', 'Ver puntos de ubicación del equipo'],
+['aprobar', 'Equipo', 'Aprobar ajustes, horas extra y cambios de turno'],
+['novedades', 'Equipo', 'Registrar y aprobar novedades'],
+['cerrar', 'Periodo', 'Cerrar el periodo de horas'],
+['exportar', 'Periodo', 'Exportar horas para nómina'],
+['horarios', 'Configuración', 'Crear plantillas y asignar horarios'],
+['parametros', 'Configuración', 'Cambiar parámetros, actividades y sitios'],
+['usuarios', 'Configuración', 'Invitar usuarios y cambiar roles'],
+['auditoria', 'Configuración', 'Consultar la auditoría']
+];
+const grant = this.state.grant;
+return {
+tabs: [{ id: 'users', label: 'Usuarios' }, { id: 'roles', label: 'Roles y permisos' }].map((t) => Object.assign({}, t, chip(t.id === tab), { sel: t.id === tab ? 'true' : 'false', pick: () => this.setState({ tab: t.id }) })),
+showUsers: tab === 'users',
+showRoles: tab === 'roles',
+users: users.map((u) => {
+const on = u.id === cur.id;
+const st = u.invited ? ['Invitado', '#FEF3DA', '#8A4105'] : (u.active ? ['Activo', '#E6F4EC', '#1E6B3F'] : ['Inactivo', '#E8E8E7', '#3C3C3B']);
+return Object.assign({}, u, { roleLabel: RL[u.role], status: st[0], sBg: st[1], sFg: st[2], sel: on ? 'true' : 'false', bg: on ? '#FBF7F8' : '#FFFFFF', mark: on ? 'inset 3px 0 0 #AF1839' : 'none', pick: () => this.setState({ sel: u.id }) });
+}),
+c: Object.assign({}, cur, {
+initials: cur.name.split(' ').map((w) => w.charAt(0)).join('').slice(0, 2),
+roles: R.map((r) => {
+const on = r.id === cur.role;
+return { label: r.label, sel: on ? 'true' : 'false', bg: on ? '#AF1839' : '#FFFFFF', fg: on ? '#FFFFFF' : '#3C3C3B', border: on ? '1px solid #AF1839' : '1px solid #C9C9C8', pick: () => upd({ role: r.id }) };
+}),
+revoke: () => upd({ device: 'Sin dispositivo vinculado' }),
+activeLabel: cur.active ? 'Desactivar usuario' : 'Activar usuario',
+toggleActive: () => upd({ active: cur.active ? 0 : 1, invited: 0 })
+}),
+roleCols: R,
+perms: P.map((p) => ({
+group: p[1], name: p[2],
+cells: R.map((r, i) => {
+const on = !!grant[p[0]][i];
+const lock = r.id === 'adm';
+return {
+on: on ? 'true' : 'false', mark: on ? '✓' : '', aria: p[2] + ' · ' + r.label,
+bg: on ? (lock ? '#3C3C3B' : '#AF1839') : '#FFFFFF', fg: '#FFFFFF', border: on ? 'none' : '1px solid #C9C9C8',
+toggle: () => { if (lock) return; const g = Object.assign({}, grant); g[p[0]] = grant[p[0]].slice(); g[p[0]][i] = on ? 0 : 1; this.setState({ grant: g }); }
+};
+})
+}))
+};
+}
+}
+
+</script>
+</body>
+</html>

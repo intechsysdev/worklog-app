@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Mi semana</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;">
+  <header style="display: flex; flex-direction: column; gap: 12px; padding: 20px 20px 8px;">
+    <div style="display: flex; flex-direction: column; gap: 2px;">
+      <h1 style="margin: 0; font-size: 22px; font-weight: 700;">Mi semana</h1>
+      <span style="font-size: 14px; color: #5A5958;">Lunes 26 a viernes 30 de octubre</span>
+    </div>
+    <nav aria-label="Vista del historial" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 12px; background: #E8E8E7;">
+      <a href="Historial.dc.html" style="height: 40px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; color: #3C3C3B; text-decoration: none;">Día</a>
+      <a href="Semana.dc.html" aria-current="page" style="height: 40px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #1E1F1D; background: #FFFFFF; text-decoration: none;">Semana</a>
+    </nav>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 16px; min-height: 0;">
+    <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <span style="font-size: 30px; font-weight: 700; letter-spacing: -0.01em;">31 h 20 m</span>
+        <span style="font-size: 14px; color: #5A5958;">de 42 h legales</span>
+      </div>
+      <div role="img" aria-label="31 horas 20 minutos de 40 horas programadas y 42 horas de tope legal" style="position: relative; height: 12px; border-radius: 6px; background: #E8E8E7;">
+        <span style="position: absolute; left: 0; top: 0; bottom: 0; width: 74.6%; border-radius: 6px; background: #AF1839;"></span>
+        <span style="position: absolute; left: 95.2%; top: -4px; bottom: -4px; width: 2px; background: #1E1F1D;"></span>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 12px; color: #5A5958;"><span>Programadas: 40 h</span><span>Te faltan 8 h 40 m</span></div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+      <h2 style="margin: 0; font-size: 12px; font-weight: 700; color: #AF1839; text-transform: uppercase; letter-spacing: 0.1em;">Horas por día</h2>
+      <div role="img" aria-label="Lunes 8 horas, martes 8 horas 20, miércoles 7 horas 50, jueves 7 horas 10 en curso, viernes sin registro" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; align-items: end; height: 150px;">
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="5">
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 100%;">
+            <span style="font-size: 12px; font-weight: 600; color: #3C3C3B;">{{d.label}}</span>
+            <span style="width: 100%; max-width: 40px; border-radius: 6px 6px 2px 2px; height: {{d.h}}; background: {{d.color}};"></span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; font-size: 12px; color: #5A5958; text-align: center;"><span>Lun 26</span><span>Mar 27</span><span>Mié 28</span><span>Jue 29</span><span>Vie 30</span></div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 4px 16px;">
+      <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #EFEFEE; font-size: 14px;"><span>Ordinarias diurnas</span><span style="font-weight: 600;">31 h 20 m</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #EFEFEE; font-size: 14px;"><span>Ordinarias nocturnas</span><span style="font-weight: 600;">0 h</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #EFEFEE; font-size: 14px;"><span>Horas extra aprobadas</span><span style="font-weight: 600;">0 de 12</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 12px 0; font-size: 14px;"><span>Dominical o festivo</span><span style="font-weight: 600;">0 h</span></div>
+    </section>
+
+    <p style="margin: 0; font-size: 12px; line-height: 17px; color: #5A5958;">Cifras provisionales hasta el cierre del periodo, el 15 de noviembre.</p>
+  </main>
+
+  <nav aria-label="Navegación principal" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #E2E2E1; background: #FFFFFF; padding: 8px 8px 16px;">
+    <a href="Actividad.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; min-height: 44px; color: #5A5958; font-size: 12px; font-weight: 500; text-decoration: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Actividad</a>
+    <a href="Historial.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; min-height: 44px; color: #AF1839; font-size: 12px; font-weight: 600; text-decoration: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg>Historial</a>
+    <a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; min-height: 44px; color: #5A5958; font-size: 12px; font-weight: 500; text-decoration: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Jornada</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+const raw = [
+{ label: '8:00', m: 480, color: '#AF1839' },
+{ label: '8:20', m: 500, color: '#AF1839' },
+{ label: '7:50', m: 470, color: '#AF1839' },
+{ label: '7:10', m: 430, color: '#E51E49' },
+{ label: '—', m: 0, color: '#E8E8E7' }
+];
+return {
+days: raw.map((d) => Object.assign({}, d, { h: Math.max(6, Math.round(d.m / 540 * 120)) + 'px' }))
+};
+}
+}
+</script>
+</body>
+</html>

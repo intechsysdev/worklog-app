@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Historial del día</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:#AF1839}a:hover{color:#751326}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F5F5F4; color: #1E1F1D; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;">
+  <header style="display: flex; flex-direction: column; gap: 2px; padding: 20px 20px 12px;">
+    <h1 style="margin: 0; font-size: 22px; font-weight: 700;">Mi día</h1>
+    <span style="font-size: 14px; color: #5A5958;">Jueves 29 de octubre · 07:03 – en curso</span>
+    <nav aria-label="Vista del historial" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; margin-top: 10px; border-radius: 12px; background: #E8E8E7;">
+      <a href="Historial.dc.html" aria-current="page" style="height: 40px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #1E1F1D; background: #FFFFFF; text-decoration: none;">Día</a>
+      <a href="Semana.dc.html" style="height: 40px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; color: #3C3C3B; text-decoration: none;">Semana</a>
+    </nav>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding: 4px 20px 16px; min-height: 0;">
+    <section style="background: #FFFFFF; border: 1px solid #E2E2E1; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+      <div role="img" aria-label="Distribución del día: traslado 1 hora, sin actividad 7 minutos, instalación 1 hora 28 minutos, sin actividad 5 minutos, mantenimiento en curso" style="display: flex; height: 14px; border-radius: 7px; overflow: hidden; gap: 2px;">
+        <span style="flex: 60 1 0; background: #868787;"></span>
+        <span style="flex: 7 1 0; background: #DA830B;"></span>
+        <span style="flex: 88 1 0; background: #AF1839;"></span>
+        <span style="flex: 5 1 0; background: #DA830B;"></span>
+        <span style="flex: 40 1 0; background: #E51E49;"></span>
+        <span style="flex: 340 1 0; background: #E8E8E7;"></span>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 12px; color: #5A5958;"><span>07:00</span><span>11:30</span><span>16:00</span></div>
+      <div style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: #3C3C3B;">
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 3px; background: #AF1839;"></span>Productivo 2 h 28 m</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 3px; background: #868787;"></span>Traslado 1 h</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 3px; background: #DA830B;"></span>Sin actividad 12 m</span>
+      </div>
+    </section>
+
+    <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; flex-grow: 1; overflow: auto;">
+      <sc-for list="{{events}}" as="e" hint-placeholder-count="6">
+        <li style="display: flex; gap: 12px;">
+          <div style="display: flex; flex-direction: column; align-items: center; width: 14px;">
+            <span style="width: 12px; height: 12px; border-radius: 6px; margin-top: 4px; flex-shrink: 0; background: {{e.color}};"></span>
+            <span style="flex-grow: 1; width: 2px; background: #E2E2E1;"></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 16px; flex-grow: 1;">
+            <div style="display: flex; justify-content: space-between; gap: 8px;">
+              <span style="font-size: 15px; font-weight: 600;">{{e.title}}</span>
+              <span style="font-size: 14px; font-weight: 600; color: #3C3C3B; white-space: nowrap;">{{e.dur}}</span>
+            </div>
+            <span style="font-size: 13px; color: #5A5958;">{{e.meta}}</span>
+          </div>
+        </li>
+      </sc-for>
+    </ol>
+
+    <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E2E2E1;">
+      <span style="flex-grow: 1; font-size: 13px; line-height: 18px; color: #3C3C3B;">¿Algo quedó mal registrado? Los ajustes los aprueba tu supervisor.</span>
+      <button type="button" style="min-height: 44px; padding: 0 14px; border-radius: 10px; border: 1px solid #AF1839; background: #FFFFFF; color: #AF1839; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap;">Solicitar ajuste</button>
+    </div>
+  </main>
+
+  <nav aria-label="Navegación principal" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #E2E2E1; background: #FFFFFF; padding: 8px 8px 16px;">
+    <a href="Actividad.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; min-height: 44px; color: #5A5958; font-size: 12px; font-weight: 500; text-decoration: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Actividad</a>
+    <a href="Historial.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; min-height: 44px; color: #AF1839; font-size: 12px; font-weight: 600; text-decoration: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg>Historial</a>
+    <a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; min-height: 44px; color: #5A5958; font-size: 12px; font-weight: 500; text-decoration: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Jornada</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+events: [
+{ title: 'Mantenimiento preventivo', dur: 'En curso', meta: '09:45 – ahora · Bodega Sur · OT-1043', color: '#E51E49' },
+{ title: 'Sin actividad', dur: '5 m', meta: '09:40 – 09:45', color: '#DA830B' },
+{ title: 'Instalación de equipo', dur: '1 h 28 m', meta: '08:12 – 09:40 · Completada · 1 foto', color: '#AF1839' },
+{ title: 'Sin actividad', dur: '7 m', meta: '08:05 – 08:12', color: '#DA830B' },
+{ title: 'Traslado entre sitios', dur: '1 h', meta: '07:05 – 08:05', color: '#868787' },
+{ title: 'Inicio de jornada', dur: '07:03', meta: 'Sede Bogotá Norte · dentro de geocerca', color: '#1E1F1D' }
+]
+};
+}
+}
+</script>
+</body>
+</html>
