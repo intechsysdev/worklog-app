@@ -11,6 +11,8 @@ enum AuthMode {
 
 /// Build-time configuration, passed with `--dart-define`.
 ///
+/// Without defines the app targets production (WorkLog API and INTECHSYS ONE). For the local API:
+///
 /// ```
 /// flutter run --dart-define=AUTH_MODE=development --dart-define=WORKLOG_API_URL=http://10.0.2.2:5290
 /// ```
@@ -27,10 +29,10 @@ class AppConfig {
   });
 
   factory AppConfig.fromEnvironment() {
-    const mode = String.fromEnvironment('AUTH_MODE', defaultValue: 'development');
-    const api = String.fromEnvironment('WORKLOG_API_URL', defaultValue: 'http://10.0.2.2:5290');
-    const one = String.fromEnvironment('ONE_URL', defaultValue: 'http://10.0.2.2:5180');
-    const portal = String.fromEnvironment('ONE_PORTAL_URL');
+    const mode = String.fromEnvironment('AUTH_MODE', defaultValue: 'one');
+    const api = String.fromEnvironment('WORKLOG_API_URL', defaultValue: _prodWorklogApi);
+    const one = String.fromEnvironment('ONE_URL', defaultValue: _prodOneApi);
+    const portal = String.fromEnvironment('ONE_PORTAL_URL', defaultValue: _prodOnePortal);
     const clientId = String.fromEnvironment('ONE_CLIENT_ID', defaultValue: 'worklog');
     const redirect = String.fromEnvironment('ONE_REDIRECT_URI', defaultValue: 'com.intechsys.worklog://sso/callback');
     const data = String.fromEnvironment('DATA_MODE');
@@ -84,6 +86,11 @@ class AppConfig {
 
   /// Custom scheme of [ssoRedirectUri], used to catch the redirect on the device.
   String get ssoCallbackScheme => Uri.parse(ssoRedirectUri).scheme;
+
+  // Production: the same hosts as worklog-front/.env.production.
+  static const _prodWorklogApi = 'https://app-worklog-api-prd-djdwfecheudhg9de.centralus-01.azurewebsites.net';
+  static const _prodOneApi = 'https://app-intechsysone-api-prd-bxehhkf8dgcwbve9.centralus-01.azurewebsites.net';
+  static const _prodOnePortal = 'https://intechsysone.com';
 
   static String _trimSlash(String value) => value.endsWith('/') ? value.substring(0, value.length - 1) : value;
 }

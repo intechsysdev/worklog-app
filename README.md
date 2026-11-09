@@ -15,10 +15,21 @@ dotnet run --project F:\Intechsys_Proj\worklog\work_log_api\src\WorkLog.Api --la
 
 | Clave | Por defecto | Uso |
 |---|---|---|
-| `AUTH_MODE` | `development` | `development`: Ingreso solo pide el correo y usa el token `dev:<correo>`. `one`: correo y contraseña de INTECHSYS ONE, más el SSO. |
-| `WORKLOG_API_URL` | `http://10.0.2.2:5290` | API de WorkLog, sin `/api/v1`. En el emulador de Android `localhost` es `10.0.2.2`. |
-| `ONE_URL` | `http://10.0.2.2:5180` | API de ONE (`/api/v1/auth/login`, `/auth/refresh`, `/sso/token`). |
-| `ONE_PORTAL_URL` | igual a `ONE_URL` | Portal de ONE, que sirve la página `/autorizar` del SSO. |
+| `AUTH_MODE` | `one` | `development`: Ingreso solo pide el correo y usa el token `dev:<correo>`. `one`: correo y contraseña de INTECHSYS ONE, más el SSO. |
+| `WORKLOG_API_URL` | API de producción | API de WorkLog, sin `/api/v1`. En el emulador de Android `localhost` es `10.0.2.2`. |
+| `ONE_URL` | API de ONE de producción | API de ONE (`/api/v1/auth/login`, `/auth/refresh`, `/sso/token`). |
+| `ONE_PORTAL_URL` | `https://intechsysone.com` | Portal de ONE, que sirve la página `/autorizar` del SSO. |
+
+Sin `--dart-define` la app apunta a producción (las mismas URLs de `worklog-front/.env.production`, definidas en
+`lib/core/config/app_config.dart`) y no usa datos de demostración; esos solo se activan con `DATA_MODE=mock`.
+
+## APK de producción
+
+```bash
+flutter build apk --release
+```
+
+El APK queda en `build/app/outputs/flutter-apk/app-release.apk`, firmado con la clave de debug.
 | `ONE_CLIENT_ID` | `worklog` | Slug de la app en ONE (`client_id` del SSO). |
 | `ONE_REDIRECT_URI` | `com.intechsys.worklog://sso/callback` | Redirect del SSO. |
 
