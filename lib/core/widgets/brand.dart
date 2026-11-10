@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
 
-/// INTECHSYS ONE mark plus the "one" wordmark.
+/// Official INTECHSYS ONE artwork (from one-front/public/marca), with its dark-background version:
+/// the stacked mark with "one" when [large] (sign-in), the horizontal logo otherwise (headers).
 class OneLogo extends StatelessWidget {
   const OneLogo({super.key, this.large = false});
 
@@ -10,29 +11,14 @@ class OneLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final markWidth = large ? 56.0 : 30.0;
-    return Semantics(
-      label: 'INTECHSYS ONE',
-      image: true,
-      child: ExcludeSemantics(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset('assets/brand/one_mark.png', width: markWidth, height: markWidth * 271 / 265),
-            SizedBox(width: large ? 10 : 6),
-            Text(
-              'one',
-              style: TextStyle(
-                fontSize: large ? 50 : 27,
-                fontWeight: FontWeight.w800,
-                letterSpacing: (large ? 50 : 27) * -0.045,
-                height: 1,
-                color: context.wl.brandRed,
-              ),
-            ),
-          ],
-        ),
-      ),
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final asset = large
+        ? (dark ? 'assets/brand/one_marca_oscuro.png' : 'assets/brand/one_marca.png')
+        : (dark ? 'assets/brand/one_logo_oscuro.png' : 'assets/brand/one_logo.png');
+    return Image.asset(
+      asset,
+      height: large ? 104 : 28,
+      semanticLabel: 'INTECHSYS ONE',
     );
   }
 }
