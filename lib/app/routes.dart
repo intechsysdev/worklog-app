@@ -3,6 +3,7 @@ abstract final class Routes {
   static const splash = '/';
   static const login = '/ingreso';
   static const tenants = '/empresa';
+  static const changePassword = '/contrasena';
   static const policy = '/politica';
   static const permissions = '/permisos';
 

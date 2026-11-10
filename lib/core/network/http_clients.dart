@@ -31,6 +31,12 @@ final oneDioProvider = Provider<Dio>((ref) {
   return _client(ref, _options(config.oneUrl));
 });
 
+/// Client for the WorkLog API sign-in (`/api/v1/mobile-auth`): no session headers.
+final worklogAuthDioProvider = Provider<Dio>((ref) {
+  final config = ref.watch(appConfigProvider);
+  return _client(ref, _options('${config.worklogApiUrl}/api/v1'));
+});
+
 /// Client for the WorkLog API (`/api/v1`), with the auth interceptor.
 final worklogDioProvider = Provider<Dio>((ref) {
   final config = ref.watch(appConfigProvider);

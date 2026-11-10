@@ -7,6 +7,10 @@ enum AuthMode {
 
   /// INTECHSYS ONE: email and password (or SSO PKCE) against ONE.
   one,
+
+  /// WorkLog account (default): the technician only exists in WorkLog, not in ONE. Email and
+  /// password against `/api/v1/mobile-auth` of the WorkLog API.
+  worklog,
 }
 
 /// Build-time configuration, passed with `--dart-define`.
@@ -29,7 +33,7 @@ class AppConfig {
   });
 
   factory AppConfig.fromEnvironment() {
-    const mode = String.fromEnvironment('AUTH_MODE', defaultValue: 'one');
+    const mode = String.fromEnvironment('AUTH_MODE', defaultValue: 'worklog');
     const api = String.fromEnvironment('WORKLOG_API_URL', defaultValue: _prodWorklogApi);
     const one = String.fromEnvironment('ONE_URL', defaultValue: _prodOneApi);
     const portal = String.fromEnvironment('ONE_PORTAL_URL', defaultValue: _prodOnePortal);
@@ -50,7 +54,11 @@ class AppConfig {
       );
     }
     return AppConfig(
-      authMode: mode.toLowerCase() == 'one' ? AuthMode.one : AuthMode.development,
+      authMode: switch (mode.toLowerCase()) {
+        'one' => AuthMode.one,
+        'development' => AuthMode.development,
+        _ => AuthMode.worklog,
+      },
       worklogApiUrl: _trimSlash(api),
       oneUrl: _trimSlash(one),
       onePortalUrl: _trimSlash(portal.isEmpty ? one : portal),
@@ -83,6 +91,9 @@ class AppConfig {
   final bool isMock;
 
   bool get isDevelopment => authMode == AuthMode.development;
+
+  /// The technician signs in with the WorkLog password (no ONE account, no SSO).
+  bool get isWorklog => authMode == AuthMode.worklog;
 
   /// Custom scheme of [ssoRedirectUri], used to catch the redirect on the device.
   String get ssoCallbackScheme => Uri.parse(ssoRedirectUri).scheme;

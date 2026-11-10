@@ -44,7 +44,11 @@ class _TenantScreenState extends ConsumerState<TenantScreen> {
   Widget build(BuildContext context) {
     final c = context.wl;
     final auth = ref.watch(authControllerProvider);
-    final tenants = auth is SignedIn ? auth.tenants : const <TenantDto>[];
+    final tenants = switch (auth) {
+      SignedIn() => auth.tenants,
+      PendingTenant() => auth.tenants,
+      _ => const <TenantDto>[],
+    };
 
     return Scaffold(
       body: SafeArea(

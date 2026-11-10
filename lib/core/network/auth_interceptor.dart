@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import '../config/app_config.dart';
 import 'session_source.dart';
 
-/// Adds `Authorization`, `X-Tenant-Id` and `X-Client: mobile` to every WorkLog call and, with ONE
-/// tokens, refreshes once and retries when the API answers 401.
+/// Adds `Authorization`, `X-Tenant-Id` and `X-Client: mobile` to every WorkLog call and, with
+/// renewable tokens (WorkLog or ONE), refreshes once and retries when the API answers 401.
 class AuthInterceptor extends QueuedInterceptor {
   AuthInterceptor({required this._sessions, required this._retry});
 
@@ -37,12 +37,12 @@ class AuthInterceptor extends QueuedInterceptor {
     }
 
     final current = await _sessions.current();
-    if (current == null || current.mode != AuthMode.one) {
+    if (current == null || current.mode == AuthMode.development) {
       _sessions.onUnauthorized();
       return handler.next(err);
     }
 
-    // Null when ONE rejected the refresh token: the repository already signed out.
+    // Null when the refresh token was rejected: the repository already signed out.
     final renewed = await _sessions.refresh();
     if (renewed == null) return handler.next(err);
 

@@ -27,6 +27,15 @@ class ProfileApi {
     }
   }
 
+  /// `POST /me/password`: replaces the WorkLog password (also the temporary one). Closes the other sessions.
+  Future<void> changePassword(String currentPassword, String newPassword) async {
+    try {
+      await _dio.post<void>('/me/password', data: {'currentPassword': currentPassword, 'newPassword': newPassword});
+    } on DioException catch (e) {
+      throw ApiException.fromDio(e);
+    }
+  }
+
   Future<PrivacyPolicyDto> privacyPolicy() async => PrivacyPolicyDto.fromJson(await _get('/me/privacy-policy'));
 
   Future<void> acceptPolicy(String version) async {

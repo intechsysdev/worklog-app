@@ -15,7 +15,7 @@ dotnet run --project F:\Intechsys_Proj\worklog\work_log_api\src\WorkLog.Api --la
 
 | Clave | Por defecto | Uso |
 |---|---|---|
-| `AUTH_MODE` | `one` | `development`: Ingreso solo pide el correo y usa el token `dev:<correo>`. `one`: correo y contraseña de INTECHSYS ONE, más el SSO. |
+| `AUTH_MODE` | `worklog` | `worklog`: correo y contraseña de WorkLog (los técnicos no tienen cuenta de ONE); con contraseña temporal pide crear la propia. `one`: correo y contraseña de INTECHSYS ONE, más el SSO. `development`: Ingreso solo pide el correo y usa el token `dev:<correo>`. |
 | `WORKLOG_API_URL` | API de producción | API de WorkLog, sin `/api/v1`. En el emulador de Android `localhost` es `10.0.2.2`. |
 | `ONE_URL` | API de ONE de producción | API de ONE (`/api/v1/auth/login`, `/auth/refresh`, `/sso/token`). |
 | `ONE_PORTAL_URL` | `https://intechsysone.com` | Portal de ONE, que sirve la página `/autorizar` del SSO. |
@@ -68,6 +68,13 @@ flutter build apk --release --dart-define=DATA_MODE=mock
 ```
 
 Con `DATA_MODE=mock`, `MockHttpAdapter` atiende en el teléfono todos los endpoints de la app (incluido el login de ONE) con `MockBackend` (`lib/features/demo`). Usa las mismas formas JSON de la API y sus reglas principales: ventana de inicio, una sola actividad abierta, exigencias al finalizar, idempotencia, cierre automático, Mi semana y solicitudes que "Laura Gómez" aprueba a los 2 minutos. El estado se guarda en `worklog_demo.json`, en la carpeta de la app. El turno se adapta a la hora real: es 07:00–16:00 entre semana dentro de ese horario, y si no, un turno de 8 h que empezó hace 10 minutos. La primera ubicación recibida es el centro de los sitios. En Perfil están los escenarios (Normal, Vacaciones, Kiosco compartido y asignado, Aviso de fin de turno), "Simular sin conexión" y "Reiniciar datos de demostración". El APK queda en `build/app/outputs/flutter-apk/app-release.apk`, firmado con la clave de debug.
+
+## Ingreso con la cuenta de WorkLog (por defecto)
+
+- **Ingresar**: `POST {WORKLOG_API_URL}/api/v1/mobile-auth/login {email, password, device}`. Si el correo y la contraseña sirven en varias empresas responde `tenants` y la app muestra el selector y repite con `tenantId`.
+- **Contraseña temporal**: el administrador la genera en el panel (Usuarios → Accesos). Con ella la app solo deja crear la contraseña propia (`POST /api/v1/me/password`); el API responde 403 `auth.password_change_required` a lo demás.
+- **Renovar y salir**: `POST /mobile-auth/refresh` (rota ambos tokens) y `POST /mobile-auth/logout`, con un cliente HTTP sin el interceptor de sesión.
+- Desactivar a la persona, desvincular su dispositivo o restablecer su contraseña cierra sus sesiones.
 
 ## Correr en modo ONE
 

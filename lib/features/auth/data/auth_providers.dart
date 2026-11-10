@@ -6,10 +6,13 @@ import 'auth_repository.dart';
 import 'one_auth_api.dart';
 import 'session_store.dart';
 import 'sso_service.dart';
+import 'worklog_auth_api.dart';
 
 final sessionStoreProvider = Provider<SessionStore>((ref) => SecureSessionStore());
 
 final oneAuthApiProvider = Provider<OneAuthApi>((ref) => OneAuthApi(ref.watch(oneDioProvider)));
+
+final worklogAuthApiProvider = Provider<WorklogAuthApi>((ref) => WorklogAuthApi(ref.watch(worklogAuthDioProvider)));
 
 final ssoServiceProvider = Provider<SsoService>(
   (ref) => SsoService(ref.watch(appConfigProvider), ref.watch(oneAuthApiProvider)),
@@ -19,6 +22,7 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final repository = AuthRepository(
     store: ref.watch(sessionStoreProvider),
     oneApi: ref.watch(oneAuthApiProvider),
+    worklogApi: ref.watch(worklogAuthApiProvider),
     sso: ref.watch(ssoServiceProvider),
   );
   ref.onDispose(repository.dispose);

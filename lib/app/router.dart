@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../features/alerts/presentation/previews.dart';
 import '../features/auth/presentation/auth_controller.dart';
+import '../features/auth/presentation/change_password_screen.dart';
 import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/tenant_screen.dart';
 import '../features/onboarding/presentation/onboarding_controller.dart';
@@ -39,12 +40,14 @@ String? gateRedirect(AuthState auth, OnboardingState onboarding, String location
 
   if (auth is AuthLoading) return goTo(Routes.splash);
   if (auth is SignedOut) return goTo(Routes.login);
+  if (auth is PendingTenant) return goTo(Routes.tenants);
   final signedIn = auth as SignedIn;
   if (signedIn.needsTenant) return goTo(Routes.tenants);
+  if (signedIn.session.mustChangePassword) return goTo(Routes.changePassword);
   if (!onboarding.loaded) return goTo(Routes.splash);
   if (!onboarding.policyAccepted) return goTo(Routes.policy);
   if (!onboarding.deviceReviewed) return goTo(Routes.permissions);
-  const gates = {Routes.splash, Routes.login, Routes.tenants, Routes.policy, Routes.permissions};
+  const gates = {Routes.splash, Routes.login, Routes.tenants, Routes.changePassword, Routes.policy, Routes.permissions};
   return gates.contains(location) ? Routes.home : null;
 }
 
@@ -63,6 +66,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: Routes.splash, builder: (_, _) => const _Splash()),
       GoRoute(path: Routes.login, builder: (_, _) => const LoginScreen()),
       GoRoute(path: Routes.tenants, builder: (_, _) => const TenantScreen()),
+      GoRoute(path: Routes.changePassword, builder: (_, _) => const ChangePasswordScreen()),
       GoRoute(path: Routes.policy, builder: (_, _) => const PolicyScreen()),
       GoRoute(path: Routes.permissions, builder: (_, _) => const PermissionsScreen()),
       ShellRoute(

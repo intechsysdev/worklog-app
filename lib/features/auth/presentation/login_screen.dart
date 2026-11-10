@@ -11,7 +11,8 @@ import '../../onboarding/data/device_info.dart';
 import '../data/sso_service.dart';
 import 'auth_controller.dart';
 
-/// "Ingreso". In development mode only the email is asked (token `dev:<email>`).
+/// "Ingreso". By default the technician signs in with the WorkLog password; with `AUTH_MODE=one`
+/// with INTECHSYS ONE (password or SSO); in development mode only the email is asked.
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
@@ -54,6 +55,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       final auth = ref.read(authControllerProvider.notifier);
       if (config.isDevelopment) {
         await auth.signInDevelopment(_email.text);
+      } else if (config.isWorklog) {
+        final device = ref.read(deviceInfoProvider).value;
+        await auth.signInWithWorklog(_email.text, _password.text, device: device?.model);
       } else {
         await auth.signInWithPassword(_email.text, _password.text);
       }
@@ -63,6 +67,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ? 'Tu cuenta tiene verificación en dos pasos. Usa el botón «Ingresar con la cuenta de la empresa».'
             : e.statusCode == 401
             ? 'Correo o contraseña incorrectos.'
+            : e.statusCode == 429
+            ? 'Demasiados intentos seguidos. Espera un minuto e intenta de nuevo.'
             : e.message,
       );
     } finally {
@@ -89,12 +95,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   void _forgotPassword() {
+    final worklog = ref.read(appConfigProvider).isWorklog;
     showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('¿Olvidaste tu contraseña?'),
-        content: const Text(
-          'La contraseña es la de tu cuenta de INTECHSYS ONE. Recupérala desde el portal de ONE o pide ayuda a soporte TI.',
+        content: Text(
+          worklog
+              ? 'Pide a tu supervisor o al administrador de WorkLog que restablezca tu contraseña. Te darán una temporal y la app te pedirá crear la tuya.'
+              : 'La contraseña es la de tu cuenta de INTECHSYS ONE. Recupérala desde el portal de ONE o pide ayuda a soporte TI.',
         ),
         actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Entendido'))],
       ),
@@ -182,7 +191,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ],
                       const SizedBox(height: 20),
                       PrimaryButton(label: 'Ingresar', loading: _busy, onPressed: _ssoBusy ? null : _submit),
-                      if (!config.isDevelopment) ...[
+                      if (config.isWorklog) ...[
+                        Center(
+                          child: TextButton(
+                            onPressed: _forgotPassword,
+                            style: TextButton.styleFrom(minimumSize: const Size(0, 44), foregroundColor: c.primary),
+                            child: const Text(
+                              '¿Olvidaste tu contraseña?',
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ] else if (!config.isDevelopment) ...[
                         const SizedBox(height: 16),
                         Row(
                           children: [

@@ -28,6 +28,13 @@ class SignedOut extends AuthState {
   final String? message;
 }
 
+/// The WorkLog email and password work in several companies: the user picks one.
+class PendingTenant extends AuthState {
+  const PendingTenant(this.tenants);
+
+  final List<TenantDto> tenants;
+}
+
 class SignedIn extends AuthState {
   const SignedIn(this.session, {this.tenants = const []});
 
@@ -40,6 +47,14 @@ class SignedIn extends AuthState {
 }
 
 class AuthController extends Notifier<AuthState> {
+  /// Credentials kept in memory only while choosing the company (WorkLog login in several companies).
+  ({String email, String password, String? device})? _pending;
+
+  /// Password just typed, so the forced change does not ask for it again. Memory only.
+  String? _recentPassword;
+
+  String? get recentPassword => _recentPassword;
+
   @override
   AuthState build() {
     final repository = ref.watch(authRepositoryProvider);
@@ -60,7 +75,7 @@ class AuthController extends Notifier<AuthState> {
     }
     if (!ref.mounted) return;
     state = session == null ? const SignedOut() : SignedIn(session);
-    if (session != null && session.hasTenant) {
+    if (session != null && session.hasTenant && !session.mustChangePassword) {
       // Refresh the policy in the background; offline the cached acceptance is used.
       unawaited(ref.read(onboardingProvider.notifier).checkPolicy().catchError((_) {}));
     }
@@ -74,6 +89,36 @@ class AuthController extends Notifier<AuthState> {
   Future<void> signInWithPassword(String email, String password) async {
     final session = await ref.read(authRepositoryProvider).signInWithPassword(email, password);
     await _afterSignIn(session);
+  }
+
+  /// WorkLog account (default): the session already brings its company.
+  Future<void> signInWithWorklog(String email, String password, {String? device}) async {
+    final (session, tenants) = await ref.read(authRepositoryProvider).signInWithWorklog(email, password, device: device);
+    _recentPassword = password;
+    if (session == null) {
+      _pending = (email: email, password: password, device: device);
+      state = PendingTenant(tenants.map((t) => TenantDto(tenantId: t.tenantId, name: t.name)).toList());
+      return;
+    }
+    await _afterWorklogSignIn(session);
+  }
+
+  /// With a temporary password the router shows the change first; the policy is checked after it.
+  Future<void> _afterWorklogSignIn(Session session) async {
+    if (!session.mustChangePassword) {
+      _recentPassword = null;
+      await ref.read(onboardingProvider.notifier).checkPolicy();
+    }
+    state = SignedIn(session);
+  }
+
+  /// Replaces the temporary (or current) WorkLog password and continues to the app.
+  Future<void> changePassword(String currentPassword, String newPassword) async {
+    await ref.read(profileApiProvider).changePassword(currentPassword, newPassword);
+    _recentPassword = null;
+    final session = await ref.read(authRepositoryProvider).markPasswordChanged();
+    await ref.read(onboardingProvider.notifier).checkPolicy();
+    state = SignedIn(session);
   }
 
   Future<void> signInWithSso() async {
@@ -109,6 +154,19 @@ class AuthController extends Notifier<AuthState> {
   }
 
   Future<void> selectTenant(TenantDto tenant) async {
+    final pending = _pending;
+    if (state is PendingTenant && pending != null) {
+      final (session, _) = await ref
+          .read(authRepositoryProvider)
+          .signInWithWorklog(pending.email, pending.password, tenantId: tenant.tenantId, device: pending.device);
+      _pending = null;
+      if (session == null) {
+        throw const ApiException(message: 'No se pudo entrar a esa empresa. Intenta de nuevo.', code: 'auth.tenant');
+      }
+      await _afterWorklogSignIn(session);
+      return;
+    }
+
     final session = await ref.read(authRepositoryProvider).selectTenant(tenant.tenantId, tenant.name);
     // The policy decides the next screen, so it is checked before leaving the login.
     await ref.read(onboardingProvider.notifier).checkPolicy();
@@ -117,6 +175,8 @@ class AuthController extends Notifier<AuthState> {
 
   /// Signs out and removes everything local (queue included).
   Future<void> signOut() async {
+    _pending = null;
+    _recentPassword = null;
     await ref.read(authRepositoryProvider).signOut();
     await ref.read(appDatabaseProvider).wipe();
     ref.read(onboardingProvider.notifier).reset();
