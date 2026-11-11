@@ -28,6 +28,32 @@ class _FakeToday extends TodayController {
   Future<void> refresh() async {}
 }
 
+/// The server answers a different schedule than the cached one (changed in the panel).
+class _ChangingToday extends TodayController {
+  _ChangingToday(this.cached, this.fromServer);
+
+  final TodayDto cached;
+  final TodayDto fromServer;
+  int refreshes = 0;
+
+  @override
+  Future<TodayDto> build() async => cached;
+
+  @override
+  Future<void> refresh() async {
+    refreshes++;
+    state = AsyncData(fromServer);
+  }
+}
+
+/// Shift moved to 09:00 (14:00 UTC): at 07:02 it cannot start yet.
+StartWindowDto _movedWindow() => StartWindowDto(
+  opensAt: DateTime.utc(2026, 10, 29, 13, 45),
+  shiftStart: DateTime.utc(2026, 10, 29, 14),
+  shiftEnd: DateTime.utc(2026, 10, 29, 23),
+  canStartNow: false,
+);
+
 class _FakeSync extends SyncController {
   @override
   SyncStatus build() => const SyncStatus(loaded: true, network: NetworkKind.wifi);
@@ -65,7 +91,12 @@ class _RecordingCommands extends WorkdayCommands {
 void main() {
   setUp(() => starts = 0);
 
-  Future<void> pumpHome(WidgetTester tester, TodayDto today, DateTime now) async {
+  Future<void> pumpHome(
+    WidgetTester tester,
+    TodayDto today,
+    DateTime now, {
+    TodayController Function()? controller,
+  }) async {
     tester.view.physicalSize = const Size(390 * 3, 844 * 3);
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
@@ -73,7 +104,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          todayControllerProvider.overrideWith(() => _FakeToday(today)),
+          todayControllerProvider.overrideWith(controller ?? () => _FakeToday(today)),
           syncControllerProvider.overrideWith(_FakeSync.new),
           serverClockProvider.overrideWithValue(ServerClock(deviceNow: () => now)),
           locationServiceProvider.overrideWithValue(_FakeLocation()),
@@ -121,6 +152,39 @@ void main() {
     await tester.tap(find.text('Iniciar jornada'));
     await tester.pump();
     expect(starts, 0);
+
+    await unmount(tester);
+  });
+
+  testWidgets('the schedule changed in the panel: the screen shows the new window, not the cached one', (tester) async {
+    final now = DateTime.utc(2026, 10, 29, 12, 2);
+    final cached = sampleToday(serverTime: now);
+    final moved = sampleToday(serverTime: now, window: _movedWindow());
+    await pumpHome(tester, cached, now, controller: () => _ChangingToday(cached, moved));
+    await tester.pump();
+
+    expect(find.textContaining('Puedes iniciar desde las ${Fmt.time(moved.window!.opensAt)}'), findsOneWidget);
+    expect(find.text('Actualizar horario'), findsOneWidget);
+    await tester.tap(find.text('Iniciar jornada'));
+    await tester.pump();
+    expect(starts, 0);
+
+    await unmount(tester);
+  });
+
+  testWidgets('pressing start asks the schedule first and starts when the new one allows it', (tester) async {
+    final now = DateTime.utc(2026, 10, 29, 12, 2);
+    final blockedInCache = sampleToday(serverTime: now, window: _movedWindow());
+    final openNow = sampleToday(serverTime: now);
+    late _ChangingToday controller;
+    await pumpHome(tester, blockedInCache, now, controller: () => controller = _ChangingToday(blockedInCache, openNow));
+    await tester.pump();
+
+    expect(controller.refreshes, greaterThan(0));
+    await tester.tap(find.text('Iniciar jornada'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 50));
+    expect(starts, 1);
 
     await unmount(tester);
   });
