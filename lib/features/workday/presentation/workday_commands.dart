@@ -254,7 +254,9 @@ class WorkdayCommands {
     try {
       final report = await sync.run().timeout(answerTimeout);
       return CommandResult(clientEventId: clientEventId, result: report.resultFor(clientEventId));
-    } on TimeoutException {
+    } on Object {
+      // Slow server or a local failure while syncing: the action is already in the queue and
+      // the next pass sends it.
       return CommandResult(clientEventId: clientEventId);
     }
   }

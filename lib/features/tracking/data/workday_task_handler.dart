@@ -98,9 +98,12 @@ class WorkdayTaskHandler extends TaskHandler {
     FlutterForegroundTask.launchApp('/inicio');
   }
 
+  /// The database is NOT closed here: on Android sqflite hands every isolate of the process the
+  /// same native connection for the same file, so closing it here closed the app's one too. The
+  /// service stops right when the workday is closed, and the sync could no longer record the
+  /// server answer: the close stayed "Pendiente de sincronizar" and the next day did not load.
   @override
   Future<void> onDestroy(DateTime timestamp, bool isTimeout) async {
-    await _db?.close();
     _db = null;
   }
 

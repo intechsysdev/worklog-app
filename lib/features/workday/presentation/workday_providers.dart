@@ -32,7 +32,8 @@ class TodayController extends AsyncNotifier<TodayDto> {
   Future<void> refresh() async {
     try {
       await ref.read(todayRepositoryProvider).fetch();
-    } on ApiException catch (e) {
+    } on Object catch (error) {
+      final e = ApiException.from(error);
       if (!e.isTransient && state.value == null && ref.mounted) state = AsyncError(e, StackTrace.current);
     }
   }
