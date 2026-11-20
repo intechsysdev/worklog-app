@@ -15,6 +15,7 @@ import '../features/requests/domain/adjustment_options.dart';
 import '../features/requests/presentation/adjustment_form_screen.dart';
 import '../features/requests/presentation/overtime_form_screen.dart';
 import '../features/requests/presentation/requests_screen.dart';
+import '../features/requests/presentation/resume_form_screen.dart';
 import '../features/requests/presentation/shift_change_form_screen.dart';
 import '../features/sync/presentation/pending_sync_screen.dart';
 import '../features/week/presentation/week_screen.dart';
@@ -89,6 +90,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(path: Routes.overtimeRequest, builder: (_, _) => const OvertimeFormScreen()),
           GoRoute(path: Routes.shiftChangeRequest, builder: (_, _) => const ShiftChangeFormScreen()),
+          GoRoute(path: Routes.resumeRequest, builder: (_, _) => const ResumeFormScreen()),
           GoRoute(path: Routes.kiosk, builder: (_, _) => const KioskPreviewScreen()),
           GoRoute(path: Routes.shiftEndNotice, builder: (_, _) => const ShiftEndPreviewScreen()),
         ],

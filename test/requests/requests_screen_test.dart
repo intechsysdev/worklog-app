@@ -5,6 +5,12 @@ import 'package:worklog_mobile/core/theme/app_theme.dart';
 import 'package:worklog_mobile/features/requests/data/request_models.dart';
 import 'package:worklog_mobile/features/requests/presentation/requests_controller.dart';
 import 'package:worklog_mobile/features/requests/presentation/requests_screen.dart';
+import 'package:worklog_mobile/features/workday/data/models/enums.dart';
+import 'package:worklog_mobile/features/workday/data/models/today_dto.dart';
+import 'package:worklog_mobile/features/workday/domain/day_projection.dart';
+import 'package:worklog_mobile/features/workday/presentation/workday_providers.dart';
+
+import '../support/fakes.dart';
 
 final _requests = [
   RequestDto(
@@ -44,6 +50,9 @@ class _FakeRequests extends RequestsController {
   Future<List<RequestDto>> build() async => _requests;
 
   @override
+  Future<List<RequestDto>> refreshResolved() async => const [];
+
+  @override
   Future<void> cancel(String id) async {
     cancelled.add(id);
     state = AsyncData([
@@ -65,13 +74,16 @@ class _FakeRequests extends RequestsController {
 void main() {
   late _FakeRequests controller;
 
-  Future<void> pump(WidgetTester tester) async {
+  Future<void> pump(WidgetTester tester, {AsyncValue<DayView> day = const AsyncLoading()}) async {
     tester.view.physicalSize = const Size(390 * 3, 844 * 3);
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [requestsControllerProvider.overrideWith(() => controller = _FakeRequests())],
+        overrides: [
+          requestsControllerProvider.overrideWith(() => controller = _FakeRequests()),
+          dayViewProvider.overrideWithValue(day),
+        ],
         child: MaterialApp(theme: AppTheme.light(), home: const RequestsScreen()),
       ),
     );
@@ -126,5 +138,26 @@ void main() {
     expect(find.text('Ajuste de registro'), findsOneWidget);
     expect(find.text('Horas extra'), findsOneWidget);
     expect(find.text('Cambio de turno'), findsOneWidget);
+    expect(find.text('Reinicio de actividades'), findsNothing);
+  });
+
+  testWidgets('with the workday of today closed it also offers "Reinicio de actividades"', (tester) async {
+    final closed = sampleToday(
+      workday: WorkdayDto(
+        id: 'w1',
+        date: '2026-10-29',
+        status: WorkdayStatus.closed,
+        startedAt: DateTime.utc(2026, 10, 29, 12),
+        endedAt: DateTime.utc(2026, 10, 29, 14),
+        summary: const DaySummaryDto(),
+      ),
+      resume: const ResumeDto(),
+    );
+    await pump(tester, day: AsyncData(DayProjection.build(closed, const [])));
+    await tester.tap(find.text('Nueva solicitud'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Reinicio de actividades'), findsOneWidget);
+    expect(find.text('Volver a trabajar hoy después de cerrar la jornada.'), findsOneWidget);
   });
 }

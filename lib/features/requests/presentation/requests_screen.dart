@@ -10,6 +10,8 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/buttons.dart';
 import '../../../core/widgets/common.dart';
 import '../../../core/widgets/headers.dart';
+import '../../workday/domain/day_projection.dart';
+import '../../workday/presentation/workday_providers.dart';
 import '../data/request_models.dart';
 import 'requests_controller.dart';
 
@@ -23,6 +25,13 @@ class RequestsScreen extends ConsumerStatefulWidget {
 
 class _RequestsScreenState extends ConsumerState<RequestsScreen> {
   RequestsTab _tab = RequestsTab.all;
+
+  @override
+  void initState() {
+    super.initState();
+    // The supervisor resolves them from the panel: the list is asked again every time it opens.
+    Future.microtask(() => ref.read(requestsControllerProvider.notifier).refreshResolved());
+  }
 
   Future<void> _cancel(RequestDto request) async {
     final confirmed = await showDialog<bool>(
@@ -149,6 +158,21 @@ Future<void> showNewRequestSheet(BuildContext context) => showModalBottomSheet<v
             'Cambio de turno',
             'Otro horario o un día libre.',
             Routes.shiftChangeRequest,
+          ),
+          // Only with the workday of today closed (and a server that knows the request).
+          Consumer(
+            builder: (_, ref, _) {
+              final day = ref.watch(dayViewProvider).value;
+              if (day == null || day.mode != HomeMode.closed || day.today.resume == null) {
+                return const SizedBox.shrink();
+              }
+              return option(
+                Icons.play_circle_outline_rounded,
+                'Reinicio de actividades',
+                'Volver a trabajar hoy después de cerrar la jornada.',
+                Routes.resumeRequest,
+              );
+            },
           ),
         ],
       ),

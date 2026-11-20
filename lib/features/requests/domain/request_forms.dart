@@ -52,6 +52,15 @@ String? _reasonError(String reason) {
   return null;
 }
 
+/// "Reinicio de actividades": only the reason.
+class ResumeForm {
+  const ResumeForm({required this.reason});
+
+  final String reason;
+
+  FormErrors validate() => {'reason': ?_reasonError(reason)};
+}
+
 /// "Ajuste de registro": a recorded time that should be different.
 class AdjustmentForm {
   const AdjustmentForm({

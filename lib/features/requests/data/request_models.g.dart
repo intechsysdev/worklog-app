@@ -50,6 +50,7 @@ const _$RequestTypeEnumMap = {
   RequestType.recordAdjustment: 'RecordAdjustment',
   RequestType.overtime: 'Overtime',
   RequestType.shiftChange: 'ShiftChange',
+  RequestType.resume: 'Resume',
   RequestType.unknown: 'Unknown',
 };
 

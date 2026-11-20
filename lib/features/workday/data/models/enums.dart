@@ -9,6 +9,10 @@ enum DayKind { shift, absence, override, holiday, rest, unscheduled, unknown }
 @JsonEnum(fieldRename: FieldRename.pascal)
 enum WorkdayStatus { open, closed, pendingReview, unknown }
 
+/// "Reinicio de actividades" of the closed workday of today.
+@JsonEnum(fieldRename: FieldRename.pascal)
+enum ResumeState { none, pending, approved, rejected, unknown }
+
 @JsonEnum(fieldRename: FieldRename.pascal)
 enum ActivityStatus { running, paused, finished, unknown }
 

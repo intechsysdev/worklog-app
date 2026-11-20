@@ -96,6 +96,30 @@ void main() {
     expect(view.mode, HomeMode.closed);
   });
 
+  test('"Reanudar jornada" queued on a closed workday opens it again', () {
+    final closed = sampleToday(
+      workday: WorkdayDto(
+        id: 'w1',
+        date: '2026-10-29',
+        status: WorkdayStatus.closed,
+        startedAt: t0,
+        endedAt: t0.add(const Duration(hours: 2)),
+        summary: const DaySummaryDto(activityCount: 1),
+      ),
+      resume: const ResumeDto(state: ResumeState.approved, canResumeNow: true),
+    );
+    expect(DayProjection.build(closed, const []).mode, HomeMode.closed);
+
+    final view = DayProjection.build(closed, [
+      queued(SyncEventKind.workdayStart, t0.add(const Duration(hours: 4)), workdayId: 'w-new'),
+    ]);
+    expect(view.mode, HomeMode.active);
+    expect(view.workday!.id, 'w1');
+    expect(view.workday!.endedAt, isNull);
+    expect(view.workday!.startedAt, t0);
+    expect(view.workday!.summary.activityCount, 1);
+  });
+
   test('the server snapshot keeps the stopwatch running from serverTime', () {
     final serverTime = DateTime.utc(2026, 10, 29, 13);
     final today = sampleToday(

@@ -24,6 +24,7 @@ abstract final class Routes {
   static const adjustmentRequest = '/solicitudes/ajuste';
   static const overtimeRequest = '/solicitudes/horas-extra';
   static const shiftChangeRequest = '/solicitudes/cambio-de-turno';
+  static const resumeRequest = '/solicitudes/reinicio';
   static const kiosk = '/kiosco';
   static const shiftEndNotice = '/aviso-fin-de-turno';
 

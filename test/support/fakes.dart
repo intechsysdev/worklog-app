@@ -18,6 +18,7 @@ TodayDto sampleToday({
   DayKind kind = DayKind.shift,
   WorkdayDto? workday,
   StartWindowDto? window,
+  ResumeDto? resume,
 }) {
   final now = serverTime ?? DateTime.utc(2026, 10, 29, 12, 2);
   return TodayDto(
@@ -47,6 +48,7 @@ TodayDto sampleToday({
               )
             : null),
     workday: workday,
+    resume: resume,
     policy: const PolicyStatusDto(currentVersion: '1.0', accepted: true, effectiveFrom: '2026-01-01'),
     settings: const ClientSettingsDto(),
   );

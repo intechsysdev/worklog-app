@@ -5,9 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/clock/server_clock.dart';
+import '../core/widgets/common.dart';
 import '../features/alerts/data/alert_notifier.dart';
 import '../features/alerts/domain/alert_schedule.dart';
 import '../features/alerts/presentation/shift_end_notice.dart';
+import '../features/requests/data/request_models.dart';
+import '../features/requests/presentation/requests_controller.dart';
 import '../features/sync/data/sync_providers.dart';
 import '../features/sync/presentation/sync_controller.dart';
 import '../features/tracking/data/service_location_tracker.dart';
@@ -21,7 +24,10 @@ import '../features/workday/presentation/workday_providers.dart';
 ///   keeps its notification in step with the current activity;
 /// - reschedules the local alerts (inactivity, pause, shift end) with every new state;
 /// - shows the shift end notice when a warning is reached with the app open;
-/// - on resume, refreshes `today` and retries the queue.
+/// - on resume, refreshes `today` and retries the queue;
+/// - while a request waits for the supervisor, asks every minute whether it was resolved and,
+///   when it was, says so and brings the day up to date (an approval can change the schedule,
+///   the overtime or let the closed workday be resumed).
 class WorkSessionScope extends ConsumerStatefulWidget {
   const WorkSessionScope({super.key, required this.child});
 
@@ -37,6 +43,8 @@ class _WorkSessionScopeState extends ConsumerState<WorkSessionScope> {
   late final AlertNotifier _alerts;
   StreamSubscription<TrackerEvent>? _trackerEvents;
   Timer? _noticeTimer;
+  Timer? _requestsTimer;
+  bool _checkingRequests = false;
   String? _lastStatus;
   String? _lastAlerts;
 
@@ -57,6 +65,9 @@ class _WorkSessionScopeState extends ConsumerState<WorkSessionScope> {
     _trackerEvents = _tracker.events.listen(_onTrackerEvent);
     ref.listenManual(dayViewProvider, (_, next) => _onDay(next.value), fireImmediately: true);
     _noticeTimer = Timer.periodic(const Duration(seconds: 20), (_) => _checkNotice());
+    // The requests of the user are loaded once here so their answers can be watched.
+    ref.listenManual(requestsControllerProvider, (_, _) {});
+    _requestsTimer = Timer.periodic(_requestsEvery, (_) => _checkRequests());
     // First pass of the queue left from a previous session.
     Future.microtask(() => ref.read(syncControllerProvider.notifier).run());
   }
@@ -65,6 +76,7 @@ class _WorkSessionScopeState extends ConsumerState<WorkSessionScope> {
   void dispose() {
     _lifecycle.dispose();
     _noticeTimer?.cancel();
+    _requestsTimer?.cancel();
     _trackerEvents?.cancel();
     unawaited(_tracker.stop());
     unawaited(_alerts.cancelAll());
@@ -74,7 +86,46 @@ class _WorkSessionScopeState extends ConsumerState<WorkSessionScope> {
   void _onResume() {
     unawaited(ref.read(todayControllerProvider.notifier).refresh());
     unawaited(ref.read(syncControllerProvider.notifier).run());
+    unawaited(_checkRequests());
     _checkNotice();
+  }
+
+  static const _requestsEvery = Duration(minutes: 1);
+
+  /// Asks whether the supervisor resolved a pending request. Nothing is asked while none waits.
+  Future<void> _checkRequests() async {
+    if (!mounted || _checkingRequests) return;
+    final requests = ref.read(requestsControllerProvider.notifier);
+    if (!requests.hasPending) return;
+    _checkingRequests = true;
+    try {
+      final resolved = await requests.refreshResolved();
+      if (!mounted || resolved.isEmpty) return;
+
+      // What was approved is already in force on the server: the day is brought up to date.
+      await ref.read(todayControllerProvider.notifier).refresh();
+      ref.invalidate(timelineProvider);
+      if (!mounted) return;
+      showMessage(context, _resolvedMessage(resolved.first, resolved.length));
+    } finally {
+      _checkingRequests = false;
+    }
+  }
+
+  static String _resolvedMessage(RequestDto request, int count) {
+    if (count > 1) return 'Tu supervisor respondió $count solicitudes. Revísalas en Mis solicitudes.';
+    final what = request.type.label.toLowerCase();
+    final comment = request.resolverComment?.trim();
+    return switch (request.status) {
+      RequestStatus.approved when request.type == RequestType.resume =>
+        'Tu supervisor aprobó el reinicio de actividades: ya puedes reanudar la jornada.',
+      RequestStatus.approved => 'Tu supervisor aprobó tu solicitud de $what.',
+      RequestStatus.rejected =>
+        comment == null || comment.isEmpty
+            ? 'Tu supervisor rechazó tu solicitud de $what.'
+            : 'Tu supervisor rechazó tu solicitud de $what: $comment',
+      _ => 'Tu solicitud de $what cambió de estado.',
+    };
   }
 
   void _onTrackerEvent(TrackerEvent event) {

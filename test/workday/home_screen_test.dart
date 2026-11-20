@@ -263,4 +263,80 @@ void main() {
 
     await unmount(tester);
   });
+
+  WorkdayDto closedWorkday() => WorkdayDto(
+    id: 'w1',
+    date: '2026-10-29',
+    status: WorkdayStatus.closed,
+    startedAt: DateTime.utc(2026, 10, 29, 12),
+    endedAt: DateTime.utc(2026, 10, 29, 14),
+    summary: const DaySummaryDto(),
+  );
+
+  testWidgets('closed workday: offers to ask for the "reinicio de actividades" and waits for the answer', (
+    tester,
+  ) async {
+    final now = DateTime.utc(2026, 10, 29, 15);
+    await pumpHome(tester, sampleToday(serverTime: now, workday: closedWorkday(), resume: const ResumeDto()), now);
+
+    expect(find.text('Jornada cerrada'), findsOneWidget);
+    expect(find.text('Solicitar reinicio de actividades'), findsOneWidget);
+    expect(find.text('Reanudar jornada'), findsNothing);
+    await unmount(tester);
+
+    await pumpHome(
+      tester,
+      sampleToday(
+        serverTime: now,
+        workday: closedWorkday(),
+        resume: const ResumeDto(state: ResumeState.pending),
+      ),
+      now,
+    );
+    expect(find.textContaining('Solicitud de reinicio de actividades enviada'), findsOneWidget);
+    expect(find.text('Solicitar reinicio de actividades'), findsNothing);
+    expect(find.text('Reanudar jornada'), findsNothing);
+    await unmount(tester);
+  });
+
+  testWidgets('closed workday with the reinicio approved: "Reanudar jornada" starts it again', (tester) async {
+    final now = DateTime.utc(2026, 10, 29, 15);
+    await pumpHome(
+      tester,
+      sampleToday(
+        serverTime: now,
+        workday: closedWorkday(),
+        resume: const ResumeDto(state: ResumeState.approved, canResumeNow: true),
+      ),
+      now,
+    );
+
+    expect(find.textContaining('aprobó el reinicio de actividades'), findsOneWidget);
+    await tester.tap(find.text('Reanudar jornada'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(starts, 1);
+    await unmount(tester);
+  });
+
+  testWidgets('reinicio approved but the shift is over: asks for overtime instead', (tester) async {
+    final now = DateTime.utc(2026, 10, 29, 22);
+    await pumpHome(
+      tester,
+      sampleToday(
+        serverTime: now,
+        workday: closedWorkday(),
+        resume: const ResumeDto(
+          state: ResumeState.approved,
+          blockedReason: 'Tu turno de hoy ya terminó. Solicita horas extra para seguir trabajando.',
+        ),
+      ),
+      now,
+    );
+
+    expect(find.text('Tu turno de hoy ya terminó. Solicita horas extra para seguir trabajando.'), findsOneWidget);
+    expect(find.text('Solicitar horas extra'), findsOneWidget);
+    expect(find.text('Reanudar jornada'), findsNothing);
+    await unmount(tester);
+  });
 }

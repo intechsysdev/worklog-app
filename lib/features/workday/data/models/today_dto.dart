@@ -24,6 +24,7 @@ class TodayDto {
     this.device = const DeviceStatusDto(),
     this.overtimeUntil,
     this.autoCloseAt,
+    this.resume,
   });
 
   factory TodayDto.fromJson(Map<String, dynamic> json) => _$TodayDtoFromJson(json);
@@ -55,6 +56,9 @@ class TodayDto {
   /// overtime) plus the grace minutes.
   final DateTime? autoCloseAt;
 
+  /// Only with the workday of today closed: state of its "reinicio de actividades".
+  final ResumeDto? resume;
+
   /// Cached snapshot of a previous day, moved to [newDate]: the plan of the new day is unknown
   /// (it is assumed to be a working day; the server has the last word) and only a workday still
   /// open carries over (the server closes forgotten ones).
@@ -72,6 +76,25 @@ class TodayDto {
     supervisorName: supervisorName,
     device: device,
   );
+}
+
+/// "Reinicio de actividades": whether the closed workday of today can be resumed.
+@JsonSerializable()
+class ResumeDto {
+  const ResumeDto({this.state = ResumeState.none, this.canResumeNow = false, this.blockedReason, this.resolverComment});
+
+  factory ResumeDto.fromJson(Map<String, dynamic> json) => _$ResumeDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$ResumeDtoToJson(this);
+
+  @JsonKey(unknownEnumValue: ResumeState.unknown)
+  final ResumeState state;
+
+  /// The supervisor approved it and the shift (or the approved overtime) has not ended.
+  final bool canResumeNow;
+
+  /// Approved but not possible right now (the shift ended): why.
+  final String? blockedReason;
+  final String? resolverComment;
 }
 
 @JsonSerializable()

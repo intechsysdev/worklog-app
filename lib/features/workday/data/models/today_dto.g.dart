@@ -25,6 +25,7 @@ TodayDto _$TodayDtoFromJson(Map<String, dynamic> json) => TodayDto(
       : DeviceStatusDto.fromJson(json['device'] as Map<String, dynamic>),
   overtimeUntil: json['overtimeUntil'] as String?,
   autoCloseAt: json['autoCloseAt'] == null ? null : DateTime.parse(json['autoCloseAt'] as String),
+  resume: json['resume'] == null ? null : ResumeDto.fromJson(json['resume'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$TodayDtoToJson(TodayDto instance) => <String, dynamic>{
@@ -44,6 +45,30 @@ Map<String, dynamic> _$TodayDtoToJson(TodayDto instance) => <String, dynamic>{
   'device': instance.device.toJson(),
   'overtimeUntil': ?instance.overtimeUntil,
   'autoCloseAt': ?instance.autoCloseAt?.toIso8601String(),
+  'resume': ?instance.resume?.toJson(),
+};
+
+ResumeDto _$ResumeDtoFromJson(Map<String, dynamic> json) => ResumeDto(
+  state:
+      $enumDecodeNullable(_$ResumeStateEnumMap, json['state'], unknownValue: ResumeState.unknown) ?? ResumeState.none,
+  canResumeNow: json['canResumeNow'] as bool? ?? false,
+  blockedReason: json['blockedReason'] as String?,
+  resolverComment: json['resolverComment'] as String?,
+);
+
+Map<String, dynamic> _$ResumeDtoToJson(ResumeDto instance) => <String, dynamic>{
+  'state': _$ResumeStateEnumMap[instance.state]!,
+  'canResumeNow': instance.canResumeNow,
+  'blockedReason': ?instance.blockedReason,
+  'resolverComment': ?instance.resolverComment,
+};
+
+const _$ResumeStateEnumMap = {
+  ResumeState.none: 'None',
+  ResumeState.pending: 'Pending',
+  ResumeState.approved: 'Approved',
+  ResumeState.rejected: 'Rejected',
+  ResumeState.unknown: 'Unknown',
 };
 
 DayPlanDto _$DayPlanDtoFromJson(Map<String, dynamic> json) => DayPlanDto(

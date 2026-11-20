@@ -77,6 +77,10 @@ class RequestsApi {
         ),
       );
 
+  /// "Reinicio de actividades": resume the closed workday of today once it is approved.
+  Future<RequestDto> submitResume({required String reason}) async =>
+      RequestDto.fromJson(await _send(() => _dio.post('/me/requests/resume', data: {'reason': reason})));
+
   Future<Map<String, dynamic>> _send(Future<Response<dynamic>> Function() call) async {
     try {
       final response = await call();

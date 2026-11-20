@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/network/api_exception.dart';
 import '../data/request_models.dart';
 import '../data/requests_api.dart';
 
@@ -10,6 +11,25 @@ class RequestsController extends AsyncNotifier<List<RequestDto>> {
 
   Future<void> refresh() async {
     state = await AsyncValue.guard(() => ref.read(requestsApiProvider).list());
+  }
+
+  bool get hasPending => state.value?.any((r) => r.status == RequestStatus.pending) ?? false;
+
+  /// Asks the server again and returns the requests that were pending and are now resolved (the
+  /// supervisor approved or rejected them from the panel). Without connection nothing changes.
+  Future<List<RequestDto>> refreshResolved() async {
+    final pending = {
+      for (final r in state.value ?? const <RequestDto>[])
+        if (r.status == RequestStatus.pending) r.id,
+    };
+    try {
+      final list = await ref.read(requestsApiProvider).list();
+      if (!ref.mounted) return const [];
+      state = AsyncData(list);
+      return list.where((r) => pending.contains(r.id) && r.status.isResolved).toList();
+    } on ApiException {
+      return const [];
+    }
   }
 
   Future<void> cancel(String id) async {

@@ -149,6 +149,18 @@ class WorkdayView {
 
   bool get isOpen => status == WorkdayStatus.open;
 
+  /// "Reanudar jornada": the closed workday is open again.
+  WorkdayView reopened() => WorkdayView(
+    id: id,
+    status: WorkdayStatus.open,
+    startedAt: startedAt,
+    startSiteName: startSiteName,
+    startGeofence: startGeofence,
+    startAdjusted: startAdjusted,
+    summary: summary,
+    optimistic: true,
+  );
+
   WorkdayView copyWith({
     WorkdayStatus? status,
     DateTime? endedAt,
@@ -209,7 +221,9 @@ abstract final class DayProjection {
     final at = e.occurredAt.toUtc();
     switch (e.kind) {
       case SyncEventKind.workdayStart:
-        if (workday != null) return workday;
+        // With the workday of today closed, a start is "Reanudar jornada" (reinicio de
+        // actividades approved): it is open again.
+        if (workday != null) return workday.isOpen ? workday : workday.reopened();
         return WorkdayView(
           id: e.workdayId ?? queued.clientEventId,
           status: WorkdayStatus.open,

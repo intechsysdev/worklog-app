@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'request_models.g.dart';
 
 @JsonEnum(fieldRename: FieldRename.pascal)
-enum RequestType { recordAdjustment, overtime, shiftChange, unknown }
+enum RequestType { recordAdjustment, overtime, shiftChange, resume, unknown }
 
 @JsonEnum(fieldRename: FieldRename.pascal)
 enum RequestStatus { pending, approved, rejected, cancelled, unknown }
@@ -34,6 +34,7 @@ extension RequestTypeX on RequestType {
     RequestType.recordAdjustment => 'Ajuste de registro',
     RequestType.overtime => 'Horas extra',
     RequestType.shiftChange => 'Cambio de turno',
+    RequestType.resume => 'Reinicio de actividades',
     RequestType.unknown => 'Solicitud',
   };
 }
